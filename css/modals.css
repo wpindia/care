@@ -1,0 +1,159 @@
+.jfh-modal .modal-header {
+    background-color: #e4e4e4;
+    text-align: center;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    height: 50px;
+    color: #222222;
+    position: relative;
+}
+
+.modal-content .row.register-header p {
+	font-size: 14px;
+	margin: 0px;
+}
+
+.jfh-modal {
+	background: #fff;
+	width: 33%;
+}
+
+.jfh-modal .close-icn-hold {
+    top: 50%;
+    transform: translate(0, -50%);
+}
+
+a.modal-close {
+    margin: 0;
+    display: inline-block;
+}
+
+.close-icn-hold {
+    position: absolute;
+    top: 12px;
+    right: 10px;
+}
+
+.close-icon {
+    width: 30px;
+    height: 26px;
+    background-position: -82px -61px;
+    background-size: 220px;
+}
+
+#signin-content .btn{
+	background-color: #92c139;
+	font-size: 14px;
+	box-shadow: none;
+	text-transform: none;
+	height: auto;
+	padding: 15px 20px;
+	line-height: normal;
+	border-radius: 3px;
+	color: #fff;
+	text-decoration: none;
+	margin: 0px auto;
+} 
+
+#signin-content.jfh-modal .modal-content {
+	padding: 0px;
+}
+
+.purple-color{
+	color: #794c9e;
+}
+
+.jfh-color{
+	color: #92c139;
+}
+
+p.error{
+	background: red;
+	color: #fff !important;
+	padding: 0px 10px;
+}
+
+.jfh-modal h2.modal-title{
+	margin: 0 !important;
+	padding: 15px 0px;
+	text-align: center !important;
+	font-size: 17px !important;
+	line-height: normal!important;
+	margin: 0 !important;
+	color: #222222 !important;
+	font-family: 'museo_sans500' !important;
+}
+
+.modal-header.grey-bg{
+	background-color: #e4e4e4 !important;
+	height: 60px !important;
+}
+
+a.modal-close{
+	margin: 0;
+	display: inline-block;
+}
+
+.col.l1.m1.s1 a.modal-close{
+	margin: 10px -12px;
+}
+
+.jfh-modal .modal-content{
+	margin: 0px;
+}
+
+.jfh-modal .container{
+	padding: 20px 15px 5px;
+	font-size: 15px !important;
+	line-height: 1.5em;
+	color: #7e7e7e;
+	text-align: center;
+	width: 75%;	
+}
+
+.jfh-modal p.description{
+	padding: 0px 0px 20px;
+}
+
+.jfh-modal .modal-sub-content{
+	padding: 0px 20px;
+}
+
+.jfh-modal .signin-link, .jfh-modal .signup-link, .jfh-modal .forgot-password-link{
+	font-size: 14px;
+	margin: 10px 0px 10px;
+	display: block;
+}
+.jfh-modal #b-signin{
+	margin: 15px 0px 10px;
+	width: 100%;
+}
+
+.jfh-modal .tnc{
+	font-size: 13px !important;
+	margin: 10px 0px;
+}
+
+#frmsignin .f-password{
+	float: right;
+}
+
+.jfh-modal .show-hide{
+	border: 1px solid #cdcdcd;
+	border-radius: 3px;
+	top: 2px;
+	bottom: inherit;
+	padding: 8px 10px;
+	position: absolute;
+	right: 0;
+	cursor: pointer;
+	color: #8c8c8c;
+    font-size: 12px;
+    line-height: 10px;
+}
+
+@media only screen and (max-width: 600px){
+    .jfh-modal{
+        width: 90%;
+        
+    }
+}

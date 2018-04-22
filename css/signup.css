@@ -1,0 +1,84 @@
+#form-section{
+	padding: 20px;
+    margin: 0px 0px 20px;
+    background: #F9F9F9;
+}
+
+#form-section div.selectize-control{
+    width: 88%;
+    float: left;
+    background: #fff;
+    border-radius: 4px;
+}
+
+.description{
+    font-size: 24px;
+}
+
+h1{
+    margin: 0px 0px 20px;
+}
+
+#frm_signup input[type=text], #frm_signup input[type=password], #frm_signup input[type=email], #frm_signup input[type=url], #frm_signup input[type=time], 
+    #frm_signup input[type=date], #frm_signup input[type=datetime], #frm_signup input[type=datetime-local], #frm_signup input[type=tel], 
+    #frm_signup input[type=number], #frm_signup input[type=search], #frm_signup textarea.materialize-textarea{
+	background: #fff;
+    padding: 0px 0px 0px 20px;
+    width: 85%;
+    border: none;
+    margin: 0px;
+}
+
+#form-section img{
+	width: 40px;
+    margin: 0px 10px 0px 0px;
+    height: 3rem;
+}
+
+.signup-icons{
+    background: white;
+    padding: 10px 10px 11px;
+    float: left;
+    margin: 0px 4px;
+    border-radius: 4px;
+}
+
+#frm_signup input{
+    border-radius: 4px;    
+}
+
+#frm_signup .btn{
+    margin-top: 20px;
+}
+
+@media only screen and (max-width : 600px) { 
+    #frm_signup input[type=text], #frm_signup input[type=password], #frm_signup input[type=email], #frm_signup input[type=url], #frm_signup input[type=time], 
+    #frm_signup input[type=date], #frm_signup input[type=datetime], #frm_signup input[type=datetime-local], #frm_signup input[type=tel], 
+    #frm_signup input[type=number], #frm_signup input[type=search], #frm_signup textarea.materialize-textarea{
+        width: 75%;
+    }
+
+    #form-section div.selectize-control{
+        width: 81%;
+    }
+
+    #frm_signup .row{
+        margin-bottom: 0px;
+    }
+    
+    #frm_signup .btn{
+        margin-top: 20px;
+    }
+
+    .description{
+        font-size: 18px;
+    }
+
+    h1{
+        font-size: 22px;
+    }
+    .signup-icons {
+        background: white;
+        padding: 9px 10px 9px
+    }    
+}    

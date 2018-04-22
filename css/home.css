@@ -1,0 +1,195 @@
+body{
+	background: #fff;
+}
+
+#banner-image{
+	width: 100%;
+}
+
+#partner-home .container{
+	width: 90%;
+}
+
+#partner-home h1{
+	font-size: 28px;
+	margin: 60px 0px 40px;
+	color: #000;
+	font-family: 'museo_sans300';
+}
+
+#partner-home h2{
+	font-size: 24px;
+	margin: 60px 0px 40px;
+	color: #000;
+	font-family: 'museo_sans300';
+}
+
+#partner-home h4{
+	font-size: 18px;
+	margin: 20px 0px 20px;
+	color: #000;
+	font-family: 'museo_sans300';
+}
+
+.jfh-green.cta{
+	padding: 10px 20px;
+    border-radius: 5px;
+    color: #fff;
+    display: inline-block;
+    margin: 25px 0px 0px 0px;
+
+}
+
+#section3 .row{
+	margin: 15px 0px 40px 0px;
+}
+
+#section3{
+	margin: 0px 0px 55px 0px;
+}
+
+#section3 .benefits{
+	box-shadow: 2px 3px 7px 2px #e8e9e9;
+    border-bottom: 7px solid #e9e8e9;
+    margin: 0 25px 0px 30px;
+    text-align: center;
+    padding: 30px 5px;
+    min-height: 270px;
+    width: 20%;
+}
+
+#section3 .benefits .b-title{
+	font-size: 16px;
+	margin: 10px 0px 10px 0px;
+}
+
+#section3 .benefits .b-desc{
+	font-size: 14px;
+	margin: 0px 0px 0px 0px;
+}
+
+
+
+#section5{
+	padding: 30px
+}
+
+/**Contact us Section **/
+.form-group {
+	margin-bottom: 20px;
+}
+
+#call_back_action input[type=text], #call_back_action input[type=email],#call_back_action textarea, #call_back_action select {
+	border: 0px;
+	background-color: #FFF;
+	margin: 0px;
+	padding: 0 10px;
+	outline: none;
+	width: 100%;
+	box-sizing: border-box;
+	border-radius: 5px;
+	font-size: 14px;
+	color: #969696;
+	font-family: 'museo_sans100';
+	height: 2.5rem;
+}
+
+#call_back_action textarea {
+	padding: 10px;
+	min-height: 4rem;
+	resize: none;
+}
+#call_back_action input[type=text]:focus,
+#call_back_action input[type=email]:focus,
+#call_back_action textarea:focus {
+	border: 0px !important;
+	box-shadow: none !important;
+}
+
+#call_back_action input[type=text].valid,
+#call_back_action input[type=email].valid,
+#call_back_action textarea.valid {
+	border: 0px !important;
+	box-shadow: none !important;
+}
+#call_back_action input[type=text].invalid,
+#call_back_action input[type=email].invalid,
+#call_back_action textarea.invalid {
+	border: 0px !important;
+	box-shadow: none !important;
+}
+#call_back_action .btn-submit {
+	font-family: 'museo_sans300';
+	font-size: 24px;
+	line-height: normal;
+	color: #FFF;
+	background-color: #9aca3c;
+	padding: 0 3rem;
+	text-transform: none;
+}
+#call_back_action .btn-submit:focus,
+#call_back_action .btn-submit:active,
+#call_back_action .btn-submit:hover {
+	background-color: #9aca3c;
+}
+div[class*=' errorTxt'],
+div[class^='errorTxt'] {
+	padding: 5px 5px 0;
+}
+div[class*=' errorTxt'] div.error,
+div[class^='errorTxt'] div.error{
+	position: relative;
+	top: 0rem;
+	left: 0rem;
+	font-size: 0.8rem;
+	color: #FF1744;
+	text-align: left;
+	-webkit-transform: translateY(0%);
+	-ms-transform: translateY(0%);
+	-o-transform: translateY(0%);
+	transform: translateY(0%);
+}
+.thankyou-logo {
+	padding: 20px 0 0;
+}
+.thankyou-contnet {
+	text-align: center;
+}
+.thankyou-name {
+	font-family: 'museo_sans500';
+	font-size: 32px;
+	color: #9aca3c;
+}
+.sub-title {
+	font-family: 'museo_sans300';
+	font-size: 24px;
+	color: #171717;
+}
+.hr-line {
+	width: 36%;
+	border-color: #9aca3c;
+}
+
+.form-container {
+	display: block;
+	width: 100%;
+	padding-top: 20px;
+}
+.form-group {
+	margin-bottom: 15px;
+}
+
+/** End of Contact us section **/
+
+
+@media only screen and (max-width : 600px) {
+	#section3 .benefits {
+	    box-shadow: 2px 3px 7px 2px #e8e9e9;
+	    border-bottom: 7px solid #e9e8e9;
+	    margin: 0 5px 0px 6px;
+	    text-align: center;
+	    padding: 30px 5px;
+	    min-height: 270px;
+	    width: 45%;
+	}    
+}

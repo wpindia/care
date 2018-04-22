@@ -1,0 +1,318 @@
+
+.description ul{
+    margin: 10px 0px 0px 20px;
+}
+.description ul li{
+    list-style-type: disc;
+}
+
+
+#profile #header{
+	/*padding: 30px;*/
+}
+
+#profile .timeline-content.featured-timeline h1{
+    color: #fff;
+}
+
+.timeline-content.featured-timeline {
+    background-color: transparent;
+    color: #fff;
+}
+
+.timeline-content {
+    background-color: #FFF;
+    position: relative;
+    color: #222;
+    
+}
+
+#partner-gallery.owl-carousel.owl-theme .owl-item img{
+    width: 200px;
+    height: auto;
+}
+
+.owl-theme .owl-nav div {
+    color: #FFF;
+    display: inline-block;
+    zoom: 1;
+    margin: 5px;
+    padding: 3px 10px;
+    font-size: 12px;
+    -webkit-border-radius: 30px;
+    -moz-border-radius: 30px;
+    border-radius: 30px;
+    background: #869791;
+    filter: Alpha(Opacity=50);
+    opacity: 0.5;
+}
+
+.owl-nav .owl-next {
+    position: absolute;
+    right: -20px;
+    top: 30%;
+}
+
+.owl-nav .owl-prev {
+    position: absolute;
+    left: -30px;
+    top: 30%;
+}
+
+#profile .featured-content-edit {
+    position: absolute;
+    cursor: pointer;
+    top: 10px;
+    right: 60px;
+    padding: 3px 5px;
+    background: #fff;
+    z-index: 10;
+}
+
+#profile .featured-content-edit span {
+    background-image: url(../../images/sprite-icons.png);
+    background-repeat: no-repeat;
+    display: inline-block;
+    width: 21px;
+    height: 22px;
+    vertical-align: middle;
+    background-position: -176px -178px;
+    cursor: pointer;
+}
+
+#profile .featured-content-delete {
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    padding: 3px 5px;
+    background: #fff;
+    z-index: 10;
+}
+
+#profile .featured-content-delete span {
+    background-image: url(../../images/sprite-icons.png);
+    background-repeat: no-repeat;
+    display: inline-block;
+    width: 21px;
+    height: 22px;
+    vertical-align: middle;
+    background-position: -202px -178px;
+}
+#profile .cover{
+    margin: 0px;
+
+}    
+
+.cover-image {
+    width: 100%;
+    position: relative;
+    border-bottom: 1px solid #ccc;
+}
+
+.cover-image > img {
+    max-width: 100%;
+    max-height: 439px;
+    position: relative;
+    min-height: 150px;
+    height: auto;
+}
+
+.cover-headline{
+    padding: 30px
+} 
+
+.featured-timeline .cover-headline {
+    position: absolute;
+    bottom: 0px;
+    background-color: rgba(0,0,0,0.7);
+    width: 100%;
+
+}
+
+
+
+
+.carousel .indicators .indicator-item {
+    background-color: #b2b2b2;
+    opacity: 0.5;
+}
+.carousel .indicators .indicator-item:hover,
+.carousel .indicators .indicator-item:focus {
+    opacity: 1;
+}
+.carousel .indicators .indicator-item.active {
+    background-color: #92c139;
+    opacity: 1;
+}
+.owl-theme .owl-controls .owl-page.active span {
+    background: #92c139;
+}
+.jfh-theme .owl-dots, .owl-theme .owl-nav {
+    text-align: center;
+    -webkit-tap-highlight-color: transparent;
+}
+.jfh-theme .owl-dots .owl-dot {
+    display: inline-block;
+    zoom: 1;
+    cursor: pointer;
+}
+.jfh-theme .owl-dots .owl-dot span {
+    width: 10px;
+    height: 10px;
+    margin: 5px 7px;
+    background: #D6D6D6;
+    display: block;
+    -webkit-backface-visibility: visible;
+    transition: opacity .2s ease;
+    border-radius: 30px;
+    opacity: 0.5;
+}
+.jfh-theme .owl-dots .owl-dot.active span {
+    background: #92c139;
+    opacity: 1;
+}
+.jfh-theme .owl-dots .owl-dot span:hover {
+    opacity: 1;
+}
+
+
+h2 {
+    line-height: normal;
+    font-size: 20px;
+    color: #222222;
+    font-family: 'museo_sans500';
+    margin: 0px 0px 30px;
+}
+
+h3 {
+    font-size: 18px;
+    margin: 0px;
+    color: #794d9e;
+}
+
+h4.header-title{
+    text-align: left;
+}
+
+h4 {
+    line-height: normal;
+    margin: 5px 0;
+    font-size: 16px;
+    color: #222222;
+    font-family: 'museo_sans500';
+}
+
+p.description{
+    text-align: left;
+    color: #222;
+}
+
+#profile h1{
+	font-size: 25px;
+    line-height: 27px;
+    font-family: 'museo_sans500';
+    margin: 0 0 10px;
+    color: #222;
+}
+
+#profile h4.details{
+	line-height: 25px;
+    color: #8c8c8c;
+    font-weight: normal;
+    font-size: 14px;
+    margin: 0px;
+}
+
+#profile .followers {
+    font-size: 18px;
+    line-height: 16px;
+    font-weight: normal;
+    margin-bottom: 20px;
+    font-family: 'museo_sans500';
+    text-align: center;
+}
+
+.follower-btn{
+	background: #92c139 !important;
+    color: #fff;
+    padding: 0px 25px;
+    height: 36px;
+}
+
+#profile .collapsible-body{
+    padding: 20px 25px;
+    color: #000;
+}
+
+#profile .collapsible-body a{
+    color: #000;
+}
+
+#profile .collapsible-body p{
+    padding: 20px 0px;
+}
+
+#profile .collapsible-body .description{
+    font-size: 14px;
+}
+
+/*.entity-logo{
+    padding: 35px;
+}*/
+
+#profile .side .description p{
+    padding: 5px 0px 0px;
+    color: #636363;
+    font-size: 14px;
+    font-family: arial;
+    line-height: 21px;
+}
+
+#profile .description p, #profile .description ul li {
+    color: #636363;
+    font-size: 14px;
+    font-family: arial;
+    line-height: 21px
+}    
+
+#profile .section {
+    margin: 0px 0px 10px 0px;
+}
+
+.add-featured-content i {
+    padding-right: 5px;
+    vertical-align: middle;
+    font-size: 16px;
+}
+
+.add-featured-content{ 
+    padding: 5px 10px;
+    display: block;
+}    
+
+@media only screen and (max-width: 600px){
+    .entity-logo{
+        width: 61px;
+        height: 61px;
+    }
+
+}
+
+@media only screen and (min-width: 600px){
+    .entity-logo{
+        width: 100px;
+        height: 100px;
+    }
+}
+
+.entity-logo{
+    background-color: #fff;
+    color: #222;
+    border: 1px solid #DDD;
+    border-radius: 3px;
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    overflow: hidden;
+}

@@ -1,0 +1,50 @@
+#profile-image{
+	width: 100px;
+	height: 100px;
+}
+
+.circle-counter.top{
+	background: green;
+}	
+
+.circle-counter{
+	padding: 5px;
+	border-radius: 20px;
+	border: 1px solid #FFF;
+	color: #fff;
+	font-weight: bold;
+	font-size: 16px;
+}
+
+
+#courses .card{
+	background: #37b6af;
+}
+
+#assessments .card{
+	background: #7a4d9e;
+}
+
+#services .card{
+	background: #faa940;
+}
+
+.card.small {
+    min-height: 200px;
+}
+
+.tabs .tab a:hover, .tabs .tab a.active {
+    background-color: transparent;
+    color: #0f0f0f;
+}
+
+.tabs .tab a {
+    color: #0f0f0f;
+}
+
+@media only screen and (min-width : 800px) {
+	/*#left-col{
+		min-height: 800px;
+	}*/
+
+}	

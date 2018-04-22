@@ -1,0 +1,61 @@
+#settings .label{
+	padding: 0px;
+    margin: 0px 10px 0px 0px;
+    font-family: Arial, Helvetica, sans-serif;
+    display: inline-block;
+    font-size: 16px;
+    color: #777777;
+    line-height: 15px;
+    vertical-align: baseline;
+}	
+
+#settings .black-text{
+	color: #222222;
+	font-size: 16px;
+}
+
+#settings .content > a{
+	color: #794d9e;
+	text-decoration: underline;
+	font-size: 14px;
+}
+
+#settings .row{
+    padding: 5px 0px 25px;
+    border-bottom: 1px solid #e4e4e4;
+}    
+
+#change-password-section .row{
+    border: none;
+    padding: 0px;
+}
+
+#settings .upgrade-icon {
+    background-image: url(../../images/sprite-icons.png);
+    background-repeat: no-repeat;
+    display: inline-block;
+    vertical-align: middle;
+    background-position: -377px -1px;
+    margin: 0px 5px 0px 0px;
+    width: 18px;
+    height: 20px;
+}
+
+#settings .featured{
+	background-position: -308px -120px;
+    height: 35px;
+    width: 35px;
+    margin-right: 5px;
+    background-image: url(../../images/sprite.png);
+    background-repeat: no-repeat;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+#settings .view-details a, #settings .edit-details a, .change{
+	margin: 0px 10px;
+    cursor: pointer;
+    color: #794c9e;
+}
+
+

@@ -1,0 +1,24 @@
+#partner-followers .wrapper{
+	margin-top: 0px !important;
+	padding: 0px;
+}
+
+#partner-followers .fields-hold{
+	padding: 0px
+}
+
+#partner-followers .selectize-input, .selectize-input input {
+	padding: 0px !important;
+}
+
+#partner-followers .soc-img img {
+    width: 70%;
+}
+
+#partner-followers .default-btn{
+	padding: 0px 24px !important;
+}
+
+#footer ul.footer-list li{
+	display: block;
+}

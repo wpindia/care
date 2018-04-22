@@ -1,0 +1,69 @@
+section#leads{
+	padding: 10px 20px;
+}
+
+i.material-icons{
+	padding-right: 5px;
+	vertical-align: middle;
+}
+
+.profile-image{
+	width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    margin: 10px 0px 0px;
+}
+
+#left-sidebar h4{
+	font-size: 16px;
+}
+
+#leads_details .card{
+	margin: 10px 20px 10px 35px;
+	padding: 10px;
+}
+
+.sidebar .collapsible-body a{
+	color: #7a4d9f;
+	font-size: 14px;
+	font-family: Arial;
+	display: block;
+	padding: 5px 0px;
+}
+
+.sidebar .collapsible-body a.selected{
+	background: #cccccc;
+}
+
+.collapsible-header{
+	color: #000;
+	font-size: 18px;
+	font-family: 'museo_sans_300';
+	
+}
+
+.collapsible-body{
+	padding: 10px;
+}
+
+.reskilling-hot-icon {
+    width: 20px;
+    height: 20px;
+    background-position: -117px -58px;
+    background-size: 200px;
+    margin: 0px 4px;
+    zoom: normal;
+}
+
+.sprite {
+    background-image: url(../../images/sprite.png);
+    background-repeat: no-repeat;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+@media only screen and (max-width : 600px) {
+	#leads_details .card{
+		margin: 10px 0px;
+	}
+}
