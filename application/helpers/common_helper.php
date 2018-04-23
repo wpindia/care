@@ -12,7 +12,7 @@ if( !function_exists('loadJS') ) {
 			102=>'https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.15.0/jquery.validate.min.js',
 			103=>'https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.3/owl.carousel.min.js',
 			104=>'https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.15.0/additional-methods.min.js',
-			105=>'https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js', 
+			 
 			
 		);
 		$jsText = '';
@@ -58,10 +58,11 @@ if( !function_exists('loadCSS') ) {
 			101=>'https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css',
 			102=>'https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.3/assets/owl.carousel.min.css',
 			103=>'https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.3/assets/owl.theme.default.min.css',
+			104=>'https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css'
 		);
 		
 		$cssText = '';
-		$cssArr = array(0,101,102,103);
+		$cssArr = array(0,101,102,103,104);
 		switch ($pageName) {
 			case 'signup':
 				array_push($cssArr,1);

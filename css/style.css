@@ -1,6 +1,6 @@
 body {
     margin: 0 auto;
-    background-color: #fff;
+    background-color: #f9f9f9;
     font-family: 'Roboto', sans-serif;
 }
 
@@ -11,13 +11,31 @@ body {
 	margin-top: 10px !important;  
 }
 
+.margin-right-20{
+	margin-right: 20px !important;  	
+}
+
 #daycare .container {
     width: 85%;
 }
 
-#daycare .daycare-green{
+#daycare .btn{
+	height: auto;
+    line-height: normal;
+}
+
+#daycare .daycare-green-btn{
 	background-color: #8cb859;
 	color: #fff;
+}
+
+#daycare .daycare-default-btn{
+    background-color: #fff;
+    color: #000;
+}    
+
+.padding10{
+	padding: 10px !important;
 }
 
 #daycare .block{

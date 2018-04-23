@@ -17,7 +17,7 @@
 					</div>
 				
 
-					<button id="b-signin" class="center waves-effect waves-light btn daycare-green signin-button" type="submit">Sign In</button>
+					<button id="b-signin" class="center waves-effect waves-light btn daycare-green-btn signin-button" type="submit">Sign In</button>
 					
 					<div class="f-password">
 						<a class="center modal-trigger modal-action modal-close" href="#forgot-password">

@@ -264,6 +264,13 @@ class Account extends CI_Controller {
 
     }
 
+    public function getLocationByCityId(){
+        show('123');
+        $cityId = $this->input->post('city_id');
+        $array = array('Kothrud','Shivaji Nagar'); 
+        echo json_encode($array);
+    }
+
     public function signinProcess(){
         
         $this->data['pageName'] = 'signin-process';

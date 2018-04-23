@@ -58,7 +58,7 @@
 				<div class="row">
 					<div class="col s12 m12 l12 center">
 						
-						<button class="daycare-green waves-effect waves-light btn" type="submit" name="action">Sign Up
+						<button class="daycare-green-btn waves-effect waves-light btn" type="submit" name="action">Sign Up
 						    <i class="material-icons right">send</i>
 						</button>
 						<br/>
