@@ -6,6 +6,7 @@
 				<h1 class="center">PARTNER ZONE</h1>
 				<div class="center description">
 					List your business for FREE with India's only day care listing portal.
+					Millions of parents are looking for the right daycare on day-care.in. Start your digital journey with Day-Care.in Profile. Let’s take the first step and create your account:
 				</div>
 			</div>
 		</div> 

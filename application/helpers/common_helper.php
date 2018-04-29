@@ -7,6 +7,7 @@ if( !function_exists('loadJS') ) {
 		$jsFileArr = array(
 			0 => 'home.js',
 			1 => 'signup.js',
+			2 => 'user_daycare_view.js',
 
 			101=>'https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js',
 			102=>'https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.15.0/jquery.validate.min.js',
@@ -16,10 +17,10 @@ if( !function_exists('loadJS') ) {
 			
 		);
 		$jsText = '';
-		$jsArr = array(101,103);
+		$jsArr = array(101);
 		switch ($pageName) {
 			case 'home':
-				array_push($jsArr, 0);
+				array_push($jsArr, 0,103);
 			break;	
 
 			case 'signup':
@@ -28,7 +29,11 @@ if( !function_exists('loadJS') ) {
 
 			case 'create-branch':
 				array_push($jsArr, 1,102,104);
-			break;				
+			break;
+
+			case 'user-daycare-view':
+				array_push($jsArr, 2,103);
+			break;							
 		}
 
 		if(!empty($jsArr)){
@@ -54,6 +59,7 @@ if( !function_exists('loadCSS') ) {
 			0  => 'style.css',
 			1  => 'signup.css',
 			2  => 'signin.css',
+			3  => 'user_daycare_view.css',
 
 			101=>'https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css',
 			102=>'https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.3/assets/owl.carousel.min.css',
@@ -62,8 +68,12 @@ if( !function_exists('loadCSS') ) {
 		);
 		
 		$cssText = '';
-		$cssArr = array(0,101,102,103,104);
+		$cssArr = array(0,101,104);
 		switch ($pageName) {
+			case 'home':
+				array_push($cssArr, 102,103);
+			break;
+					
 			case 'signup':
 				array_push($cssArr,1);
 			break;
@@ -74,6 +84,10 @@ if( !function_exists('loadCSS') ) {
 
 			case 'create-branch':
 				//array_push($jsArr, 1,102,104);
+			break;
+
+			case 'user-daycare-view':
+				array_push($cssArr, 3,102,103);
 			break;
 		}
 

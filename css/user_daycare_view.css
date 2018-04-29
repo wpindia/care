@@ -1,0 +1,123 @@
+
+@media only screen and (min-width: 601px){
+.dropdown-content{
+	display:block;
+	opacity: 0.6;
+	background: #000;
+	position: fixed;
+    top: 0px;
+    right: 0px;
+    min-width: 50px;	
+    width: 50px;	
+}
+.daycare-title{
+	position: absolute;
+	bottom: 0px;
+	left: 0px;
+	background: #000;
+    opacity: 0.8;
+    width: 100%;
+    padding: 10px;
+}
+
+
+.daycare-title h1{
+	color: #fff;
+    padding: 0px;
+    margin: 0px 0px 0px 10px;
+}
+}
+
+.dropdown-content i.material-icons{
+	color: #fff;
+}
+
+h3{
+	margin: 10px 0px 30px;
+}
+
+.dropdown-content li>a{
+	padding: 30px 12px;
+}
+
+.dropdown-content li a:hover,.dropdown-content li:hover{
+	background: none;
+}
+
+#user_daycare_view .section{
+	width: 80%;
+	margin: 0 auto;
+	color: #000;
+	line-height: 1.5em;
+	font-size: 18px;
+}
+
+
+
+.section1 {
+	position: relative;
+}
+
+#testimonials{
+	width: 80%;
+	background: #fff;
+	border-radius: 10px;
+	padding: 20px;
+}
+
+#testimonials .author{
+	float: right;
+	margin: 10px 0px 20px;
+}
+
+.fixed-action-btn {
+    position: fixed;
+    right: 23px;
+    bottom: 23px;
+    padding-top: 15px;
+    margin-bottom: 0;
+    z-index: 997;
+}
+
+@media only screen and (max-width: 600px){
+	.dropdown-content{
+		display:block;
+		opacity: 0.6;
+		background: #000;
+		position: fixed;
+	    bottom: 0px;
+	    left: 0px;
+	    min-width: 100%;	
+	    width: 100%;	
+	}
+
+	.dropdown-content li{
+		float: left;
+		width: 50px;	
+		clear: none;
+	}
+
+	.daycare-title{
+		position: relative;
+		display: block;
+		background: #000;
+	    opacity: 0.8;
+	    width: 100%;
+	    padding: 10px;
+	}
+
+
+	.daycare-title h1{
+		font-size: 22px;
+		color: #fff;
+	    padding: 0px;
+	    margin: 0px 0px 0px 10px;
+	}
+
+	::placeholder{
+		color: #000;
+		opacity: 1;
+	}
+
+}
+

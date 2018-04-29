@@ -53,6 +53,7 @@ $route['default_controller'] = 'account';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
+
 $route['signin'] 		= 'account/signin';
 $route['validate-user'] = 'account/signinProcess';
 $route['signup'] 		= 'account/signup';
@@ -61,3 +62,4 @@ $route['welcome'] 		= 'account/welcome';
 $route['logout'] 		= 'account/logout';
 
 $route['create-branch'] = 'branch/create';
+$route['(:any)/(:any)'] = 'daycare/index';

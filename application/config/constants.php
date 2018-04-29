@@ -84,8 +84,8 @@ defined('EXIT_DATABASE')       OR define('EXIT_DATABASE', 8); // database error
 defined('EXIT__AUTO_MIN')      OR define('EXIT__AUTO_MIN', 9); // lowest automatically-assigned error code
 defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest automatically-assigned error code
 
-define('DOMAIN', 'www.dummy.dev');
-define('DOMAIN_URL', 'http://www.dummy.dev/');
+define('DOMAIN', 'dev.daycare.com');
+define('DOMAIN_URL', 'http://dev.daycare.com/');
 define('THEME_CSS_PATH', DOMAIN_URL.'css/');
 define('THEME_JS_PATH', DOMAIN_URL.'js/');
-
+define('GOOGLE_MAPS_API_KEY', 'AIzaSyBSUXN3fpPAeT3n67x0CzcF3vScsUsDwfA');

@@ -2,17 +2,31 @@ body {
     margin: 0 auto;
     background-color: #f9f9f9;
     font-family: 'Roboto', sans-serif;
+
+}
+
+.padding0{
+	padding: 0px !important;
+}
+
+.margin-bottom0{
+	margin-bottom: 0px !important;
 }
 
 .margin20{
 	margin: 20px 20px 20px 20px;
 }
+
 .margin-top-10{
 	margin-top: 10px !important;  
 }
 
 .margin-right-20{
 	margin-right: 20px !important;  	
+}
+
+.padding20{
+	padding: 20px 20px 20px 20px;
 }
 
 #daycare .container {
@@ -32,6 +46,13 @@ body {
 #daycare .daycare-default-btn{
     background-color: #fff;
     color: #000;
+}
+
+#daycare .daycare-default-round-btn{
+    background-color: #fff;
+    color: #000;
+    padding: 10px;
+    border-radius: 5px;
 }    
 
 .padding10{
@@ -78,7 +99,7 @@ i.material-icons{
 	width: 10px;
 	height: 10px;
 	margin: 5px 7px;
-	background: #D6D6D6;
+	background: dimgrey;
 	display: block;
 	-webkit-backface-visibility: visible;
 	transition: opacity .2s ease;
@@ -145,3 +166,4 @@ label.error, div.error {
     font-size: 0.8rem;
     color: #FF1744;
 }    
+
