@@ -24,27 +24,49 @@ jQuery('document').ready(function(){
 	});
 
 	
-	$('#location').autocomplete({
-		data: {
-	        "Apple": null,
-	        "Microsoft": null,
-	        "Google": 'https://placehold.it/250x250'
-	      },
-		/*source: function (request, response) {
+	/*$('#location').autocomplete({
+		source: function (request, response) {
+			alert('123');
 			$.ajax({
-				url: 'candidate/account/suggestItem',
+				url: '/account/getLocationByCityId',
 				type: "GET",
 				cache: false,
 				dataType: "json",
-				data: {type: $(this.element).data('type'), searchItm: encodeURI(request.term)},
+				data: {searchItem: encodeURI(request.term)},
 				success: function (data) {
 					if(data && data.resource){
 						response(data.resource);
 					}
 				}
 			});
-		}*/
+		}
 		
 	});
+	*/
+
+		//$('body').on('focus', '#location', function () { 
+			$('input#location').autocomplete({
+			    data: {
+			        "Apple": null,
+			        "Microsoft": null,
+			        "Google": 'https://placehold.it/250x250'
+			      },
+			    /*source: function (request, response) {
+					$.ajax({
+						url: 'suggestItem',
+						type: "GET",
+						cache: false,
+						dataType: "json",
+						data: {type: $(this.element).data('type'), searchItm: encodeURI(request.term)},
+						success: function (data) {
+							if(data && data.resource){
+								response(data.resource);
+							}
+						}
+					});
+				},*/
+			    
+			});
+		//});
 		
 });	

@@ -89,3 +89,5 @@ define('DOMAIN_URL', 'http://www.dummy.dev/');
 define('THEME_CSS_PATH', DOMAIN_URL.'css/');
 define('THEME_JS_PATH', DOMAIN_URL.'js/');
 
+define('AWS_ACCESS_KEY', 'AKIAIAPFKQ45FCFR3TYQ' );
+define('AWS_SECRET_KEY', 'mUFazRMwQ1e2065ZQg+xdIRr6b7F9V//34fL2IsN' );

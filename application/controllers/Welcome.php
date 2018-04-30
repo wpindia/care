@@ -19,7 +19,8 @@ class Welcome extends CI_Controller {
 	 * @see https://codeigniter.com/user_guide/general/urls.html
 	 */
 	public function index(){
-		
+		$this->data['pageName'] = 'home';
+        $this->generateView('home',$this->data);	
 	}
 
 	protected function generateView( $viewName,$data = '' ) {

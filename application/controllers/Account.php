@@ -950,10 +950,10 @@ class Account extends CI_Controller {
 
     
     protected function generateView( $viewName,$data = '' ) {
-        $this->load->view('header', $data);
-        $this->load->view('header-menu', $data);
+        $this->load->view('partner/header', $data);
+        $this->load->view('partner/header-menu', $data);
         $this->load->view($viewName, $data);
-        $this->load->view('footer', $data );
+        $this->load->view('partner/footer', $data );
     
     }
 
