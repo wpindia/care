@@ -62,3 +62,5 @@ $route['partner/logout'] 		= 'account/logout';
 
 $route['partner/create-branch'] = 'branch/create';
 $route['partner/save-branch'] 	= 'branch/save';
+
+$route['(:any)/(:any)'] = 'daycare/index';

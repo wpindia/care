@@ -6,6 +6,7 @@
 	<link rel="icon" href="favicon.ico" type="image/x-icon">
 	<link rel="apple-touch-icon" href="favicon.ico">
 	<link rel="manifest" href="/manifest.json">
+	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Raleway:400,600">
 	<meta name="apple-mobile-web-app-title" content="DayCare">
 	<meta name="application-name" content="DayCare">
 	<meta name="theme-color" content="#ffffff">
