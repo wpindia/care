@@ -7,13 +7,17 @@ if( !function_exists('loadJS') ) {
 		$jsFileArr = array(
 			0 => 'home.js',
 			1 => 'signup.js',
-			2 => 'user_daycare_view.js',
+			2 => 'branch.js',
+			3 => 'user_daycare_view.js',
 
 			101=>'https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js',
 			102=>'https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.15.0/jquery.validate.min.js',
 			103=>'https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.3/owl.carousel.min.js',
 			104=>'https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.15.0/additional-methods.min.js',
-			 
+			105=>'https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/js/dropify.min.js', 
+			106=>'https://cdnjs.cloudflare.com/ajax/libs/tinymce/4.7.11/jquery.tinymce.min.js',
+			107=>'https://cdnjs.cloudflare.com/ajax/libs/tinymce/4.5.6/tinymce.min.js',
+			108=>"https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"		
 			
 		);
 		$jsText = '';
@@ -28,11 +32,11 @@ if( !function_exists('loadJS') ) {
 			break;			
 
 			case 'create-branch':
-				array_push($jsArr, 1,102,104);
-			break;
+				array_push($jsArr, 2,102,104,105,106,107);
+			break;				
 
 			case 'user-daycare-view':
-				array_push($jsArr, 2,103);
+				array_push($jsArr, 3,103);
 			break;							
 		}
 
@@ -64,7 +68,9 @@ if( !function_exists('loadCSS') ) {
 			101=>'https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css',
 			102=>'https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.3/assets/owl.carousel.min.css',
 			103=>'https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.3/assets/owl.theme.default.min.css',
-			104=>'https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css'
+			104=>'https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css',
+			105=>'https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/css/dropify.min.css',
+			106=>'https://cdnjs.cloudflare.com/ajax/libs/tinymce/4.7.11/skins/lightgray/skin.min.css'
 		);
 		
 		$cssText = '';
@@ -83,7 +89,7 @@ if( !function_exists('loadCSS') ) {
 			break;				
 
 			case 'create-branch':
-				//array_push($jsArr, 1,102,104);
+				array_push($cssArr, 1,105,106);
 			break;
 
 			case 'user-daycare-view':
@@ -129,4 +135,11 @@ function show($data){
 	echo '<pre>';
 	var_dump($data);
 	exit; 
+}
+
+if ( ! function_exists('partner_base_url')){
+	function partner_base_url($uri = ''){
+		$uri = 'partner/'.$uri;
+		return get_instance()->config->base_url($uri);
+	}
 }

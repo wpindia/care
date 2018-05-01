@@ -49,17 +49,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | Examples:	my-controller/index	-> my_controller/index
 |		my-controller/my-method	-> my_controller/my_method
 */
-$route['default_controller'] = 'account';
+$route['default_controller'] = 'welcome';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
+$route['partner/signin'] 		= 'account/signin';
+$route['partner/validate-user'] = 'account/signinProcess';
+$route['partner/signup'] 		= 'account/signup';
+$route['partner/signupProcess'] = 'account/signupProcess';
+$route['partner/welcome'] 		= 'account/welcome';
+$route['partner/logout'] 		= 'account/logout';
 
-$route['signin'] 		= 'account/signin';
-$route['validate-user'] = 'account/signinProcess';
-$route['signup'] 		= 'account/signup';
-$route['signupProcess'] = 'account/signupProcess';
-$route['welcome'] 		= 'account/welcome';
-$route['logout'] 		= 'account/logout';
+$route['partner/create-branch'] = 'branch/create';
+$route['partner/save-branch'] 	= 'branch/save';
 
-$route['create-branch'] = 'branch/create';
 $route['(:any)/(:any)'] = 'daycare/index';

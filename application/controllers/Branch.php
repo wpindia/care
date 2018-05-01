@@ -50,9 +50,12 @@ class Branch extends Account {
                                             'weekdays_end_time' => '',
                                             'weekend_start_time' => '',
                                             'weekend_end_time' => '',
-      
+                                            'facebook_id'  => '',
+                                            'twitter_id'   => '',
+                                            'linkedin_id'  => ''
+
             );
-    	$this->generateView( 'addEditBranch', $this->data);
+    	$this->generateView( 'partner/addEditBranch', $this->data);
     }   
 
     function edit(){
@@ -60,7 +63,11 @@ class Branch extends Account {
     	$this->displayPages( 'partner/profile/addEditProfile', $this->data, true );
     }  
 
-    function saveProfile(){
+    function save(){
+
+        $coverImageName = $this->uploadImage();
+
+        show($_POST);
     	$aboutUs  			= $this->input->post('aboutus');
     	$registeredAddress  = $this->input->post('registered-address');
     	$pan  				= $this->input->post('pan');
@@ -107,6 +114,68 @@ class Branch extends Account {
             $this->session->set_flashdata('set_flashdata', 'Something went wrong..');
             redirect('partner/create-profile');
         }
+    }
+
+    protected function uploadfile( $type, $uploadedFilename = 'featured_image'  ){
+        log_message('info', __METHOD__ . ' called');
+        $filename = strtolower($_FILES[$uploadedFilename]["name"]);
+        $rand = rand(10, 99999);
+        $rand_alpha = $this->RandomString();
+        $db_location = 'images/reskilling/desktop/' . $type . '/';
+        
+        if ($_FILES[$uploadedFilename]['error'] == 0 && $_FILES[$uploadedFilename]['name'] != '') {
+            if (strpos($filename, '.jpeg') !== false) {
+                $file_ext = 'jpeg';
+            } else if (strpos($filename, '.jpg') !== false) {
+                $file_ext = 'jpg';
+            } else if (strpos($filename, '.png') !== false) {
+                $file_ext = 'png';
+            }else if (strpos($filename, '.gif') !== false) {
+                $file_ext = 'gif';
+            }
+            if (strpos($filename, '.gif') !== false || strpos($filename, '.png') !== false || strpos($filename, '.jpeg') !== false || strpos($filename, '.jpg') !== false) {
+                $config['upload_path'] = FCPATH.'uploads/admin/reskilling';
+                $config['new_path'] = FCPATH.'images/reskilling/desktop/' . $type . '/';
+                $config['allowed_types'] = '*';
+                $this->load->library('upload', $config);
+                if ( false == $this->upload->do_upload($uploadedFilename) ) {
+                    $error = array('error' => $this->upload->display_errors());
+                    show($error);
+                }else {
+                    $filename = $rand_alpha . '-'.time(). '.' . $file_ext;
+                    $dblocation = $db_location . $filename; // Full path
+                    $this->load->helper('s3_helper');
+                    $originalImage = $this->upload->data();
+                    $originalImage['type'] = $originalImage['file_type'];
+                    $this->load->library('image_lib');
+                    $originalImage['tmp_name'] = $originalImage['full_path'];
+                    $file_path = uploadFilesAdminS3Bucket($dblocation, $originalImage);
+                    if($file_path != ''){
+                        $imageSizes = array(100);
+                        if(!empty($imageSizes)){
+                            foreach ($imageSizes as $key => $value) {
+                                $config['image_library'] = 'gd2';
+                                $config['source_image'] = $originalImage['full_path'];
+                                $config['new_image'] = FCPATH.'uploads/admin/reskilling';
+                                $config['maintain_ratio'] = TRUE;
+                                $config['width'] = $value;
+                                $this->image_lib->clear();
+                                $this->image_lib->initialize($config);
+                                if ( ! $this->image_lib->resize() ){
+                                    echo $this->image_lib->display_errors();
+                                }
+                                $dblocation = $db_location.'thumb-'.$value.'-'.$filename;
+                                $file_path = uploadFilesAdminS3Bucket($dblocation, $originalImage);
+                                                    
+                            }
+                        }
+                        return $filename;
+                    }
+
+                }
+            }
+        }
+        return false;
     }
 
     function createImageGallery(){
@@ -539,13 +608,13 @@ class Branch extends Account {
         }
     }
 
-    protected function uploadImage( $destinationPath, $isCreateOnlyThumbnails = false ){
+    protected function uploadImage( $destinationPath = '' ){
         $filename = strtolower($_FILES["featured-image"]["name"]);
         $rand = rand(10, 99999);
         $rand_alpha = $this->RandomString();
         //$db_location = 'images/reskilling/desktop/' . $type . '/';
         $s3DestinationDirectory = $destinationPath;
-        $destinationPath = FCPATH. $destinationPath;
+        $destinationPath = FCPATH.  'uploads/admin/';
 
         if(!file_exists($destinationPath)){
             $status = mkdir($destinationPath);
@@ -562,7 +631,7 @@ class Branch extends Account {
                 $file_ext = 'gif';
             }
             if (strpos($filename, '.gif') !== false || strpos($filename, '.png') !== false || strpos($filename, '.jpeg') !== false || strpos($filename, '.jpg') !== false) {
-                $config['upload_path']  = FCPATH.'uploads/admin/reskilling';
+                $config['upload_path']  = FCPATH.'uploads/admin/';
                 $config['new_path']     = $destinationPath;
                 $config['allowed_types'] = '*';
                 $this->load->library('upload', $config);
@@ -582,10 +651,9 @@ class Branch extends Account {
                     
                     //$file_path = uploadFilesAdminS3Bucket($s3Path, $originalImage);
                     //if($file_path != ''){
-                        $imageSizes = array(200);
-                        if(!empty($imageSizes)){
-                            foreach ($imageSizes as $key => $value) {
-                                $config['image_library'] = 'gd2';
+                        
+                            //foreach ($imageSizes as $key => $value) {
+                                /*$config['image_library']    = 'gd2';
                                 $config['source_image']     = $originalImage['full_path'];
                                 $config['new_image']        = $destinationPath;
                                 $config['maintain_ratio']   = TRUE;
@@ -594,21 +662,22 @@ class Branch extends Account {
                                 $this->image_lib->initialize($config);
                                 if ( ! $this->image_lib->resize() ){
                                     echo $this->image_lib->display_errors();
-                                }
+                                }*/
 
                                 $originalImage['full_path']   = $destinationPath . $originalImage['file_name'];
                                 $originalImage['tmp_name']    = $destinationPath .  $originalImage['file_name'];
                                 //$dblocation = $db_location.'thumb-'.$value.'-'.$filename;
-                                $s3Path     = $s3DestinationDirectory.'thumb-'.$value.'-'.$filename;
-                                $file_path  = uploadFilesAdminS3Bucket($s3Path, $originalImage);
+                                $s3Path     = $s3DestinationDirectory.$filename;
+                                $file_path  = uploadFilesS3($s3Path, $originalImage);
+                                show($file_path);
                                 //var_dump($s3DestinationDirectory);
                                 
                                 unlink($config['upload_path'] . '/' . $originalImage['file_name'] );                    
                                 unlink($destinationPath . $originalImage['file_name']);
                                 rmdir($destinationPath);
-                            }
-                        }
-                        return 'thumb-'.$value.'-'.$filename;
+                            //}
+                        //}
+                        return $value.'-'.$filename;
                     //}
 
                 }

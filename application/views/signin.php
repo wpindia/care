@@ -6,7 +6,7 @@
 		
 		
 			<?php echo ( true == isset( $signinErrors ) ) ? $signinErrors : ''; ?>
-			<form id="frmsignin" name="frmsignin" class="" method="POST" action="<?php echo base_url('validate-user')?>">
+			<form id="frmsignin" name="frmsignin" class="" method="POST" action="<?php echo partner_base_url('validate-user')?>">
 					<div class="input-field fields-hold">
 						<input id="email" name="email" placeholder="Email ID*" type="email" class="" value="">
 					</div>
@@ -25,7 +25,7 @@
 						</a>
 					</div>
 				
-					<a href="<?php echo base_url('signup') ?>" class="signup-link show-signin center">
+					<a href="<?php echo partner_base_url('signup') ?>" class="signup-link show-signin center">
 						New to JobsForHer? <span class="purple-color">Sign up now</span>
 					</a>
 				

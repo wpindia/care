@@ -38,6 +38,10 @@ body {
     line-height: normal;
 }
 
+#daycare .btn.compact{
+	padding: 10px 30px;
+}
+
 #daycare .daycare-green-btn{
 	background-color: #8cb859;
 	color: #fff;
