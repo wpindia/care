@@ -26,6 +26,19 @@
     padding: 0px;
     margin: 0px 0px 0px 10px;
 }
+#user_daycare_view .section{
+	width: 80%;
+	margin: 0 auto;
+	color: #000;
+	line-height: 1.5em;
+	font-size: 18px;
+}
+
+.dropdown-content li>a{
+	padding: 30px 12px;
+}
+
+
 }
 
 .dropdown-content i.material-icons{
@@ -36,21 +49,11 @@ h3{
 	margin: 10px 0px 30px;
 }
 
-.dropdown-content li>a{
-	padding: 30px 12px;
-}
 
 .dropdown-content li a:hover,.dropdown-content li:hover{
 	background: none;
 }
 
-#user_daycare_view .section{
-	width: 80%;
-	margin: 0 auto;
-	color: #000;
-	line-height: 1.5em;
-	font-size: 18px;
-}
 
 
 
@@ -59,7 +62,7 @@ h3{
 }
 
 #testimonials{
-	width: 80%;
+	width: 100%;
 	background: #fff;
 	border-radius: 10px;
 	padding: 20px;
@@ -68,6 +71,7 @@ h3{
 #testimonials .author{
 	float: right;
 	margin: 10px 0px 20px;
+	font-weight: bold;
 }
 
 .fixed-action-btn {
@@ -93,8 +97,16 @@ h3{
 
 	.dropdown-content li{
 		float: left;
-		width: 50px;	
+		width: 55px;	
 		clear: none;
+	}
+
+	.dropdown-content li:first-child{
+		margin-left: 34px;
+	}
+
+	.dropdown-content li>a{
+		padding: 12px 0px;
 	}
 
 	.daycare-title{
@@ -117,6 +129,19 @@ h3{
 	::placeholder{
 		color: #000;
 		opacity: 1;
+	}
+
+	#user_daycare_view .section {
+	    width: 95%;
+	    margin: 0 auto;
+	    color: #000;
+	    line-height: 1.5em;
+	    font-size: 18px;
+	}
+
+	#testimonials-section{    
+		margin-top: 10px;
+	    border-top: 1px solid #FFF;
 	}
 
 }
