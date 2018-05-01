@@ -81,8 +81,8 @@
 
 								<div class="row">
 									<div class="col s12 m12 l12 input-field">
-										<textarea id="additional-information" name="additional-information" class="tinymce-editor">
-											<?php echo $daycareDetails['additional-information']?></textarea>
+										<textarea id="additional-information" name="additional_information" class="tinymce-editor">
+											<?php echo $daycareDetails['additional_information']?></textarea>
 				            			<label for="additional-information" class="custom">Additional Information</label>
 									</div>
 								</div>
@@ -101,8 +101,8 @@
 							<div class="collapsible-body">
 								<div class="row">
 									<div class="col s12 m12 l12 input-field">
-										<textarea id="registered-address" name="registered-address" class=""><?php echo $daycareDetails['address']?></textarea>
-				            			<label for="registered-address" class="custom">Address Line 1</label>
+										<textarea id="address" name="address" class=""><?php echo $daycareDetails['address']?></textarea>
+				            			<label for="address" class="custom">Address Line 1</label>
 									</div>
 								</div>
 
@@ -125,17 +125,17 @@
 
 								<div class="row">
 									<div class="input-field col s12 m4 l4 other-details">
-										<input id="pan" name="pan" type="text" data-length="10" value="<?php echo $daycareDetails['city_id']?>">
+										<input id="city" name="city" type="text" value="<?php echo $daycareDetails['city_id']?>">
 				            			<label for="pan">City</label>
 									</div>
 
 									<div class="input-field col s12 m4 l4 other-details">
-										 <input id="gst" name="gst" type="text" data-length="10" value="<?php echo $daycareDetails['area']?>">
+										 <input id="area" name="area" type="text" value="<?php echo $daycareDetails['area']?>">
 				            			<label for="gst">Area</label>
 									</div>
 
 									<div class="input-field col s12 m4 l4 other-details">
-										 <input id="sac" name="sac" type="text" data-length="10" value="<?php echo $daycareDetails['zip']?>">
+										 <input id="zip" name="zip" type="text" value="<?php echo $daycareDetails['zip']?>">
 				            			<label for="sac">Zip</label>
 									</div>
 								</div>
@@ -255,8 +255,8 @@
 							<div class="collapsible-body">
 								<div class="row">
 									<div class="input-field col s12 m4 l4 other-details">
-										<input id="video-id" name="video-id" type="text" value="">
-				            			<label for="video-id">Video URL</label>
+										<input id="video_url" name="video_url" type="text" value="">
+				            			<label for="video_url">Video URL</label>
 									</div>
 								</div>
 							</div>
@@ -275,18 +275,18 @@
 
 								<div class="row">
 									<div class="input-field col s12 m4 l4 other-details">
-										<input id="facebook-id" name="facebook-id" type="text" data-length="10" value="<?php echo $daycareDetails['facebook_id']?>">
+										<input id="facebook_id" name="facebook_id" type="text" data-length="10" value="<?php echo $daycareDetails['facebook_id']?>">
 				            			<label for="facebook-id">Facebook ID</label>
 									</div>
 
 									<div class="input-field col s12 m4 l4 other-details">
-										 <input id="twitter-id" name="twitter-id" type="text" data-length="10" value="<?php echo $daycareDetails['twitter_id']?>"> 
+										 <input id="twitter_id" name="twitter_id" type="text" data-length="10" value="<?php echo $daycareDetails['twitter_id']?>"> 
 				            			<label for="twitter-id">Twitter ID</label>
 									</div>
 
 									<div class="input-field col s12 m4 l4 other-details">
-										<input id="linkedin-id" name="linkedin-id" type="text" data-length="10" value="<?php echo $daycareDetails['linkedin_id']?>">
-				            			<label for="linkedin-id">Linkedin ID</label>
+										<input id="instagram_id" name="instagram_id" type="text" data-length="10" value="<?php echo $daycareDetails['instagram_id']?>">
+				            			<label for="instagram_id">Instagram ID</label>
 									</div>
 								</div>
 							</div>

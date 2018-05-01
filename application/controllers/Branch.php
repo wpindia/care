@@ -34,7 +34,7 @@ class Branch extends Account {
     	$this->data['pageName']        = 'create-branch';
         $this->data['daycareDetails']  = array(
                                             'description' => '', 
-                                            'additional-information' => '',
+                                            'additional_information' => '',
                                             'is_featured' => 0,
                                             'logo'        => '',  
                                             'cover_image' => '',
@@ -52,7 +52,7 @@ class Branch extends Account {
                                             'weekend_end_time' => '',
                                             'facebook_id'  => '',
                                             'twitter_id'   => '',
-                                            'linkedin_id'  => ''
+                                            'instagram_id'  => ''
 
             );
     	$this->generateView( 'partner/addEditBranch', $this->data);
@@ -65,22 +65,44 @@ class Branch extends Account {
 
     function save(){
 
-        $coverImageName = $this->uploadImage();
+        //$coverImageName = $this->uploadImage();
 
-        show($_POST);
-    	$aboutUs  			= $this->input->post('aboutus');
-    	$registeredAddress  = $this->input->post('registered-address');
-    	$pan  				= $this->input->post('pan');
-    	$gst  				= $this->input->post('gst');
-    	$sac  				= $this->input->post('sac');
-    	$facebookId  		= $this->input->post('facebook-id');
-    	$twitterId  		= $this->input->post('twitter-id');
-    	$linkedinId  		= $this->input->post('linkedin-id');
-        $videoId            = $this->input->post('video-id');
-        
-    	$vendorTypes        = $this->input->post('vendor-types');    
+        //show($_POST);
+    	
+        $aboutUs                    = $this->input->post('aboutus');
+        $additionalInformation      = $this->input->post('additional_information');
+        $address                    = $this->input->post('address');
 
-        $imageName          = $this->input->post('profile_image');
+        $contactName                = $this->input->post('contact_name');
+        $email                      = $this->input->post('email');
+        $mobile                     = $this->input->post('mobile');
+
+        $city                       = $this->input->post('city');
+        $area                       = $this->input->post('area');
+        $zip                        = $this->input->post('zip');
+
+        $weekdaysStartTime          = $this->input->post('weekdays_start_time');
+        $weekdaysEndTime            = $this->input->post('weekdays_end_time');
+        $weekendStartTime           = $this->input->post('weekend_start_time');
+        $weekendEndTime             = $this->input->post('weekend_end_time');
+
+        $isFoodAvailable            = $this->input->post('food_provided');
+        $isDoctorOnCallAvailable    = $this->input->post('doctor_on_call');
+        $isOpenOnWeekends           = $this->input->post('open_on_weekends');
+        $areActivitiesAvailable     = $this->input->post('activities_available');
+        $isPickDropAvailable        = $this->input->post('pick_drop');
+        $isDigitalPaymentAvailable  = $this->input->post('credit_debit_card');
+
+        $videoUrl                    = $this->input->post('video_url');
+        $facebookId                 = $this->input->post('facebook_id');
+        $twiiterId                  = $this->input->post('twitter_id');
+        $instagramId                = $this->input->post('instagram_id');
+
+        /*var_dump($aboutUs,$additionalInformation,$registeredAddress,$contactName,$email,$mobile,$city,$area,$zip,$weekdaysStartTime,$weekdaysEndTime,$weekendStartTime,$weekendEndTime, $isFoodAvailable,$isDoctorOnCallAvailable,$isOpenOnWeekends,$areActivitiesAvailable,$isPickDropAvailable, $isDigitalPaymentAvailable,$videoUrl,$facebookId,$twiiterId, $instagramId);
+        exit; 
+        */
+
+        /*$imageName          = $this->input->post('profile_image');
         if(isset($_FILES['logo']['name']) && !empty($_FILES['logo']['name'])){
             $imageName = $this->uploadfile('vendors', 'logo');
         }
@@ -88,27 +110,41 @@ class Branch extends Account {
         $coverImageName          = $this->input->post('cover_image');
         if(isset($_FILES['featured_image']['name']) && !empty($_FILES['featured_image']['name'])){
             $coverImageName = $this->uploadfile('vendors');
-        }
+        }*/
                 
-        $vendorData = array(
+        $daycareData = array(
     		'description' 			=> $aboutUs,
-    		'registered_address' 	=> $registeredAddress,
-    		'pan' 					=> $pan,
-    		'gst_id' 				=> $gst,
-    		'sac_hsc_id' 			=> $sac,
-    		'facebook_id' 			=> $facebookId,
+            'additional_information'=> $additionalInformation,
+    		'address' 	               => $address,
+            'contact_name'             => $contactName,
+            'email'
+            'mobile'
+            'city_id'
+            'area'
+            'zip'
+            'weekdays_start_time'
+            'weekdays_end_time'
+            'weekend_start_time'
+            'weekend_end_time',
+            'is_food_available'
+            'is_doctor_on_call_available'
+            'is_open_on_weekends'
+            'are_activities_available'
+            'is_pick_drop_available'
+            'is_digital_payment_available'
+            'facebook_id' 			=> $facebookId,
     		'twitter_id' 			=> $twitterId,
-    		'linkedin_id' 			=> $linkedinId,
-    	    'logo'                  => $imageName,   
-            'cover_image'           => $coverImageName,
+    		'instagram_id' 			=> $instagramId,
+    	    //'logo'                  => $imageName,   
+            //'cover_image'           => $coverImageName,
             'video_url'             => $videoId,
             'modified_date'         => date('Y-m-d H:i:s')
         );
 
     	$isUpdated = $this->vendors_model->updateVendorProfile($vendorData, $this->vendorId, $vendorTypes);
-    	if(true == $isUpdated){
-    		$this->reskilling_model->addReskillingIndexing( $this->vendorId, PARTNER_TYPE_ID );
-            $this->session->set_flashdata('set_flashdata', 'Saved successfully!!');
+    	
+        if(true == $isUpdated){
+    		$this->session->set_flashdata('set_flashdata', 'Saved successfully!!');
             redirect('partner/dashboard');
     	} else{
             $this->session->set_flashdata('set_flashdata', 'Something went wrong..');
