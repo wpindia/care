@@ -53,22 +53,22 @@
 	<div id="features-section" class="row margin-bottom0" style="background:#ffcf40;min-height:200px">
 		<div class="section ">	
 		<h3>Features</h3>
-			<div class="col s6 m4 l4">
+			<div class="col s12 m4 l4">
 				<i class="material-icons">check</i> Timings: 8.30 a.m to 7.30 p.m<br/><br/>
 				<i class="material-icons">clear</i> Age-Group: 10 months+<br/><br/>
-				<i class="material-icons">clear</i> Trained and caring staff<br/><br/>
+				<i class="material-icons">clear</i> Trained & caring staff<br/><br/>
 			</div>
 
-			<div class="col s6 m4 l4">
+			<div class="col s12 m4 l4">
 				<i class="material-icons">check</i> Food provided<br/><br/>
 				<i class="material-icons">clear</i> Open on weekend<br/><br/>
 				<i class="material-icons">check</i> Transport available<br/><br/>
 			</div>
 			
-			<div class="col s6 m4 l4">
+			<div class="col s12 m4 l4">
 				<i class="material-icons">check</i> Activities<br/><br/>
-				<i class="material-icons">clear</i> Open on weekend<br/><br/>
-				<i class="material-icons">check</i> Transport available<br/><br/>
+				<i class="material-icons">clear</i> Doctor on call<br/><br/>
+				
 			</div>
 
 				
@@ -141,7 +141,7 @@
 				</div>		
 			</form>
 			</div>
-			<div class="col s12 m6 l6">
+			<div id="testimonials-section" class="col s12 m6 l6">
 				<h3 class="white-text">What our parents say</h3>
 				<div id="testimonials" class="owl-carousel owl-theme ">
 					<div class="slide1">
