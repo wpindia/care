@@ -210,32 +210,32 @@
 							<div class="collapsible-body">
 								<div class="row">
 									<div class="col s3 m3 l3">
-										<input type="checkbox" name="food_provided" id="food_provided" class="margin20"  />
+										<input type="checkbox" name="food_provided" id="food_provided" value="1" class="margin20"  />
 					      				<label for="food_provided">Food Provided</label>
 					      			</div>	
 
 					      			<div class="col s3 m3 l3">
-					      				<input type="checkbox" id="doctor_on_call" name="doctor_on_call" class="margin20" />
+					      				<input type="checkbox" id="doctor_on_call" name="doctor_on_call" value="1" class="margin20" />
 					      				<label for="doctor_on_call">Doctor on call</label>
 				      				</div>
 
 				      				<div class="col s3 m3 l3">
-					      				<input type="checkbox" id="open_on_weekends" name="open_on_weekends" class="margin20" />
+					      				<input type="checkbox" id="open_on_weekends" name="open_on_weekends" value="1" class="margin20" />
 					      				<label for="open_on_weekends">Open on weekends</label>
 				      				</div>
 
 				      				<div class="col s3 m3 l3">
-					      				<input type="checkbox" id="activities_available" name="activities_available" class="margin20" />
+					      				<input type="checkbox" id="activities_available" name="activities_available" value="1" class="margin20" />
 					      				<label for="activities_available">Activities</label>
 				      				</div>
 
 				      				<div class="col s3 m3 l3">
-					      				<input type="checkbox" id="pick_drop" name="pick_drop" class="margin20" />
+					      				<input type="checkbox" id="pick_drop" name="pick_drop" value="1" class="margin20" />
 					      				<label for="pick_drop">Pickup & Drop</label>
 				      				</div>
 
 				      				<div class="col s3 m3 l3">
-					      				<input type="checkbox" id="credit_debit_card" name="credit_debit_card" class="margin20" />
+					      				<input type="checkbox" id="credit_debit_card" name="credit_debit_card" value="1" class="margin20" />
 					      				<label for="credit_debit_card">Credit/Debit Card Payment</label>
 				      				</div>
 								</div>

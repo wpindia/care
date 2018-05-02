@@ -27,7 +27,7 @@ class Account extends CI_Controller {
         */
         $this->data['logged']   = 0;
         $this->partnerData      = $this->partner_account_model->getPartnerData(); 
-        //var_dump($this->partnerData);
+        //show($this->partnerData);
        if( false == empty( $this->partnerData ) ) {
             
             $this->data['logged'] = 1;

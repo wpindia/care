@@ -6,7 +6,7 @@ class Branch extends Account {
 
 	function __construct() {
         parent::__construct();
-        //$this->load->model('partner_profile_model');
+        $this->load->model('daycare_model');
 
         if( true == empty( $this->partnerData ) ) {
             redirect('/');
@@ -58,17 +58,14 @@ class Branch extends Account {
     	$this->generateView( 'partner/addEditBranch', $this->data);
     }   
 
-    function edit(){
-    	$this->data['pageName'] = 'edit-profile';
-    	$this->displayPages( 'partner/profile/addEditProfile', $this->data, true );
+    function edit($dayCareId){
+    	$this->data['pageName'] = 'edit-branch';
+        $this->data['daycareDetails']  = $this->daycare_model->getDaycareDetailsById($dayCareId); 
+    	$this->generateView( 'partner/addEditBranch', $this->data);
     }  
 
     function save(){
-
-        //$coverImageName = $this->uploadImage();
-
-        //show($_POST);
-    	
+        $id                         = (int)$this->input->post('daycare-id');
         $aboutUs                    = $this->input->post('aboutus');
         $additionalInformation      = $this->input->post('additional_information');
         $address                    = $this->input->post('address');
@@ -77,8 +74,8 @@ class Branch extends Account {
         $email                      = $this->input->post('email');
         $mobile                     = $this->input->post('mobile');
 
-        $city                       = $this->input->post('city');
-        $area                       = $this->input->post('area');
+        $cityId                     = 1;//$this->input->post('city');
+        $areaId                     = 1;//$this->input->post('area');
         $zip                        = $this->input->post('zip');
 
         $weekdaysStartTime          = $this->input->post('weekdays_start_time');
@@ -93,9 +90,9 @@ class Branch extends Account {
         $isPickDropAvailable        = $this->input->post('pick_drop');
         $isDigitalPaymentAvailable  = $this->input->post('credit_debit_card');
 
-        $videoUrl                    = $this->input->post('video_url');
+        $videoUrl                   = $this->input->post('video_url');
         $facebookId                 = $this->input->post('facebook_id');
-        $twiiterId                  = $this->input->post('twitter_id');
+        $twitterId                  = $this->input->post('twitter_id');
         $instagramId                = $this->input->post('instagram_id');
 
         /*var_dump($aboutUs,$additionalInformation,$registeredAddress,$contactName,$email,$mobile,$city,$area,$zip,$weekdaysStartTime,$weekdaysEndTime,$weekendStartTime,$weekendEndTime, $isFoodAvailable,$isDoctorOnCallAvailable,$isOpenOnWeekends,$areActivitiesAvailable,$isPickDropAvailable, $isDigitalPaymentAvailable,$videoUrl,$facebookId,$twiiterId, $instagramId);
@@ -111,44 +108,58 @@ class Branch extends Account {
         if(isset($_FILES['featured_image']['name']) && !empty($_FILES['featured_image']['name'])){
             $coverImageName = $this->uploadfile('vendors');
         }*/
+
+        $city = 'Bangalore';
+        $area = 'Whitefield';
+        $slug = $city . '/' . $this->partnerData['vendor_name'] . '-' . $area;
                 
         $daycareData = array(
-    		'description' 			=> $aboutUs,
-            'additional_information'=> $additionalInformation,
-    		'address' 	               => $address,
-            'contact_name'             => $contactName,
-            'email'
-            'mobile'
-            'city_id'
-            'area'
-            'zip'
-            'weekdays_start_time'
-            'weekdays_end_time'
-            'weekend_start_time'
-            'weekend_end_time',
-            'is_food_available'
-            'is_doctor_on_call_available'
-            'is_open_on_weekends'
-            'are_activities_available'
-            'is_pick_drop_available'
-            'is_digital_payment_available'
-            'facebook_id' 			=> $facebookId,
-    		'twitter_id' 			=> $twitterId,
-    		'instagram_id' 			=> $instagramId,
-    	    //'logo'                  => $imageName,   
+            'vendor_id'                         => $this->partnerData['vendor_id'],
+            'vendor_name'                       => $this->partnerData['vendor_name'],
+            'seo_name'                          => generateSlug($slug),
+    		'description' 			            => $aboutUs,
+            'additional_information'            => $additionalInformation,
+    		'address' 	                        => $address,
+            'contact_name'                      => $contactName,
+            'email'                             => $email, 
+            'mobile'                            => $mobile, 
+            'city_id'                           => $cityId,
+            'area_id'                           => $areaId,
+            'zip'                               => $zip,
+            'weekdays_start_time'               => $weekdaysStartTime,
+            'weekdays_end_time'                 => $weekdaysEndTime,
+            'weekend_start_time'                => $weekendStartTime,
+            'weekend_end_time'                  => $weekendEndTime,
+            'is_food_available'                 => $isFoodAvailable,
+            'is_doctor_on_call_available'       => $isDoctorOnCallAvailable,
+            'is_open_on_weekends'               => $isOpenOnWeekends,
+            'are_activities_available'          => $areActivitiesAvailable,
+            'is_pick_drop_available'            => $isPickDropAvailable,
+            'is_digital_payment_available'      => $isDigitalPaymentAvailable,
+            'facebook_id' 			            => $facebookId,
+    		'twitter_id' 			            => $twitterId,
+    		'instagram_id' 			            => $instagramId,
+    	    'video_url'                         => $videoUrl,
+            'modified_date'                     => date('Y-m-d H:i:s')
+            //'logo'                  => $imageName,   
             //'cover_image'           => $coverImageName,
-            'video_url'             => $videoId,
-            'modified_date'         => date('Y-m-d H:i:s')
+            
         );
 
-    	$isUpdated = $this->vendors_model->updateVendorProfile($vendorData, $this->vendorId, $vendorTypes);
+        if( $id ){
+            unset( $daycareData['seo_name'] );
+        }
+
+    	$daycareId = $this->daycare_model->insertOrUpdateDaycareData($daycareData, $id);
     	
-        if(true == $isUpdated){
+        if($daycareId){
     		$this->session->set_flashdata('set_flashdata', 'Saved successfully!!');
-            redirect('partner/dashboard');
+            $daycareLink = 'partner/edit-branch/' . $daycareId;
+            redirect($daycareLink);
     	} else{
             $this->session->set_flashdata('set_flashdata', 'Something went wrong..');
-            redirect('partner/create-profile');
+            redirect('partner/create-branch');
+            //redirect('partner/create-profile');
         }
     }
 
