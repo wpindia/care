@@ -65,9 +65,10 @@ class Branch extends Account {
     }   
 
     function edit($daycareId){
-    	$this->data['pageName'] = 'edit-branch';
+    	$this->data['pageName']        = 'edit-branch';
         $this->data['daycareDetails']  = $this->daycare_model->getDaycareDetailsById($daycareId); 
-    	$this->generateView( 'partner/addEditBranch', $this->data);
+    	
+        $this->generateView( 'partner/addEditBranch', $this->data);
     }  
 
     function save(){
@@ -107,14 +108,14 @@ class Branch extends Account {
 
         $imageName = $this->input->post('profile_image');
         if(isset($_FILES['logo']['name']) && !empty($_FILES['logo']['name'])){
-            $imageName = uploadfile();
+            $imageName = uploadfile('logo', $this->partnerData['vendor_id']);
         }
 
         $coverImageName = $this->input->post('cover_image');
         if(isset($_FILES['featured_image']['name']) && !empty($_FILES['featured_image']['name'])){
-            $coverImageName = uploadfile();
+            $coverImageName = uploadfile('featured_image', $this->partnerData['vendor_id']);
         }
-
+        
         $city = 'Bangalore';
         $area = 'Whitefield';
         $slug = $city . '/' . $this->partnerData['vendor_name'] . '-' . $area;
@@ -146,9 +147,9 @@ class Branch extends Account {
     		'twitter_id' 			            => $twitterId,
     		'instagram_id' 			            => $instagramId,
     	    'video_url'                         => $videoUrl,
-            'modified_date'                     => date('Y-m-d H:i:s')
-            //'logo'                  => $imageName,   
-            //'cover_image'           => $coverImageName,
+            'modified_date'                     => date('Y-m-d H:i:s'),
+            'logo'                              => $imageName,   
+            'featured_image'                    => $coverImageName,
             
         );
 
@@ -169,7 +170,7 @@ class Branch extends Account {
         }
     }
 
-    protected function uploadfile( $type, $uploadedFilename = 'featured_image'  ){
+    /*protected function uploadfile( $type, $uploadedFilename = 'featured_image'  ){
         log_message('info', __METHOD__ . ' called');
         $filename = strtolower($_FILES[$uploadedFilename]["name"]);
         $rand = rand(10, 99999);
@@ -229,7 +230,7 @@ class Branch extends Account {
             }
         }
         return false;
-    }
+    }*/
 
     function createImageGallery(){
         $this->data['pageName'] = 'create-gallery';

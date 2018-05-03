@@ -7,26 +7,20 @@
 					$profile_image = $logo = $featured_image = $cover_image = '';
 					
 					if(isset($daycareDetails['logo']) && $daycareDetails['logo'] != ''){
-						$profile_image = $daycareDetails['logo'];
+						$logo = generateImageUrl( 'uploads/admin/'. $daycareDetails['vendor_id'] . '/' . $daycareDetails['logo'] );
 					}
 
-					if($profile_image != ''){
-						$logo = generate_image_url('images/reskilling/desktop/vendors/'. $profile_image);
-					}					
-
-					if(isset($daycareDetails['cover_image']) && $daycareDetails['cover_image'] != ''){
-						$cover_image = $daycareDetails['cover_image'];
+					if(isset($daycareDetails['featured_image']) && $daycareDetails['featured_image'] != ''){
+						$featured_image = generateImageUrl( 'uploads/admin/'. $daycareDetails['vendor_id'] . '/' . $daycareDetails['featured_image'] );
 					}
-
-					if($cover_image != ''){
-						$featured_image = generate_image_url('images/reskilling/desktop/vendors/'. $cover_image);
-					}
+					//var_dump($logo);
+					//show($featured_image);	
 				?>
 			</div>
 
 			<form id="frm_addEditProfile" name="frm_addEditProfile" action="<?php echo partner_base_url('save-branch');?>" method="post" enctype="multipart/form-data">
 				<h2 class="center">Partner Details</h2>
-
+				<input type="hidden" name="daycare-id" value="<?php echo $daycareDetails['id'];?>"/>
 				<div class="row white">
 					<ul id="images-collapsible" class="collapsible" data-collapsible="accordion">
 						<li class="active">
@@ -38,9 +32,8 @@
 								<div class="row">
 									<div class="col s12 m4 l4 profile-image-section">
 										<label for="logo">Logo</label>
-										<input type="text" class="visbilty-none hide" name="profile_image" id="profile_image" value="<?php echo $profile_image;?>">
-										<input type="file" name="logo" class="dropify" id="logo"
-										data-default-file="<?php echo $logo;?>"  />
+										<input type="text" class="visbilty-none hide" name="profile_image" id="profile_image" value="<?php echo $daycareDetails['logo'];?>">
+										<input type="file" name="logo" class="dropify" id="logo" data-default-file="<?php echo $logo;?>"  />
 										
 										<div class="error"><?php echo form_error('profile_image'); ?></div>
 														
@@ -48,8 +41,8 @@
 									
 									<div class="col s12 m8 l8 cover-image-section">
 										<label for="cover_image">Cover Image</label>
-										<input type="text" class="visbilty-none hide" name="cover_image" id="cover_image" value="<?php echo $cover_image;?>">
-										<input type="file" name="featured-image" class="dropify" id="featured_image"
+										<input type="text" class="visbilty-none hide" name="cover_image" id="cover_image" value="<?php echo $daycareDetails['featured_image'];?>">
+										<input type="file" name="featured_image" class="dropify" id="featured_image"
 										data-default-file="<?php echo $featured_image;?>" />
 										
 										<div class="error"><?php echo form_error('profile_image'); ?></div>
@@ -118,7 +111,7 @@
 									</div>
 
 									<div class="input-field col s12 m4 l4 other-details">
-										 <input id="mobile" name="mobile" type="text" value="<?php echo $daycareDetails['mobile']?>">
+										 <input id="mobile" name="mobile" type="number" pattern="[0-9]*" maxlength="10" class="numbers" value="<?php echo $daycareDetails['mobile']?>">
 				            			<label for="mobile">Mobile/Phone No*</label>
 									</div>
 								</div>
@@ -140,7 +133,7 @@
 									</div>
 
 									<div class="input-field col s12 m4 l4 other-details">
-										 <input id="zip" name="zip" type="text" value="<?php echo $daycareDetails['zip']?>">
+										 <input id="zip" name="zip" type="number" pattern="[0-9]*" maxlength="6" value="<?php echo $daycareDetails['zip']?>">
 				            			<label for="sac">Zip</label>
 									</div>
 								</div>
@@ -163,7 +156,37 @@
 									<div class="input-field col s12 m3 l3 other-details">
 										<select id="weekdays_start_time" class="" name="weekdays_start_time" >
 											<option value="" >Weekdays Start Time</option>
-											<option value="6:00 am" >6:00 am</option>
+											<?php			
+												$selected = "";
+												if( (0 < count($courseDetails)) && ($revenueType['id'] == $courseDetails['revenue_type_id'])){
+													$selected = "selected='selected'";		 
+												}
+											?>	
+											<option value="6:00 am" <?php echo $selected ?> >6:00 am</option>
+											<option value="6:30 am" <?php echo $selected ?> >6:00 am</option>
+											<option value="7:00 am" <?php echo $selected ?> >6:00 am</option>
+											<option value="7:30 am" <?php echo $selected ?> >6:00 am</option>
+											<option value="8:00 am" <?php echo $selected ?> >6:00 am</option>
+											<option value="8:30 am" <?php echo $selected ?> >6:00 am</option>
+											<option value="9:00 am" <?php echo $selected ?> >6:00 am</option>
+											<option value="9:30 am" <?php echo $selected ?> >6:00 am</option>
+											<option value="10:00 am" <?php echo $selected ?> >6:00 am</option>
+											<option value="10:30 am" <?php echo $selected ?> >6:00 am</option>
+											<option value="11:00 am" <?php echo $selected ?> >6:00 am</option>
+											<option value="11:30 am" <?php echo $selected ?> >6:00 am</option>
+											<option value="12 noon" <?php echo $selected ?> >6:00 am</option>
+
+											<option value="12:30 pm" <?php echo $selected ?> >6:00 am</option>
+											<option value="1:00 pm" <?php echo $selected ?> >6:00 am</option>
+											<option value="1:30 pm" <?php echo $selected ?> >6:00 am</option>
+											<option value="2:00 pm" <?php echo $selected ?> >6:00 am</option>
+											<option value="2:30 pm" <?php echo $selected ?> >6:00 am</option>
+											<option value="3:00 pm" <?php echo $selected ?> >6:00 am</option>
+											<option value="3:30 pm" <?php echo $selected ?> >6:00 am</option>
+											<option value="4:00 pm" <?php echo $selected ?> >6:00 am</option>
+											<option value="5:00 pm" <?php echo $selected ?> >6:00 am</option>
+											<option value="5:30 pm" <?php echo $selected ?> >6:00 am</option>
+											<option value="6:00 pm" <?php echo $selected ?> >6:00 am</option>
 										</select>
 				            			<label for="weekdays_start_time">Weekdays Start Time</label>
 									</div>

@@ -149,64 +149,49 @@ if ( ! function_exists('partner_base_url')){
 function getRandomString(){
 	$characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
     $strRandom = '';
-    for ($i = 0; $i < 10; $i++) {
+    for ($i = 0; $i < 5; $i++) {
         $strRandom .= $characters[mt_rand(0, strlen($characters) - 1)];
     }
     return $strRandom;
 }
 
-function uploadfile($uploadedFilename){
-        $filename = strtolower($_FILES[$uploadedFilename]["name"]);
-        $randomString = getRandomString();
-        $dbPath = '';
+function generateImageUrl($fileName){
+	$strUrl = ( ENVIRONMENT !== 'production' ) ? base_url($fileName) : FCPATH . $fileName; 
+	return $strUrl;
+}
+
+function uploadfile($uploadedFilename, $vendorId){
+        //$filename 			= strtolower($_FILES[$uploadedFilename]["name"]);
+        $randomString 		= getRandomString();
+        $destinationPath 	= FCPATH . 'uploads/admin/' . $vendorId . '/';
         
-        $info = new SplFileInfo($_FILES[$uploadedFilename]);
-		var_dump($info->getExtension());
-
-        if($_FILES[$uploadedFilename]['error'] == 0 && $_FILES[$uploadedFilename]['name'] != '') {
-            if(strpos($filename, '.jpg') !== false) {
-                $config['upload_path'] = FCPATH.'uploads/admin/reskilling';
-                $config['new_path'] = FCPATH.'images/reskilling/desktop/' . $type . '/';
-                $config['allowed_types'] = '*';
-                $this->load->library('upload', $config);
-                if ( false == $this->upload->do_upload($uploadedFilename) ) {
-                    $error = array('error' => $this->upload->display_errors());
-                    show($error);
-                }else {
-                    $filename = $rand_alpha . '-'.time(). '.' . $file_ext;
-                    $dblocation = $db_location . $filename; // Full path
-                    $originalImage = $this->upload->data();
-                    /*
-					$this->load->helper('s3_helper');
-                    
-                    $originalImage['type'] = $originalImage['file_type'];
-                    $this->load->library('image_lib');
-                    $originalImage['tmp_name'] = $originalImage['full_path'];
-                    $file_path = uploadFilesAdminS3Bucket($dblocation, $originalImage);
-                    if($file_path != ''){
-                        $imageSizes = array(100);
-                        if(!empty($imageSizes)){
-                            foreach ($imageSizes as $key => $value) {
-                                $config['image_library'] = 'gd2';
-                                $config['source_image'] = $originalImage['full_path'];
-                                $config['new_image'] = FCPATH.'uploads/admin/reskilling';
-                                $config['maintain_ratio'] = TRUE;
-                                $config['width'] = $value;
-                                $this->image_lib->clear();
-                                $this->image_lib->initialize($config);
-                                if ( ! $this->image_lib->resize() ){
-                                    echo $this->image_lib->display_errors();
-                                }
-                                $dblocation = $db_location.'thumb-'.$value.'-'.$filename;
-                                $file_path = uploadFilesAdminS3Bucket($dblocation, $originalImage);
-                                                    
-                            }
-                        }
-                        return $filename;
-                    }*/
-
-                }
-            }
+        if(false == file_exists($destinationPath)){
+            $status = mkdir($destinationPath);
+        	if(false == $status) return false;
         }
+
+        $info 			= new SplFileInfo($_FILES[$uploadedFilename]["name"]);
+		$fileExtension 	= $info->getExtension();
+
+		if($_FILES[$uploadedFilename]['error'] != 0 || $_FILES[$uploadedFilename]['name'] == '') return false;
+
+		$filename 	= $uploadedFilename . '_' . $randomString . '_'.time(). '.' . $fileExtension;
+        
+        $config['upload_path'] 		= $destinationPath;
+        $config['allowed_types'] 	= 'gif|jpg|png|jpeg';
+        $config['file_name']		= $filename;
+        $CI =& get_instance();
+     	$CI->load->library('upload', $config);
+
+        if( false == $CI->upload->do_upload($uploadedFilename) ) {
+            $error = array('error' => $CI->upload->display_errors());
+            show($error);
+        }else {
+            $uploadData = $CI->upload->data();
+	        
+	        return $filename;
+        }
+        
+        
         return false;
     }
