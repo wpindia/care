@@ -60,8 +60,10 @@ $route['partner/signupProcess'] = 'account/signupProcess';
 $route['partner/welcome'] 		= 'account/welcome';
 $route['partner/logout'] 		= 'account/logout';
 
+
+$route['partner/fetchLocations'] 	= 'account/getLocationByCityId';
 $route['partner/create-branch'] = 'branch/create';
-$route['partner/edit-branch/']   = 'branch/edit';
+$route['partner/edit-branch/(:num)']   = 'branch/edit/$1';
 $route['partner/save-branch'] 	= 'branch/save';
 
-$route['(:any)/(:any)'] = 'daycare/index';
+$route['(:any)/(:any)'] = 'daycare/displayDaycare/$1/$2';

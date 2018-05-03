@@ -101,37 +101,42 @@
 							<div class="collapsible-body">
 								<div class="row">
 									<div class="col s12 m12 l12 input-field">
-										<textarea id="address" name="address" class=""><?php echo $daycareDetails['address']?></textarea>
-				            			<label for="address" class="custom">Address Line 1</label>
+										<input type="text" id="address" name="address" class="" value="<?php echo $daycareDetails['address']?>" />
+				            			<label for="address" class="custom">Address Line 1*</label>
 									</div>
 								</div>
 
 								<div class="row">
 									<div class="input-field col s12 m4 l4 other-details">
-										<input id="contact_name" name="contact_name" type="text" data-length="10" value="<?php echo $daycareDetails['contact_name']?>">
-				            			<label for="contact_name">Contact Name</label>
+										<input id="contact_name" name="contact_name" type="text" value="<?php echo $daycareDetails['contact_name']?>">
+				            			<label for="contact_name">Contact Name*</label>
 									</div>
 
 									<div class="input-field col s12 m4 l4 other-details">
 										 <input id="email" name="email" type="text" value="<?php echo $daycareDetails['email']?>">
-				            			<label for="email">Email</label>
+				            			<label for="email">Email*</label>
 									</div>
 
 									<div class="input-field col s12 m4 l4 other-details">
-										 <input id="mobile" name="mobile" type="text" data-length="10" value="<?php echo $daycareDetails['mobile']?>">
-				            			<label for="mobile">Mobile/Phone No</label>
+										 <input id="mobile" name="mobile" type="text" value="<?php echo $daycareDetails['mobile']?>">
+				            			<label for="mobile">Mobile/Phone No*</label>
 									</div>
 								</div>
 
 								<div class="row">
 									<div class="input-field col s12 m4 l4 other-details">
-										<input id="city" name="city" type="text" value="<?php echo $daycareDetails['city_id']?>">
-				            			<label for="pan">City</label>
+										<select name="city" id="city">
+											<option value="0">Select City</option>
+											<?php foreach($cities as $city){?>
+												<option value="<?php echo $city['id'] ?>"><?php echo $city['name'] ?></option>
+											<?php } ?> 
+										</select>
+				            			<label for="pan">City*</label>
 									</div>
 
 									<div class="input-field col s12 m4 l4 other-details">
-										 <input id="area" name="area" type="text" value="<?php echo $daycareDetails['area']?>">
-				            			<label for="gst">Area</label>
+										 <input id="area" name="area" type="text" value="<?php echo $daycareDetails['area_id']?>">
+				            			<label for="gst">Area*</label>
 									</div>
 
 									<div class="input-field col s12 m4 l4 other-details">
@@ -195,11 +200,6 @@
 					</ul>
 				</div>				
 	
-						
-						
-
-				
-
 				<div class="row white">
 					<ul id="features-collapsible" class="collapsible" data-collapsible="accordion">
 						<li class="active">
@@ -210,32 +210,32 @@
 							<div class="collapsible-body">
 								<div class="row">
 									<div class="col s3 m3 l3">
-										<input type="checkbox" name="food_provided" id="food_provided" value="1" class="margin20"  />
+										<input type="checkbox" name="food_provided" id="food_provided" value="1" class="margin20" <?php if( $daycareDetails['is_food_available'] == 1 ) echo "checked" ?> />
 					      				<label for="food_provided">Food Provided</label>
 					      			</div>	
 
 					      			<div class="col s3 m3 l3">
-					      				<input type="checkbox" id="doctor_on_call" name="doctor_on_call" value="1" class="margin20" />
+					      				<input type="checkbox" id="doctor_on_call" name="doctor_on_call" value="1" class="margin20" <?php if( $daycareDetails['is_doctor_on_call_available'] == 1 ) echo "checked" ?> />
 					      				<label for="doctor_on_call">Doctor on call</label>
 				      				</div>
 
 				      				<div class="col s3 m3 l3">
-					      				<input type="checkbox" id="open_on_weekends" name="open_on_weekends" value="1" class="margin20" />
+					      				<input type="checkbox" id="open_on_weekends" name="open_on_weekends" value="1" class="margin20" <?php if( $daycareDetails['is_open_on_weekends'] == 1 ) echo "checked" ?> />
 					      				<label for="open_on_weekends">Open on weekends</label>
 				      				</div>
 
 				      				<div class="col s3 m3 l3">
-					      				<input type="checkbox" id="activities_available" name="activities_available" value="1" class="margin20" />
+					      				<input type="checkbox" id="activities_available" name="activities_available" value="1" class="margin20" <?php if( $daycareDetails['are_activities_available'] == 1 ) echo "checked" ?> />
 					      				<label for="activities_available">Activities</label>
 				      				</div>
 
 				      				<div class="col s3 m3 l3">
-					      				<input type="checkbox" id="pick_drop" name="pick_drop" value="1" class="margin20" />
+					      				<input type="checkbox" id="pick_drop" name="pick_drop" value="1" class="margin20" <?php if( $daycareDetails['is_pick_drop_available'] == 1 ) echo "checked" ?> />
 					      				<label for="pick_drop">Pickup & Drop</label>
 				      				</div>
 
 				      				<div class="col s3 m3 l3">
-					      				<input type="checkbox" id="credit_debit_card" name="credit_debit_card" value="1" class="margin20" />
+					      				<input type="checkbox" id="credit_debit_card" name="credit_debit_card" value="1" class="margin20" <?php if( $daycareDetails['is_digital_payment_available'] == 1 ) echo "checked" ?> />
 					      				<label for="credit_debit_card">Credit/Debit Card Payment</label>
 				      				</div>
 								</div>
@@ -255,7 +255,7 @@
 							<div class="collapsible-body">
 								<div class="row">
 									<div class="input-field col s12 m4 l4 other-details">
-										<input id="video_url" name="video_url" type="text" value="">
+										<input id="video_url" name="video_url" type="text" value="<?php echo $daycareDetails['video_url'] ?>">
 				            			<label for="video_url">Video URL</label>
 									</div>
 								</div>
@@ -275,17 +275,17 @@
 
 								<div class="row">
 									<div class="input-field col s12 m4 l4 other-details">
-										<input id="facebook_id" name="facebook_id" type="text" data-length="10" value="<?php echo $daycareDetails['facebook_id']?>">
+										<input id="facebook_id" name="facebook_id" type="text" value="<?php echo $daycareDetails['facebook_id']?>">
 				            			<label for="facebook-id">Facebook ID</label>
 									</div>
 
 									<div class="input-field col s12 m4 l4 other-details">
-										 <input id="twitter_id" name="twitter_id" type="text" data-length="10" value="<?php echo $daycareDetails['twitter_id']?>"> 
+										 <input id="twitter_id" name="twitter_id" type="text" value="<?php echo $daycareDetails['twitter_id']?>"> 
 				            			<label for="twitter-id">Twitter ID</label>
 									</div>
 
 									<div class="input-field col s12 m4 l4 other-details">
-										<input id="instagram_id" name="instagram_id" type="text" data-length="10" value="<?php echo $daycareDetails['instagram_id']?>">
+										<input id="instagram_id" name="instagram_id" type="text" value="<?php echo $daycareDetails['instagram_id']?>">
 				            			<label for="instagram_id">Instagram ID</label>
 									</div>
 								</div>

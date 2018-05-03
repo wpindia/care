@@ -5,6 +5,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Account extends CI_Controller {
 
     protected $path = '';
+    protected $cities = array();
     protected $partnerData;
     protected $vendorId;
     protected $vendorAssociationIds;
@@ -13,6 +14,7 @@ class Account extends CI_Controller {
         parent::__construct();
         $this->load->helper('common_helper');
         $this->load->model('partner_account_model');
+        $this->load->model('common_model');
         /*$this->load->helper('partner_helper');
         $this->load->helper('common');
         $this->load->library('redis');
@@ -26,6 +28,9 @@ class Account extends CI_Controller {
         //$vendorId  = 1;
         */
         $this->data['logged']   = 0;
+        $this->cities = $this->common_model->getActiveCities();
+        $this->data['cities'] = $this->cities;
+        
         $this->partnerData      = $this->partner_account_model->getPartnerData(); 
         //show($this->partnerData);
        if( false == empty( $this->partnerData ) ) {
@@ -265,11 +270,12 @@ class Account extends CI_Controller {
     }
 
     public function getLocationByCityId(){
-        show('123');
         $cityId = $this->input->post('city_id');
-        $array = array('Kothrud','Shivaji Nagar'); 
+        $areas  = $this->common_model->getActiveAreasByCityId($cityId);
+
         echo json_encode($array);
     }
+
 
     public function signinProcess(){
         

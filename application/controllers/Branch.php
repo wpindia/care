@@ -39,7 +39,7 @@ class Branch extends Account {
                                             'logo'        => '',  
                                             'cover_image' => '',
                                             'city_id'     => '',  
-                                            'area'        => '',
+                                            'area_id'     => '',
                                             'zip'         => '',
                                             'video_url'   => '',
                                             'address'     => '',
@@ -52,15 +52,21 @@ class Branch extends Account {
                                             'weekend_end_time' => '',
                                             'facebook_id'  => '',
                                             'twitter_id'   => '',
-                                            'instagram_id'  => ''
+                                            'instagram_id'  => '',
+                                            'is_food_available' => '',
+                                            'is_doctor_on_call_available' => '',
+                                            'is_open_on_weekends' => '',
+                                            'are_activities_available' => '',
+                                            'is_pick_drop_available' => '',
+                                            'is_digital_payment_available' =>''
 
             );
     	$this->generateView( 'partner/addEditBranch', $this->data);
     }   
 
-    function edit($dayCareId){
+    function edit($daycareId){
     	$this->data['pageName'] = 'edit-branch';
-        $this->data['daycareDetails']  = $this->daycare_model->getDaycareDetailsById($dayCareId); 
+        $this->data['daycareDetails']  = $this->daycare_model->getDaycareDetailsById($daycareId); 
     	$this->generateView( 'partner/addEditBranch', $this->data);
     }  
 
@@ -99,15 +105,15 @@ class Branch extends Account {
         exit; 
         */
 
-        /*$imageName          = $this->input->post('profile_image');
+        $imageName = $this->input->post('profile_image');
         if(isset($_FILES['logo']['name']) && !empty($_FILES['logo']['name'])){
-            $imageName = $this->uploadfile('vendors', 'logo');
+            $imageName = uploadfile();
         }
 
-        $coverImageName          = $this->input->post('cover_image');
+        $coverImageName = $this->input->post('cover_image');
         if(isset($_FILES['featured_image']['name']) && !empty($_FILES['featured_image']['name'])){
-            $coverImageName = $this->uploadfile('vendors');
-        }*/
+            $coverImageName = uploadfile();
+        }
 
         $city = 'Bangalore';
         $area = 'Whitefield';

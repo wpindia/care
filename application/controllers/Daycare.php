@@ -12,6 +12,7 @@ class Daycare extends CI_Controller {
     function __construct() {
         parent::__construct();
         $this->load->helper('common_helper');
+        $this->load->model('daycare_model');
         //$this->load->model('partner_account_model');
         /*$this->load->helper('partner_helper');
         $this->load->helper('common');
@@ -47,10 +48,23 @@ class Daycare extends CI_Controller {
     *********************/
 
     public function index() {
-        
-        $this->data['pageName'] = 'user-daycare-view';
+        //404 page
+        /*$this->data['pageName'] = 'user-daycare-view';
+
         $this->generateView('user_daycare_view.php',$this->data);
-        //$this->generateView('home',$this->data);
+        *///$this->generateView('home',$this->data);
+    }
+
+    public function cityListing($city){
+
+    }
+
+    public function displayDaycare($city,$slug){
+        $this->data['pageName'] = 'user-daycare-view';
+        $seoName = $city . '/' . $slug;
+        $this->data['daycareDetails'] = (array)$this->daycare_model->getDaycareDetailsBySeoName($seoName);
+        
+        $this->generateView('user_daycare_view.php',$this->data);
     }
 
     public function deleteSampleDocs(){

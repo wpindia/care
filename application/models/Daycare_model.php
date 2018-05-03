@@ -21,7 +21,7 @@ class Daycare_model extends CI_Model{
 			}
 			
 			$this->db->trans_complete();
-
+			//show($this->db->last_query());
 			return $id;
 		} catch (Exception $e) {
 			$this->db->rollback();
@@ -38,7 +38,33 @@ class Daycare_model extends CI_Model{
 			$query 	= $this->db->get();
 			if($query){
 				$result = $query->result_array();
-				return $result;
+				if($result)
+					return $result[0];
+				else 
+					return array();
+				
+			}
+			return array();	
+		}catch(Exception $e){		
+            log_message('error', __METHOD__ . ' called '.$e->getMessage());		
+            return NULL;		
+        }	
+	}
+
+	function getDaycareDetailsBySeoName($seoName){
+		try{
+			$this->db->select('d.*');
+			$this->db->from('daycare as d');
+			$this->db->where('d.seo_name', $seoName );
+			
+			$query 	= $this->db->get();
+			
+			if($query){
+				$result = $query->result_array();
+				if($result)
+					return $result[0];
+				else 
+					return array();
 				
 			}
 			return array();	

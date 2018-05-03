@@ -1,13 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.4.1deb2ubuntu2
--- http://www.phpmyadmin.net
+-- version 4.7.4
+-- https://www.phpmyadmin.net/
 --
--- Host: localhost:3306
--- Generation Time: Apr 30, 2018 at 02:23 PM
--- Server version: 5.7.21-0ubuntu0.16.04.1
--- PHP Version: 7.1.15-1+ubuntu16.04.1+deb.sury.org+2
+-- Host: 127.0.0.1
+-- Generation Time: May 02, 2018 at 06:51 PM
+-- Server version: 10.1.28-MariaDB
+-- PHP Version: 7.0.25
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -23,19 +25,19 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Bangalore`
+-- Table structure for table `bangalore`
 --
 
-CREATE TABLE `Bangalore` (
+CREATE TABLE `bangalore` (
   `city_id` int(1) DEFAULT NULL,
   `area` varchar(24) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `Bangalore`
+-- Dumping data for table `bangalore`
 --
 
-INSERT INTO `Bangalore` (`city_id`, `area`) VALUES
+INSERT INTO `bangalore` (`city_id`, `area`) VALUES
 (1, 'Whitefield'),
 (1, 'Indiranagar'),
 (1, 'Jayanagar'),
@@ -279,6 +281,28 @@ INSERT INTO `Bangalore` (`city_id`, `area`) VALUES
 (1, 'Hoodi'),
 (1, 'Akshaya Nagar'),
 (1, 'Kasavanahalli');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cities`
+--
+
+CREATE TABLE `cities` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `alias` varchar(255) NOT NULL,
+  `is_active` tinyint(1) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='store all cities';
+
+--
+-- Dumping data for table `cities`
+--
+
+INSERT INTO `cities` (`id`, `name`, `alias`, `is_active`) VALUES
+(1, 'Bangalore', 'Bengaluru', 1),
+(2, 'Pune', 'Pune', 1),
+(3, 'Mumbai', 'Mumbai', 1);
 
 -- --------------------------------------------------------
 
@@ -1441,52 +1465,69 @@ INSERT INTO `city_area_association` (`id`, `city_id`, `area_name`, `is_active`) 
 CREATE TABLE `daycare` (
   `id` int(11) NOT NULL,
   `vendor_name` varchar(255) NOT NULL,
-  `seo_name` varchar(255) NOT NULL,
+  `vendor_id` int(10) NOT NULL,
+  `seo_name` varchar(255) DEFAULT NULL,
   `contact_name` varchar(255) NOT NULL,
   `description` text NOT NULL,
   `featured_image` varchar(255) DEFAULT NULL,
   `logo` varchar(255) NOT NULL,
   `additional_information` text,
-  `additional_services_activities` text,
   `address` varchar(500) NOT NULL,
   `city_id` int(10) NOT NULL,
-  `area` varchar(255) NOT NULL,
+  `area_id` int(10) NOT NULL,
   `zip` int(11) DEFAULT NULL,
-  `mobile_no` varchar(12) NOT NULL,
+  `mobile` varchar(12) NOT NULL,
   `alternate_no` varchar(12) DEFAULT NULL,
-  `email_id` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
   `website` varchar(255) DEFAULT NULL,
   `contract_start_date` datetime NOT NULL,
   `contract_end_date` datetime NOT NULL,
   `status_id` int(11) NOT NULL DEFAULT '2',
-  `weekdays_start_time` datetime DEFAULT NULL,
-  `weekdays_end_time` datetime DEFAULT NULL,
-  `weekend_start_time` datetime DEFAULT NULL,
-  `weekend_end_time` datetime DEFAULT NULL,
+  `weekdays_start_time` time DEFAULT NULL,
+  `weekdays_end_time` time DEFAULT NULL,
+  `weekend_start_time` time DEFAULT NULL,
+  `weekend_end_time` time DEFAULT NULL,
   `age_group` varchar(255) DEFAULT NULL,
+  `video_url` varchar(255) DEFAULT NULL,
   `total_views` int(11) NOT NULL DEFAULT '0',
   `total_clicks` int(11) NOT NULL DEFAULT '0',
-  `is_featured` tinyint(1) NOT NULL,
+  `twitter_id` varchar(255) DEFAULT NULL,
+  `facebook_id` varchar(255) DEFAULT NULL,
+  `instagram_id` varchar(255) DEFAULT NULL,
+  `is_featured` tinyint(1) NOT NULL DEFAULT '0',
+  `is_food_available` tinyint(1) DEFAULT '0',
+  `is_digital_payment_available` tinyint(1) DEFAULT '0',
+  `is_pick_drop_available` tinyint(1) DEFAULT '0',
+  `are_activities_available` tinyint(1) DEFAULT '0',
+  `is_open_on_weekends` tinyint(1) DEFAULT '0',
+  `is_doctor_on_call_available` tinyint(1) DEFAULT '0',
   `created_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `modified_date` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='store all vendor info';
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='store all daycare info';
+
+--
+-- Dumping data for table `daycare`
+--
+
+INSERT INTO `daycare` (`id`, `vendor_name`, `vendor_id`, `seo_name`, `contact_name`, `description`, `featured_image`, `logo`, `additional_information`, `address`, `city_id`, `area_id`, `zip`, `mobile`, `alternate_no`, `email`, `website`, `contract_start_date`, `contract_end_date`, `status_id`, `weekdays_start_time`, `weekdays_end_time`, `weekend_start_time`, `weekend_end_time`, `age_group`, `video_url`, `total_views`, `total_clicks`, `twitter_id`, `facebook_id`, `instagram_id`, `is_featured`, `is_food_available`, `is_digital_payment_available`, `is_pick_drop_available`, `are_activities_available`, `is_open_on_weekends`, `is_doctor_on_call_available`, `created_date`, `modified_date`) VALUES
+(1, 'kids oorja', 1, 'bangalore/kids-oorja-whitefield', 'contact name', '<p>about us</p>', NULL, '', '<p>additional info</p>', 'address line 1', 1, 1, 411038, '8087589660', NULL, 'email@email.com', NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 2, '06:00:00', '06:00:00', '06:00:00', '06:00:00', NULL, 'http://youtube.com', 0, 0, 'twitter.com', 'fb.com', 'instagram.com', 0, 1, NULL, 1, NULL, NULL, NULL, '2018-05-02 18:05:47', '2018-05-02 14:35:47');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Pune`
+-- Table structure for table `pune`
 --
 
-CREATE TABLE `Pune` (
+CREATE TABLE `pune` (
   `A` varchar(10) DEFAULT NULL,
   `B` varchar(30) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `Pune`
+-- Dumping data for table `pune`
 --
 
-INSERT INTO `Pune` (`A`, `B`) VALUES
+INSERT INTO `pune` (`A`, `B`) VALUES
 (NULL, '9 Brd'),
 (NULL, 'A R Shala'),
 (NULL, 'Adhale BK'),
@@ -2196,19 +2237,19 @@ INSERT INTO `Pune` (`A`, `B`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Sheet3`
+-- Table structure for table `sheet3`
 --
 
-CREATE TABLE `Sheet3` (
+CREATE TABLE `sheet3` (
   `A` varchar(10) DEFAULT NULL,
   `B` varchar(19) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `Sheet3`
+-- Dumping data for table `sheet3`
 --
 
-INSERT INTO `Sheet3` (`A`, `B`) VALUES
+INSERT INTO `sheet3` (`A`, `B`) VALUES
 (NULL, 'Andheri'),
 (NULL, 'Bandra'),
 (NULL, 'Powai'),
@@ -2447,11 +2488,18 @@ CREATE TABLE `vendor_login` (
 --
 
 INSERT INTO `vendor_login` (`id`, `contact_name`, `email_id`, `password`, `mobile`, `is_email_verified`, `encrypt_code`, `is_mobile_verified`, `is_admin`, `last_login`, `status`, `user_reg_ip`, `vendor_id`, `created_date`, `modified_date`) VALUES
-(1, 'ninad', 'ninadajnikar@gmail.com', 'ceb6c970658f31504a901b89dcd3e461', '9923206515', 0, NULL, 0, 1, '2018-04-30 12:15:43', 'ACTIVE', NULL, 1, '2018-04-22 10:27:07', '2018-04-30 06:45:43');
+(1, 'ninad', 'ninadajnikar@gmail.com', 'ceb6c970658f31504a901b89dcd3e461', '9923206515', 0, NULL, 0, 1, '2018-05-02 16:13:49', 'ACTIVE', NULL, 1, '2018-04-22 10:27:07', '2018-05-02 14:13:49');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `cities`
+--
+ALTER TABLE `cities`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `name` (`name`);
 
 --
 -- Indexes for table `city_area_association`
@@ -2464,7 +2512,9 @@ ALTER TABLE `city_area_association`
 --
 ALTER TABLE `daycare`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `seo_name` (`seo_name`);
+  ADD UNIQUE KEY `vendor_id` (`vendor_id`),
+  ADD UNIQUE KEY `seo_name` (`seo_name`),
+  ADD KEY `vendor_id_2` (`vendor_id`);
 
 --
 -- Indexes for table `vendor`
@@ -2484,25 +2534,36 @@ ALTER TABLE `vendor_login`
 --
 
 --
+-- AUTO_INCREMENT for table `cities`
+--
+ALTER TABLE `cities`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT for table `city_area_association`
 --
 ALTER TABLE `city_area_association`
   MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1135;
+
 --
 -- AUTO_INCREMENT for table `daycare`
 --
 ALTER TABLE `daycare`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
 --
 -- AUTO_INCREMENT for table `vendor`
 --
 ALTER TABLE `vendor`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
 --
 -- AUTO_INCREMENT for table `vendor_login`
 --
 ALTER TABLE `vendor_login`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+COMMIT;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

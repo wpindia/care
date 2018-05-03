@@ -32,6 +32,7 @@ if( !function_exists('loadJS') ) {
 			break;			
 
 			case 'create-branch':
+			case 'edit-branch':
 				array_push($jsArr, 2,102,104,105,106,107);
 			break;				
 
@@ -89,6 +90,7 @@ if( !function_exists('loadCSS') ) {
 			break;				
 
 			case 'create-branch':
+			case 'edit-branch':
 				array_push($cssArr, 1,105,106);
 			break;
 
@@ -143,3 +145,68 @@ if ( ! function_exists('partner_base_url')){
 		return get_instance()->config->base_url($uri);
 	}
 }
+
+function getRandomString(){
+	$characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $strRandom = '';
+    for ($i = 0; $i < 10; $i++) {
+        $strRandom .= $characters[mt_rand(0, strlen($characters) - 1)];
+    }
+    return $strRandom;
+}
+
+function uploadfile($uploadedFilename){
+        $filename = strtolower($_FILES[$uploadedFilename]["name"]);
+        $randomString = getRandomString();
+        $dbPath = '';
+        
+        $info = new SplFileInfo($_FILES[$uploadedFilename]);
+		var_dump($info->getExtension());
+
+        if($_FILES[$uploadedFilename]['error'] == 0 && $_FILES[$uploadedFilename]['name'] != '') {
+            if(strpos($filename, '.jpg') !== false) {
+                $config['upload_path'] = FCPATH.'uploads/admin/reskilling';
+                $config['new_path'] = FCPATH.'images/reskilling/desktop/' . $type . '/';
+                $config['allowed_types'] = '*';
+                $this->load->library('upload', $config);
+                if ( false == $this->upload->do_upload($uploadedFilename) ) {
+                    $error = array('error' => $this->upload->display_errors());
+                    show($error);
+                }else {
+                    $filename = $rand_alpha . '-'.time(). '.' . $file_ext;
+                    $dblocation = $db_location . $filename; // Full path
+                    $originalImage = $this->upload->data();
+                    /*
+					$this->load->helper('s3_helper');
+                    
+                    $originalImage['type'] = $originalImage['file_type'];
+                    $this->load->library('image_lib');
+                    $originalImage['tmp_name'] = $originalImage['full_path'];
+                    $file_path = uploadFilesAdminS3Bucket($dblocation, $originalImage);
+                    if($file_path != ''){
+                        $imageSizes = array(100);
+                        if(!empty($imageSizes)){
+                            foreach ($imageSizes as $key => $value) {
+                                $config['image_library'] = 'gd2';
+                                $config['source_image'] = $originalImage['full_path'];
+                                $config['new_image'] = FCPATH.'uploads/admin/reskilling';
+                                $config['maintain_ratio'] = TRUE;
+                                $config['width'] = $value;
+                                $this->image_lib->clear();
+                                $this->image_lib->initialize($config);
+                                if ( ! $this->image_lib->resize() ){
+                                    echo $this->image_lib->display_errors();
+                                }
+                                $dblocation = $db_location.'thumb-'.$value.'-'.$filename;
+                                $file_path = uploadFilesAdminS3Bucket($dblocation, $originalImage);
+                                                    
+                            }
+                        }
+                        return $filename;
+                    }*/
+
+                }
+            }
+        }
+        return false;
+    }
