@@ -269,14 +269,6 @@ class Account extends CI_Controller {
 
     }
 
-    public function getLocationByCityId(){
-        $cityId = $this->input->post('city_id');
-        $areas  = $this->common_model->getActiveAreasByCityId($cityId);
-
-        echo json_encode($array);
-    }
-
-
     public function signinProcess(){
         
         $this->data['pageName'] = 'signin-process';

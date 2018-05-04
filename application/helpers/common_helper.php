@@ -9,8 +9,9 @@ if( !function_exists('loadJS') ) {
 			1 => 'signup.js',
 			2 => 'branch.js',
 			3 => 'user_daycare_view.js',
-
-			101=>'https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js',
+			4 => 'materialize.min.js',
+			//101=>'https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js',
+			//101=>'materialize.min.js',
 			102=>'https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.15.0/jquery.validate.min.js',
 			103=>'https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.3/owl.carousel.min.js',
 			104=>'https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.15.0/additional-methods.min.js',
@@ -21,10 +22,10 @@ if( !function_exists('loadJS') ) {
 			
 		);
 		$jsText = '';
-		$jsArr = array(101);
+		$jsArr = array(4);
 		switch ($pageName) {
 			case 'home':
-				array_push($jsArr, 0,103);
+				array_push($jsArr, 0,103,108);
 			break;	
 
 			case 'signup':

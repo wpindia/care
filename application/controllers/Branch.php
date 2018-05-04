@@ -33,6 +33,8 @@ class Branch extends Account {
     function create(){
     	$this->data['pageName']        = 'create-branch';
         $this->data['daycareDetails']  = array(
+                                            'id'            => '',
+                                            'featured_image' => '',
                                             'description' => '', 
                                             'additional_information' => '',
                                             'is_featured' => 0,

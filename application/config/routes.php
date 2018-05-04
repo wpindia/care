@@ -66,4 +66,6 @@ $route['partner/create-branch'] = 'branch/create';
 $route['partner/edit-branch/(:num)']   = 'branch/edit/$1';
 $route['partner/save-branch'] 	= 'branch/save';
 
-$route['(:any)/(:any)'] = 'daycare/displayDaycare/$1/$2';
+$route['suggestArea']			= 'welcome/getLocationByCityId'; 
+$route['(:any)/(:any)'] 		= 'daycare/search/$1/$2';
+$route['(:any)/(:any)/(:any)'] 	= 'daycare/displayDaycare/$1/$2';

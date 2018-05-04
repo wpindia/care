@@ -46,26 +46,36 @@ jQuery('document').ready(function(){
 
 		//$('body').on('focus', '#location', function () { 
 			$('input#location').autocomplete({
-			    data: {
-			        "Apple": null,
-			        "Microsoft": null,
-			        "Google": 'https://placehold.it/250x250'
-			      },
-			    /*source: function (request, response) {
+				_resizeMenu: function () {
+					var ul = this.menu.element;
+				},
+			    source: function (request, response) {
 					$.ajax({
-						url: 'suggestItem',
+						url: 'suggestArea',
 						type: "GET",
 						cache: false,
 						dataType: "json",
-						data: {type: $(this.element).data('type'), searchItm: encodeURI(request.term)},
+						data: {city_id: $('#preferred-city').val(), area_name: encodeURI(request.term)},
 						success: function (data) {
-							if(data && data.resource){
-								response(data.resource);
+							if(data && data){
+								response(data);
 							}
 						}
 					});
-				},*/
-			    
+				},
+				open: function(event, ui) { 
+					var max_width = $(this).outerWidth();
+					$(this).autocomplete("widget").width(max_width);
+				},
+
+				select: function( event, ui ) {
+					var areaName 			= encodeURI(ui.item.value.toLowerCase());
+					var city 				= encodeURI($('#preferred-city option:selected').text().toLowerCase());
+					window.location.href 	= city + "/" + areaName;
+				},
+
+				minLength: 3,
+				
 			});
 		//});
 		

@@ -59,6 +59,10 @@ class Daycare extends CI_Controller {
 
     }
 
+    public function search(){
+        show('1');
+    }
+
     public function displayDaycare($city,$slug){
         $this->data['pageName'] = 'user-daycare-view';
         $seoName = $city . '/' . $slug;

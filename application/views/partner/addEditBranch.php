@@ -1,3 +1,11 @@
+<?php 
+	$weekDaysStartTime 	= $daycareDetails['weekdays_start_time'];
+	$weekDaysEndTime 	= $daycareDetails['weekdays_end_time'];
+	$weekEndStartTime 	= $daycareDetails['weekend_start_time'];
+	$weekEndEndTime 	= $daycareDetails['weekend_end_time'];
+	//show($weekendStartTime);
+?>
+
  <div id="partner-home">
 	<div class="container">
 		<div id="form-section" class="custom-grey">
@@ -151,42 +159,41 @@
 								<i class="material-icons jfh-purple-text">note</i>Timings
 								<i class="material-icons right">arrow_drop_down</i>
 							</div>
+							<?php 
+								$selected = ''; 
+								//show($daycareDetails['weekdays_start_time']);
+							?>
 							<div class="collapsible-body">
 								<div class="row">
 									<div class="input-field col s12 m3 l3 other-details">
 										<select id="weekdays_start_time" class="" name="weekdays_start_time" >
 											<option value="" >Weekdays Start Time</option>
-											<?php			
-												$selected = "";
-												if( (0 < count($courseDetails)) && ($revenueType['id'] == $courseDetails['revenue_type_id'])){
-													$selected = "selected='selected'";		 
-												}
-											?>	
-											<option value="6:00 am" <?php echo $selected ?> >6:00 am</option>
-											<option value="6:30 am" <?php echo $selected ?> >6:00 am</option>
-											<option value="7:00 am" <?php echo $selected ?> >6:00 am</option>
-											<option value="7:30 am" <?php echo $selected ?> >6:00 am</option>
-											<option value="8:00 am" <?php echo $selected ?> >6:00 am</option>
-											<option value="8:30 am" <?php echo $selected ?> >6:00 am</option>
-											<option value="9:00 am" <?php echo $selected ?> >6:00 am</option>
-											<option value="9:30 am" <?php echo $selected ?> >6:00 am</option>
-											<option value="10:00 am" <?php echo $selected ?> >6:00 am</option>
-											<option value="10:30 am" <?php echo $selected ?> >6:00 am</option>
-											<option value="11:00 am" <?php echo $selected ?> >6:00 am</option>
-											<option value="11:30 am" <?php echo $selected ?> >6:00 am</option>
-											<option value="12 noon" <?php echo $selected ?> >6:00 am</option>
+											<option value="6:00" <?php if( $weekDaysStartTime == "06:00:00") echo "selected" ?> >6:00 am</option>
+											<option value="6:30" <?php if($weekDaysStartTime == "06:30:00") echo "selected" ?> >6:30 am</option>
+											<option value="7:00" <?php if($weekDaysStartTime == "07:00:00") echo "selected" ?> >7:00 am</option>
+											<option value="7:30" <?php if($weekDaysStartTime == "07:30:00") echo "selected" ?> >7:30 am</option>
+											<option value="8:00" <?php if($weekDaysStartTime == "08:00:00") echo "selected" ?> >8:00 am</option>
+											<option value="8:30" <?php if($weekDaysStartTime == "08:30:00") echo "selected" ?> >8:30 am</option>
+											<option value="9:00" <?php if($weekDaysStartTime == "09:00:00") echo "selected" ?> >9:00 am</option>
+											<option value="9:30" <?php if($weekDaysStartTime == "09:30:00") echo "selected" ?> >9:30 am</option>
+											<option value="10:00" <?php if($weekDaysStartTime == "10:00:00") echo "selected" ?> >10:00 am</option>
+											<option value="10:30" <?php if($weekDaysStartTime == "10:30:00") echo "selected" ?> >10:30 am</option>
+											<option value="11:00" <?php if($weekDaysStartTime == "11:00:00") echo "selected" ?> >11:00 am</option>
+											<option value="11:30" <?php if($weekDaysStartTime == "11:30:00") echo "selected" ?> >11:30 am</option>
+											<option value="12:00" <?php if($weekDaysStartTime == "12:00:00") echo "selected" ?> >12 noon</option>
 
-											<option value="12:30 pm" <?php echo $selected ?> >6:00 am</option>
-											<option value="1:00 pm" <?php echo $selected ?> >6:00 am</option>
-											<option value="1:30 pm" <?php echo $selected ?> >6:00 am</option>
-											<option value="2:00 pm" <?php echo $selected ?> >6:00 am</option>
-											<option value="2:30 pm" <?php echo $selected ?> >6:00 am</option>
-											<option value="3:00 pm" <?php echo $selected ?> >6:00 am</option>
-											<option value="3:30 pm" <?php echo $selected ?> >6:00 am</option>
-											<option value="4:00 pm" <?php echo $selected ?> >6:00 am</option>
-											<option value="5:00 pm" <?php echo $selected ?> >6:00 am</option>
-											<option value="5:30 pm" <?php echo $selected ?> >6:00 am</option>
-											<option value="6:00 pm" <?php echo $selected ?> >6:00 am</option>
+											<option value="12:30" <?php if($weekDaysStartTime == "12:30:00") echo "selected" ?> >12:30 pm</option>
+											<option value="13:00" <?php if($weekDaysStartTime == "13:00:00") echo "selected" ?> >1:00 pm</option>
+											<option value="13:30 pm" <?php if($weekDaysStartTime == "13:30:00") echo "selected" ?> >1:30 pm</option>
+											<option value="14:00 pm" <?php if($weekDaysStartTime == "14:00:00") echo "selected" ?> >2:00 pm</option>
+											<option value="14:30 pm" <?php if($weekDaysStartTime == "14:30:00") echo "selected" ?> >2:30 pm</option>
+											<option value="15:00 pm" <?php if($weekDaysStartTime == "15:00:00") echo "selected" ?> >3:00 pm</option>
+											<option value="15:30 pm" <?php if($weekDaysStartTime == "15:30:00") echo "selected" ?> >3:30 pm</option>
+											<option value="16:00 pm" <?php if($weekDaysStartTime == "16:00:00") echo "selected" ?> >4:00 pm</option>
+											<option value="16:30 pm" <?php if($weekDaysStartTime == "16:30:00") echo "selected" ?> >4:30 pm</option>
+											<option value="17:00 pm" <?php if($weekDaysStartTime == "17:00:00") echo "selected" ?> >5:00 pm</option>
+											<option value="17:30 pm" <?php if($weekDaysStartTime == "17:30:00") echo "selected" ?> >5:30 pm</option>
+											<option value="18:00 pm" <?php if($weekDaysStartTime == "18:00:00") echo "selected" ?> >6:00 pm</option>
 										</select>
 				            			<label for="weekdays_start_time">Weekdays Start Time</label>
 									</div>
@@ -194,7 +201,32 @@
 									<div class="input-field col s12 m3 l3 other-details">
 										<select id="weekdays_end_time" class="" name="weekdays_end_time" >
 											<option value="" >Weekdays End Time</option>
-											<option value="6:00 pm" >6:00 am</option>
+																						<option value="6:00" <?php if( $weekDaysEndTime == "06:00:00") echo "selected" ?> >6:00 am</option>
+											<option value="6:30" <?php if($weekDaysEndTime == "06:30:00") echo "selected" ?> >6:30 am</option>
+											<option value="7:00" <?php if($weekDaysEndTime == "07:00:00") echo "selected" ?> >7:00 am</option>
+											<option value="7:30" <?php if($weekDaysEndTime == "07:30:00") echo "selected" ?> >7:30 am</option>
+											<option value="8:00" <?php if($weekDaysEndTime == "08:00:00") echo "selected" ?> >8:00 am</option>
+											<option value="8:30" <?php if($weekDaysEndTime == "08:30:00") echo "selected" ?> >8:30 am</option>
+											<option value="9:00" <?php if($weekDaysEndTime == "09:00:00") echo "selected" ?> >9:00 am</option>
+											<option value="9:30" <?php if($weekDaysEndTime == "09:30:00") echo "selected" ?> >9:30 am</option>
+											<option value="10:00" <?php if($weekDaysEndTime == "10:00:00") echo "selected" ?> >10:00 am</option>
+											<option value="10:30" <?php if($weekDaysEndTime == "10:30:00") echo "selected" ?> >10:30 am</option>
+											<option value="11:00" <?php if($weekDaysEndTime == "11:00:00") echo "selected" ?> >11:00 am</option>
+											<option value="11:30" <?php if($weekDaysEndTime == "11:30:00") echo "selected" ?> >11:30 am</option>
+											<option value="12:00" <?php if($weekDaysEndTime == "12:00:00") echo "selected" ?> >12 noon</option>
+
+											<option value="12:30" <?php if($weekDaysEndTime == "12:30:00") echo "selected" ?> >12:30 pm</option>
+											<option value="13:00" <?php if($weekDaysEndTime == "13:00:00") echo "selected" ?> >1:00 pm</option>
+											<option value="13:30 pm" <?php if($weekDaysEndTime == "13:30:00") echo "selected" ?> >1:30 pm</option>
+											<option value="14:00 pm" <?php if($weekDaysEndTime == "14:00:00") echo "selected" ?> >2:00 pm</option>
+											<option value="14:30 pm" <?php if($weekDaysEndTime == "14:30:00") echo "selected" ?> >2:30 pm</option>
+											<option value="15:00 pm" <?php if($weekDaysEndTime == "15:00:00") echo "selected" ?> >3:00 pm</option>
+											<option value="15:30 pm" <?php if($weekDaysEndTime == "15:30:00") echo "selected" ?> >3:30 pm</option>
+											<option value="16:00 pm" <?php if($weekDaysEndTime == "16:00:00") echo "selected" ?> >4:00 pm</option>
+											<option value="16:30 pm" <?php if($weekDaysEndTime == "16:30:00") echo "selected" ?> >4:30 pm</option>
+											<option value="17:00 pm" <?php if($weekDaysEndTime == "17:00:00") echo "selected" ?> >5:00 pm</option>
+											<option value="17:30 pm" <?php if($weekDaysEndTime == "17:30:00") echo "selected" ?> >5:30 pm</option>
+											<option value="18:00 pm" <?php if($weekDaysEndTime == "18:00:00") echo "selected" ?> >6:00 pm</option>
 										</select>
 				            			<label for="weekdays_end_time">Weekdays End Time</label>
 									</div>
@@ -205,7 +237,32 @@
 									<div class="input-field col s12 m3 l3 other-details">
 										<select id="weekend_start_time" class="" name="weekend_start_time" >
 											<option value="" >Weekend Start Time</option>
-											<option value="6:00 pm" >6:00 am</option>
+											<option value="6:00" <?php if( $weekEndStartTime == "06:00:00") echo "selected" ?> >6:00 am</option>
+											<option value="6:30" <?php if($weekEndStartTime == "06:30:00") echo "selected" ?> >6:30 am</option>
+											<option value="7:00" <?php if($weekEndStartTime == "07:00:00") echo "selected" ?> >7:00 am</option>
+											<option value="7:30" <?php if($weekEndStartTime == "07:30:00") echo "selected" ?> >7:30 am</option>
+											<option value="8:00" <?php if($weekEndStartTime == "08:00:00") echo "selected" ?> >8:00 am</option>
+											<option value="8:30" <?php if($weekEndStartTime == "08:30:00") echo "selected" ?> >8:30 am</option>
+											<option value="9:00" <?php if($weekEndStartTime == "09:00:00") echo "selected" ?> >9:00 am</option>
+											<option value="9:30" <?php if($weekEndStartTime == "09:30:00") echo "selected" ?> >9:30 am</option>
+											<option value="10:00" <?php if($weekEndStartTime == "10:00:00") echo "selected" ?> >10:00 am</option>
+											<option value="10:30" <?php if($weekEndStartTime == "10:30:00") echo "selected" ?> >10:30 am</option>
+											<option value="11:00" <?php if($weekEndStartTime == "11:00:00") echo "selected" ?> >11:00 am</option>
+											<option value="11:30" <?php if($weekEndStartTime == "11:30:00") echo "selected" ?> >11:30 am</option>
+											<option value="12:00" <?php if($weekEndStartTime == "12:00:00") echo "selected" ?> >12 noon</option>
+
+											<option value="12:30" <?php if($weekEndStartTime == "12:30:00") echo "selected" ?> >12:30 pm</option>
+											<option value="13:00" <?php if($weekEndStartTime == "13:00:00") echo "selected" ?> >1:00 pm</option>
+											<option value="13:30 pm" <?php if($weekEndStartTime == "13:30:00") echo "selected" ?> >1:30 pm</option>
+											<option value="14:00 pm" <?php if($weekEndStartTime == "14:00:00") echo "selected" ?> >2:00 pm</option>
+											<option value="14:30 pm" <?php if($weekEndStartTime == "14:30:00") echo "selected" ?> >2:30 pm</option>
+											<option value="15:00 pm" <?php if($weekEndStartTime == "15:00:00") echo "selected" ?> >3:00 pm</option>
+											<option value="15:30 pm" <?php if($weekEndStartTime == "15:30:00") echo "selected" ?> >3:30 pm</option>
+											<option value="16:00 pm" <?php if($weekEndStartTime == "16:00:00") echo "selected" ?> >4:00 pm</option>
+											<option value="16:30 pm" <?php if($weekEndStartTime == "16:30:00") echo "selected" ?> >4:30 pm</option>
+											<option value="17:00 pm" <?php if($weekEndStartTime == "17:00:00") echo "selected" ?> >5:00 pm</option>
+											<option value="17:30 pm" <?php if($weekEndStartTime == "17:30:00") echo "selected" ?> >5:30 pm</option>
+											<option value="18:00 pm" <?php if($weekEndStartTime == "18:00:00") echo "selected" ?> >6:00 pm</option>
 										</select>
 				            			<label for="weekend_start_time">Weekend Start Time</label>
 									</div>
@@ -213,7 +270,32 @@
 									<div class="input-field col s12 m3 l3 other-details">
 										<select id="weekend_end_time" class="" name="weekend_end_time" >
 											<option value="" >Weekend End Time</option>
-											<option value="6:00 pm" >6:00 am</option>
+											<option value="6:00" <?php if( $weekEndEndTime == "06:00:00") echo "selected" ?> >6:00 am</option>
+											<option value="6:30" <?php if($weekEndEndTime == "06:30:00") echo "selected" ?> >6:30 am</option>
+											<option value="7:00" <?php if($weekEndEndTime == "07:00:00") echo "selected" ?> >7:00 am</option>
+											<option value="7:30" <?php if($weekEndEndTime == "07:30:00") echo "selected" ?> >7:30 am</option>
+											<option value="8:00" <?php if($weekEndEndTime == "08:00:00") echo "selected" ?> >8:00 am</option>
+											<option value="8:30" <?php if($weekEndEndTime == "08:30:00") echo "selected" ?> >8:30 am</option>
+											<option value="9:00" <?php if($weekEndEndTime == "09:00:00") echo "selected" ?> >9:00 am</option>
+											<option value="9:30" <?php if($weekEndEndTime == "09:30:00") echo "selected" ?> >9:30 am</option>
+											<option value="10:00" <?php if($weekEndEndTime == "10:00:00") echo "selected" ?> >10:00 am</option>
+											<option value="10:30" <?php if($weekEndEndTime == "10:30:00") echo "selected" ?> >10:30 am</option>
+											<option value="11:00" <?php if($weekEndEndTime == "11:00:00") echo "selected" ?> >11:00 am</option>
+											<option value="11:30" <?php if($weekEndEndTime == "11:30:00") echo "selected" ?> >11:30 am</option>
+											<option value="12:00" <?php if($weekEndEndTime == "12:00:00") echo "selected" ?> >12 noon</option>
+
+											<option value="12:30" <?php if($weekEndEndTime == "12:30:00") echo "selected" ?> >12:30 pm</option>
+											<option value="13:00" <?php if($weekEndEndTime == "13:00:00") echo "selected" ?> >1:00 pm</option>
+											<option value="13:30 pm" <?php if($weekEndEndTime == "13:30:00") echo "selected" ?> >1:30 pm</option>
+											<option value="14:00 pm" <?php if($weekEndEndTime == "14:00:00") echo "selected" ?> >2:00 pm</option>
+											<option value="14:30 pm" <?php if($weekEndEndTime == "14:30:00") echo "selected" ?> >2:30 pm</option>
+											<option value="15:00 pm" <?php if($weekEndEndTime == "15:00:00") echo "selected" ?> >3:00 pm</option>
+											<option value="15:30 pm" <?php if($weekEndEndTime == "15:30:00") echo "selected" ?> >3:30 pm</option>
+											<option value="16:00 pm" <?php if($weekEndEndTime == "16:00:00") echo "selected" ?> >4:00 pm</option>
+											<option value="16:30 pm" <?php if($weekEndEndTime == "16:30:00") echo "selected" ?> >4:30 pm</option>
+											<option value="17:00 pm" <?php if($weekEndEndTime == "17:00:00") echo "selected" ?> >5:00 pm</option>
+											<option value="17:30 pm" <?php if($weekEndEndTime == "17:30:00") echo "selected" ?> >5:30 pm</option>
+											<option value="18:00 pm" <?php if($weekEndEndTime == "18:00:00") echo "selected" ?> >6:00 pm</option>
 										</select>
 				            			<label for="weekend_end_time">Weekend End Time</label> 
 									</div>
