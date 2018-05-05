@@ -26,7 +26,11 @@ if( !function_exists('loadJS') ) {
 		switch ($pageName) {
 			case 'home':
 				array_push($jsArr, 0,103,108);
-			break;	
+			break;
+
+			case 'search-results':
+				array_push($jsArr, 108);
+			break;				
 
 			case 'signup':
 				array_push($jsArr, 1,102,104);
@@ -80,6 +84,10 @@ if( !function_exists('loadCSS') ) {
 		switch ($pageName) {
 			case 'home':
 				array_push($cssArr, 102,103);
+			break;
+
+			case 'search-results':
+				//array_push($cssArr);
 			break;
 					
 			case 'signup':
@@ -196,3 +204,27 @@ function uploadfile($uploadedFilename, $vendorId){
         
         return false;
     }
+
+    function getCityNameById($cityId){
+    	global $daycareCities;
+		return ( true == array_key_exists( $cityId, $daycareCities ) ) ? $daycareCities[$cityId] : false;
+	}
+
+	function getCityIdByName($cityName){
+		global $daycareCities;
+		return array_search(strtolower($cityName), array_map('strtolower', $daycareCities ) );
+	}
+
+	function getAreaNameById($areaId){
+    	global $daycareAreas;
+		return ( true == array_key_exists( $areaId, $daycareAreas ) ) ? $daycareAreas[$areaId] : false;
+	}
+
+	function getAreaIdByName($areaName){
+		global $daycareAreas;
+		return array_search(strtolower($areaName), array_map('strtolower', $daycareAreas ) );
+	}
+
+	function getFormattedTime($time){
+		return date('h:i a', strtotime($time));
+	}

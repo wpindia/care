@@ -26,7 +26,9 @@ class Welcome extends CI_Controller {
 
 	public function index(){
 		$this->data['pageName'] = 'home';
-        $this->generateView('home',$this->data);	
+		$this->data['daycares'] = $this->common_model->getStarredDaycares();
+
+		$this->generateView('home',$this->data);	
 	}
 
 	protected function generateView( $viewName,$data = '' ) {
@@ -39,9 +41,11 @@ class Welcome extends CI_Controller {
 
     public function getLocationByCityId(){
         
-        $cityId = $this->input->get('city_id');
-        $areaName = $this->input->get('area_name');
-        $areas  = (array)$this->common_model->getActiveAreasByCityIdByAreaName($cityId,$areaName);
+        $cityId 	= $this->input->get('city_id');
+        $areaName 	= $this->input->get('area_name');
+        $areas  	= $this->common_model->getActiveAreasByCityIdByAreaName($cityId,$areaName);
+        
+        $areas = explode(",",$areas);
 
         echo json_encode($areas);
     }
