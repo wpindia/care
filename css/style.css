@@ -2,7 +2,14 @@ body {
     margin: 0 auto;
     background-color: #f9f9f9;
     font-family: 'Roboto', sans-serif;
+}
 
+.ui-menu .ui-menu-item-wrapper {
+    padding: 10px 20px;
+    color: #794c9e;
+    text-align: left;
+    font-size: 12px;
+    cursor: pointer;
 }
 
 .padding0{
@@ -57,7 +64,31 @@ body {
     color: #000;
     padding: 10px;
     border-radius: 5px;
+}
+
+#daycare .daycare-green-flat-btn{
+    background-color: #8cb859;
+    color: #fff;
+    padding: 10px;
+    border-radius: 0px;
 }    
+
+#daycares .read-more{
+	position: absolute;
+    bottom: 0px;
+    width: 100%;
+}
+
+#daycares .card .card-content{
+	padding: 18px;
+}
+
+#daycares .card .card-image .card-title {
+	padding: 5px 0px 5px 20px;
+    background: #000;
+    width: 100%;
+    opacity: 0.8;
+}     
 
 .padding10{
 	padding: 10px !important;
@@ -66,6 +97,8 @@ body {
 #daycare .block{
 	display: block;
 }
+
+
 
 i.material-icons{
 	vertical-align: middle;

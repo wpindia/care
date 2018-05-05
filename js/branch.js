@@ -1,4 +1,90 @@
 $('document').ready(function(){
+	$('form#frm_addEditProfile').validate({
+		ignore: [],
+		rules: {
+			aboutus:{
+				required: true,
+				//minlength: 50
+			},
+			address:{
+				required: true,
+				//email:true,
+			},
+			contact_name:{
+				required: true,
+				//minlength:5
+
+			},
+			email:{
+				required:true,
+				email: true
+			},
+			mobile:{
+				required:true,
+				minlength: 10,
+				maxlength: 12
+			},
+			city:{
+				required: true
+			},
+			area:{
+				required: true
+			},
+			video_url:{
+				url: true
+			},
+			facebook_id:{
+				url: true
+			},
+			twitter_id:{
+				url: true
+			},
+			instagram_id:{
+				url: true
+			}
+		},
+		messages: {
+			email:{
+				required: "Please enter email id",
+			},
+			mobile:{
+				required: "Please enter mobile no",
+			},
+			contact_name:{
+				required: "Please enter contact name",
+			},
+			city:{
+				required: "Please enter city",	
+			},
+			video_url:{
+				url: "Please enter valid url. Url should start with http",
+			},
+			facebook_id:{
+				url: "Please enter valid url. Url should start with http",
+			},
+			twitter_id:{
+				url: "Please enter valid url. Url should start with http",
+			},
+			instagram_id:{
+				url: "Please enter valid url. Url should start with http",
+			}
+
+
+		},
+		errorElement : 'div',
+		
+		errorPlacement: function(error, element) {
+        
+            var placement = $(element).data('error');
+            if (placement) {
+                $(placement).parent().prepend(error);
+            } else {
+                error.insertAfter(element);
+                
+            }
+        }
+	});
+
 	$('select').material_select();
 
 	var drEvent = $('.dropify').dropify({
@@ -29,28 +115,30 @@ $('document').ready(function(){
     }); 
 	
 	if($('textarea.tinymce-editor').length>0){
-			tinymce.init({
-				selector: '.tinymce-editor',
-				branding:false,
-				menubar: false,
-				statusbar: true,
-				toolbar_items_size: 'small',
-				height: 200,
-				
-			});
-		}
-	});
+		tinymce.init({
+			selector: '.tinymce-editor',
+			branding:false,
+			menubar: false,
+			statusbar: true,
+			toolbar_items_size: 'small',
+			height: 200,
+			
+		});
+	}
+	
 
 	$('#city').on('change',function(){
 		$cityId = $(this).val();
 		$.ajax({
-	        url: 'account/getAreaByCityId',
+	        url: 'fetchLocations',
 	        type: "POST",
 	        dataType: "json",
 	        data: {city_id: $cityId},
 	        
 	        success: function (response) {
-	        	
+	        	console.log(response);
 	        }	
 		});
-	})	
+	});
+});
+	

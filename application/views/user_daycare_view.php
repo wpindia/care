@@ -9,7 +9,7 @@
 					<img class="" src="<?php echo base_url('images/kidsoorja.png')?>">
 				</div>
 				<div class="col s9 m9 l9">
-					<h1 class="">Kids OOrja</h1>	
+					<h1 class=""><?php echo ucwords( $daycareDetails['vendor_name'] ) ?></h1>	
 				</div>	
 			</div>
 			
@@ -35,17 +35,7 @@
 		<div class="col s12 m12 l12">
 			<div  class="section ">
 				<h3>About Us</h3>	
-			<p>India's Largest and Most Trusted Pre-School and Day Care</p>
-
-		<p>KLAY Schools are a chain of high-end preparatory schools catering to preschoolers and providing day care and after school services. KLAY schools are set up by Founding Years – A multi platform education services organization. KLAY the Best Play School in India caters to an age group of 1-10 years. Parents choose our school because of the high quality of teaching, education, infrastructure and resources that we provide – enabling our children to cope and succeed in the 21st century. They also choose KLAY because we are the Best Play School in India and believe that the school is a community of parents and they also have a say in how their children are educated and cared for.</p>
-
-		<p>We believe that children’s minds in their formative years are like clay (our name is inspired by this) and need to be provided the right environment to flourish. The three important pillars in a young child’s life at this stage are the father, mother and the teachers. A child is learning largely from his/her immediate environment, an environment they feel safe and secure in.</p>
-
-		<p>KLAY provides exactly this – an environment where your child can be his/her own person, feels at home, is safe and secure and has enough avenues to explore. We have well trained teachers who provide a structure for your child to work in and are children with them to spur their curiosity.</p>
-
-		<p>With the Best Preschool in India you can be assured that your child would have the right learning environment, with ample learning resources and qualified teachers. We ensure that your little ones will be given proper attention and that they will imbibe new things by means of various innovative learning aids.</p>
-
-		<p>KLAY the Best Play School in India, would help you in your journey of bringing up your little one by providing the right education, values and ideals, as your little one gets ready to step into the world!</p>
+				<?php echo $daycareDetails['description'] ?>
 			</div>	
 		</div>
 	</div>
@@ -55,20 +45,36 @@
 		<h3>Features</h3>
 			<div class="col s12 m4 l4">
 				<i class="material-icons">check</i> Timings: 8.30 a.m to 7.30 p.m<br/><br/>
-				<i class="material-icons">clear</i> Age-Group: 10 months+<br/><br/>
-				<i class="material-icons">clear</i> Trained & caring staff<br/><br/>
+				<i class="material-icons">check</i> Age-Group: 10 months+<br/><br/>
+				<i class="material-icons">check</i> Trained & caring staff<br/><br/>
 			</div>
 
 			<div class="col s12 m4 l4">
-				<i class="material-icons">check</i> Food provided<br/><br/>
-				<i class="material-icons">clear</i> Open on weekend<br/><br/>
-				<i class="material-icons">check</i> Transport available<br/><br/>
+				<i class="material-icons">
+					<?php if($daycareDetails['is_food_available']) echo "check"; else echo "clear";?> 
+				</i> 
+				Food provided<br/><br/>
+				<i class="material-icons">
+					<?php if($daycareDetails['is_open_on_weekends']) echo "check"; else echo "clear";?> 
+				</i> Open on weekend<br/><br/>
+
+				<i class="material-icons">
+					<?php if($daycareDetails['is_pick_drop_available']) echo "check"; else echo "clear";?> 
+				</i> Transport available<br/><br/>
 			</div>
 			
 			<div class="col s12 m4 l4">
-				<i class="material-icons">check</i> Activities<br/><br/>
-				<i class="material-icons">clear</i> Doctor on call<br/><br/>
-				
+				<i class="material-icons">
+					<?php if($daycareDetails['are_activities_available']) echo "check"; else echo "clear";?> 
+				</i>
+				Activities<br/><br/>
+				<i class="material-icons">
+					<?php if($daycareDetails['is_doctor_on_call_available']) echo "check"; else echo "clear";?> 
+				</i>Doctor on call<br/><br/>
+
+				<i class="material-icons">
+					<?php if($daycareDetails['is_digital_payment_available']) echo "check"; else echo "clear";?> 
+				</i>Aceepts Credit/Debit Card<br/><br/>				
 			</div>
 
 				
@@ -191,15 +197,15 @@
 				<h3>Contact Us</h3>	
 				<!--<div class="btn daycare-green-round-btn margin20">Contact DayCare</div>-->
 				<!--<div class="contact-us-details padding20" >-->
-					<i class="material-icons">person</i> Mrs. Test<br/><br/>
-					<i class="material-icons">phone</i> 020 - 65216516<br/><br/>
-					<i class="material-icons">email</i> test@test.com<br/>
+					<i class="material-icons">person</i> <?php echo $daycareDetails['contact_name'] ?><br/><br/>
+					<i class="material-icons">phone</i> <?php echo $daycareDetails['mobile'] ?> <br/><br/>
+					<i class="material-icons">email</i> <a href="mailto:<?php echo $daycareDetails['email'] ?>"><?php echo $daycareDetails['email'] ?></a><br/>
 				<!--</div>-->
 			</div>
 			<div class="col s12 m9 l9">
 				<h3>Our Location</h3>
-				<iframe height="300px" width="100%" src="//www.google.com/maps/embed/v1/directions?origin=Saranya+shantiniketan
-      &destination=Manipal+Whitefield&zoom=12&key=<?php echo GOOGLE_MAPS_API_KEY ?>">
+				<iframe height="300px" width="100%" src="//www.google.com/maps/embed/v1/directions?origin=
+      &destination=<?php echo $daycareDetails['address'] ?>&zoom=12&key=<?php echo GOOGLE_MAPS_API_KEY ?>">
   </iframe>	
 			</div>	
 		</div>

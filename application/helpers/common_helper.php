@@ -9,8 +9,9 @@ if( !function_exists('loadJS') ) {
 			1 => 'signup.js',
 			2 => 'branch.js',
 			3 => 'user_daycare_view.js',
-
-			101=>'https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js',
+			4 => 'materialize.min.js',
+			//101=>'https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js',
+			//101=>'materialize.min.js',
 			102=>'https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.15.0/jquery.validate.min.js',
 			103=>'https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.3/owl.carousel.min.js',
 			104=>'https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.15.0/additional-methods.min.js',
@@ -21,17 +22,22 @@ if( !function_exists('loadJS') ) {
 			
 		);
 		$jsText = '';
-		$jsArr = array(101);
+		$jsArr = array(4);
 		switch ($pageName) {
 			case 'home':
-				array_push($jsArr, 0,103);
-			break;	
+				array_push($jsArr, 0,103,108);
+			break;
+
+			case 'search-results':
+				array_push($jsArr, 108);
+			break;				
 
 			case 'signup':
 				array_push($jsArr, 1,102,104);
 			break;			
 
 			case 'create-branch':
+			case 'edit-branch':
 				array_push($jsArr, 2,102,104,105,106,107);
 			break;				
 
@@ -79,6 +85,10 @@ if( !function_exists('loadCSS') ) {
 			case 'home':
 				array_push($cssArr, 102,103);
 			break;
+
+			case 'search-results':
+				//array_push($cssArr);
+			break;
 					
 			case 'signup':
 				array_push($cssArr,1);
@@ -89,6 +99,7 @@ if( !function_exists('loadCSS') ) {
 			break;				
 
 			case 'create-branch':
+			case 'edit-branch':
 				array_push($cssArr, 1,105,106);
 			break;
 
@@ -143,3 +154,77 @@ if ( ! function_exists('partner_base_url')){
 		return get_instance()->config->base_url($uri);
 	}
 }
+
+function getRandomString(){
+	$characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $strRandom = '';
+    for ($i = 0; $i < 5; $i++) {
+        $strRandom .= $characters[mt_rand(0, strlen($characters) - 1)];
+    }
+    return $strRandom;
+}
+
+function generateImageUrl($fileName){
+	$strUrl = ( ENVIRONMENT !== 'production' ) ? base_url($fileName) : FCPATH . $fileName; 
+	return $strUrl;
+}
+
+function uploadfile($uploadedFilename, $vendorId){
+        //$filename 			= strtolower($_FILES[$uploadedFilename]["name"]);
+        $randomString 		= getRandomString();
+        $destinationPath 	= FCPATH . 'uploads/admin/' . $vendorId . '/';
+        
+        if(false == file_exists($destinationPath)){
+            $status = mkdir($destinationPath);
+        	if(false == $status) return false;
+        }
+
+        $info 			= new SplFileInfo($_FILES[$uploadedFilename]["name"]);
+		$fileExtension 	= $info->getExtension();
+
+		if($_FILES[$uploadedFilename]['error'] != 0 || $_FILES[$uploadedFilename]['name'] == '') return false;
+
+		$filename 	= $uploadedFilename . '_' . $randomString . '_'.time(). '.' . $fileExtension;
+        
+        $config['upload_path'] 		= $destinationPath;
+        $config['allowed_types'] 	= 'gif|jpg|png|jpeg';
+        $config['file_name']		= $filename;
+        $CI =& get_instance();
+     	$CI->load->library('upload', $config);
+
+        if( false == $CI->upload->do_upload($uploadedFilename) ) {
+            $error = array('error' => $CI->upload->display_errors());
+            show($error);
+        }else {
+            $uploadData = $CI->upload->data();
+	        
+	        return $filename;
+        }
+        
+        
+        return false;
+    }
+
+    function getCityNameById($cityId){
+    	global $daycareCities;
+		return ( true == array_key_exists( $cityId, $daycareCities ) ) ? $daycareCities[$cityId] : false;
+	}
+
+	function getCityIdByName($cityName){
+		global $daycareCities;
+		return array_search(strtolower($cityName), array_map('strtolower', $daycareCities ) );
+	}
+
+	function getAreaNameById($areaId){
+    	global $daycareAreas;
+		return ( true == array_key_exists( $areaId, $daycareAreas ) ) ? $daycareAreas[$areaId] : false;
+	}
+
+	function getAreaIdByName($areaName){
+		global $daycareAreas;
+		return array_search(strtolower($areaName), array_map('strtolower', $daycareAreas ) );
+	}
+
+	function getFormattedTime($time){
+		return date('h:i a', strtotime($time));
+	}

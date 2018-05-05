@@ -6,7 +6,7 @@ class Branch extends Account {
 
 	function __construct() {
         parent::__construct();
-        //$this->load->model('partner_profile_model');
+        $this->load->model('daycare_model');
 
         if( true == empty( $this->partnerData ) ) {
             redirect('/');
@@ -33,13 +33,15 @@ class Branch extends Account {
     function create(){
     	$this->data['pageName']        = 'create-branch';
         $this->data['daycareDetails']  = array(
+                                            'id'            => '',
+                                            'featured_image' => '',
                                             'description' => '', 
-                                            'additional-information' => '',
+                                            'additional_information' => '',
                                             'is_featured' => 0,
                                             'logo'        => '',  
                                             'cover_image' => '',
                                             'city_id'     => '',  
-                                            'area'        => '',
+                                            'area_id'     => '',
                                             'zip'         => '',
                                             'video_url'   => '',
                                             'address'     => '',
@@ -52,71 +54,125 @@ class Branch extends Account {
                                             'weekend_end_time' => '',
                                             'facebook_id'  => '',
                                             'twitter_id'   => '',
-                                            'linkedin_id'  => ''
+                                            'instagram_id'  => '',
+                                            'is_food_available' => '',
+                                            'is_doctor_on_call_available' => '',
+                                            'is_open_on_weekends' => '',
+                                            'are_activities_available' => '',
+                                            'is_pick_drop_available' => '',
+                                            'is_digital_payment_available' =>''
 
             );
     	$this->generateView( 'partner/addEditBranch', $this->data);
     }   
 
-    function edit(){
-    	$this->data['pageName'] = 'edit-profile';
-    	$this->displayPages( 'partner/profile/addEditProfile', $this->data, true );
+    function edit($daycareId){
+    	$this->data['pageName']        = 'edit-branch';
+        $this->data['daycareDetails']  = $this->daycare_model->getDaycareDetailsById($daycareId); 
+    	
+        $this->generateView( 'partner/addEditBranch', $this->data);
     }  
 
     function save(){
+        $id                         = (int)$this->input->post('daycare-id');
+        $aboutUs                    = $this->input->post('aboutus');
+        $additionalInformation      = $this->input->post('additional_information');
+        $address                    = $this->input->post('address');
 
-        $coverImageName = $this->uploadImage();
+        $contactName                = $this->input->post('contact_name');
+        $email                      = $this->input->post('email');
+        $mobile                     = $this->input->post('mobile');
 
-        show($_POST);
-    	$aboutUs  			= $this->input->post('aboutus');
-    	$registeredAddress  = $this->input->post('registered-address');
-    	$pan  				= $this->input->post('pan');
-    	$gst  				= $this->input->post('gst');
-    	$sac  				= $this->input->post('sac');
-    	$facebookId  		= $this->input->post('facebook-id');
-    	$twitterId  		= $this->input->post('twitter-id');
-    	$linkedinId  		= $this->input->post('linkedin-id');
-        $videoId            = $this->input->post('video-id');
-        
-    	$vendorTypes        = $this->input->post('vendor-types');    
+        $cityId                     = 1;//$this->input->post('city');
+        $areaId                     = 1;//$this->input->post('area');
+        $zip                        = $this->input->post('zip');
 
-        $imageName          = $this->input->post('profile_image');
+        $weekdaysStartTime          = $this->input->post('weekdays_start_time');
+        $weekdaysEndTime            = $this->input->post('weekdays_end_time');
+        $weekendStartTime           = $this->input->post('weekend_start_time');
+        $weekendEndTime             = $this->input->post('weekend_end_time');
+
+        $isFoodAvailable            = $this->input->post('food_provided');
+        $isDoctorOnCallAvailable    = $this->input->post('doctor_on_call');
+        $isOpenOnWeekends           = $this->input->post('open_on_weekends');
+        $areActivitiesAvailable     = $this->input->post('activities_available');
+        $isPickDropAvailable        = $this->input->post('pick_drop');
+        $isDigitalPaymentAvailable  = $this->input->post('credit_debit_card');
+
+        $videoUrl                   = $this->input->post('video_url');
+        $facebookId                 = $this->input->post('facebook_id');
+        $twitterId                  = $this->input->post('twitter_id');
+        $instagramId                = $this->input->post('instagram_id');
+
+        /*var_dump($aboutUs,$additionalInformation,$registeredAddress,$contactName,$email,$mobile,$city,$area,$zip,$weekdaysStartTime,$weekdaysEndTime,$weekendStartTime,$weekendEndTime, $isFoodAvailable,$isDoctorOnCallAvailable,$isOpenOnWeekends,$areActivitiesAvailable,$isPickDropAvailable, $isDigitalPaymentAvailable,$videoUrl,$facebookId,$twiiterId, $instagramId);
+        exit; 
+        */
+
+        $imageName = $this->input->post('profile_image');
         if(isset($_FILES['logo']['name']) && !empty($_FILES['logo']['name'])){
-            $imageName = $this->uploadfile('vendors', 'logo');
+            $imageName = uploadfile('logo', $this->partnerData['vendor_id']);
         }
 
-        $coverImageName          = $this->input->post('cover_image');
+        $coverImageName = $this->input->post('cover_image');
         if(isset($_FILES['featured_image']['name']) && !empty($_FILES['featured_image']['name'])){
-            $coverImageName = $this->uploadfile('vendors');
+            $coverImageName = uploadfile('featured_image', $this->partnerData['vendor_id']);
         }
+        
+        $city = 'Bangalore';
+        $area = 'Whitefield';
+        $slug = $city . '/' . $this->partnerData['vendor_name'] . '-' . $area;
                 
-        $vendorData = array(
-    		'description' 			=> $aboutUs,
-    		'registered_address' 	=> $registeredAddress,
-    		'pan' 					=> $pan,
-    		'gst_id' 				=> $gst,
-    		'sac_hsc_id' 			=> $sac,
-    		'facebook_id' 			=> $facebookId,
-    		'twitter_id' 			=> $twitterId,
-    		'linkedin_id' 			=> $linkedinId,
-    	    'logo'                  => $imageName,   
-            'cover_image'           => $coverImageName,
-            'video_url'             => $videoId,
-            'modified_date'         => date('Y-m-d H:i:s')
+        $daycareData = array(
+            'vendor_id'                         => $this->partnerData['vendor_id'],
+            'vendor_name'                       => $this->partnerData['vendor_name'],
+            'seo_name'                          => generateSlug($slug),
+    		'description' 			            => $aboutUs,
+            'additional_information'            => $additionalInformation,
+    		'address' 	                        => $address,
+            'contact_name'                      => $contactName,
+            'email'                             => $email, 
+            'mobile'                            => $mobile, 
+            'city_id'                           => $cityId,
+            'area_id'                           => $areaId,
+            'zip'                               => $zip,
+            'weekdays_start_time'               => $weekdaysStartTime,
+            'weekdays_end_time'                 => $weekdaysEndTime,
+            'weekend_start_time'                => $weekendStartTime,
+            'weekend_end_time'                  => $weekendEndTime,
+            'is_food_available'                 => $isFoodAvailable,
+            'is_doctor_on_call_available'       => $isDoctorOnCallAvailable,
+            'is_open_on_weekends'               => $isOpenOnWeekends,
+            'are_activities_available'          => $areActivitiesAvailable,
+            'is_pick_drop_available'            => $isPickDropAvailable,
+            'is_digital_payment_available'      => $isDigitalPaymentAvailable,
+            'facebook_id' 			            => $facebookId,
+    		'twitter_id' 			            => $twitterId,
+    		'instagram_id' 			            => $instagramId,
+    	    'video_url'                         => $videoUrl,
+            'modified_date'                     => date('Y-m-d H:i:s'),
+            'logo'                              => $imageName,   
+            'featured_image'                    => $coverImageName,
+            
         );
 
-    	$isUpdated = $this->vendors_model->updateVendorProfile($vendorData, $this->vendorId, $vendorTypes);
-    	if(true == $isUpdated){
-    		$this->reskilling_model->addReskillingIndexing( $this->vendorId, PARTNER_TYPE_ID );
-            $this->session->set_flashdata('set_flashdata', 'Saved successfully!!');
-            redirect('partner/dashboard');
+        if( $id ){
+            unset( $daycareData['seo_name'] );
+        }
+
+    	$daycareId = $this->daycare_model->insertOrUpdateDaycareData($daycareData, $id);
+    	
+        if($daycareId){
+    		$this->session->set_flashdata('set_flashdata', 'Saved successfully!!');
+            $daycareLink = 'partner/edit-branch/' . $daycareId;
+            redirect($daycareLink);
     	} else{
             $this->session->set_flashdata('set_flashdata', 'Something went wrong..');
-            redirect('partner/create-profile');
+            redirect('partner/create-branch');
+            //redirect('partner/create-profile');
         }
     }
 
-    protected function uploadfile( $type, $uploadedFilename = 'featured_image'  ){
+    /*protected function uploadfile( $type, $uploadedFilename = 'featured_image'  ){
         log_message('info', __METHOD__ . ' called');
         $filename = strtolower($_FILES[$uploadedFilename]["name"]);
         $rand = rand(10, 99999);
@@ -176,7 +232,7 @@ class Branch extends Account {
             }
         }
         return false;
-    }
+    }*/
 
     function createImageGallery(){
         $this->data['pageName'] = 'create-gallery';

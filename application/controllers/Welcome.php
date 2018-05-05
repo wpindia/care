@@ -18,9 +18,17 @@ class Welcome extends CI_Controller {
 	 * map to /index.php/welcome/<method_name>
 	 * @see https://codeigniter.com/user_guide/general/urls.html
 	 */
+	public function __construct(){
+		parent::__construct();
+        $this->load->helper('common_helper');
+        $this->load->model('common_model');
+	}
+
 	public function index(){
 		$this->data['pageName'] = 'home';
-        $this->generateView('home',$this->data);	
+		$this->data['daycares'] = $this->common_model->getStarredDaycares();
+
+		$this->generateView('home',$this->data);	
 	}
 
 	protected function generateView( $viewName,$data = '' ) {
@@ -29,5 +37,16 @@ class Welcome extends CI_Controller {
         $this->load->view($viewName, $data);
         $this->load->view('footer', $data );
     
+    }
+
+    public function getLocationByCityId(){
+        
+        $cityId 	= $this->input->get('city_id');
+        $areaName 	= $this->input->get('area_name');
+        $areas  	= $this->common_model->getActiveAreasByCityIdByAreaName($cityId,$areaName);
+        
+        $areas = explode(",",$areas);
+
+        echo json_encode($areas);
     }
 }
