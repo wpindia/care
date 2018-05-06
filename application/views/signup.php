@@ -5,8 +5,8 @@
 			<div class="col s12 m12 l12 no-padding">
 				<h1 class="center">PARTNER ZONE</h1>
 				<div class="center description">
-					List your business for FREE with India's only day care listing portal.
-					Millions of parents are looking for the right daycare on day-care.in. Start your digital journey with Day-Care.in Profile. Let’s take the first step and create your account:
+					List your business for FREE with India's only day care listing portal.<br/>
+					Millions of parents are looking for the right daycare on day-care.in. <br/>Start your digital journey with day-care.in.<br/> Let’s take the first step and create your account:
 				</div>
 			</div>
 		</div> 
@@ -59,7 +59,7 @@
 				<div class="row">
 					<div class="col s12 m12 l12 center">
 						
-						<button class="daycare-green-btn waves-effect waves-light btn" type="submit" name="action">Sign Up
+						<button class="daycare-green-round-btn waves-effect waves-light btn" type="submit" name="action">Sign Up
 						    <i class="material-icons right">send</i>
 						</button>
 						<br/>

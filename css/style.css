@@ -66,6 +66,15 @@ body {
     border-radius: 5px;
 }
 
+#daycare .daycare-green-round-btn{
+    background-color: #8cb859;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    vertical-align: middle;
+}
+
 #daycare .daycare-green-flat-btn{
     background-color: #8cb859;
     color: #fff;

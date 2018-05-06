@@ -15,6 +15,7 @@ class Account extends CI_Controller {
         $this->load->helper('common_helper');
         $this->load->model('partner_account_model');
         $this->load->model('common_model');
+        $this->load->model('daycare_model');
         /*$this->load->helper('partner_helper');
         $this->load->helper('common');
         $this->load->library('redis');
@@ -200,39 +201,9 @@ class Account extends CI_Controller {
         }
         
         $this->data['pageName'] = 'dashboard'; 
+        $this->data['daycares'] = $this->daycare_model->getDaycaresByVendorId($this->partnerData['vendor_id']);
 
-        $profieViewCount = 0;
-                
-        $this->data['vendorData']         = $this->vendors_model->getVendorDetailsById( $this->vendorId );
-        $this->data['profileViewCount']   = $profieViewCount;
-
-        $this->data['totalCourses']     = 0;
-        $this->data['totalAssessments'] = 0;
-        $this->data['totalServices']    = 0;
-
-        if( true == in_array(1, $this->vendorAssociationIds) ){
-            $this->data['totalCourses']         = $this->reskilling_model->getTotalEntities(COURSE_TYPE_ID, $this->vendorId);
-            $this->data['topViewedCourses']     = $this->reskilling_model->getTopEntitiesByViews(COURSE_TYPE_ID, 5, $this->vendorId);
-            $this->data['topClickedCourses']    = $this->reskilling_model->getTopEntitiesByClicks(COURSE_TYPE_ID, 5, $this->vendorId );
-            $this->data['newCourses']           = $this->reskilling_model->getNewEntities(COURSE_TYPE_ID, 5, $this->vendorId );
-        }
-
-        if( true == in_array(2, $this->vendorAssociationIds) ){
-            $this->data['totalAssessments']      = $this->reskilling_model->getTotalEntities(ASSESSMENT_TYPE_ID, $this->vendorId);
-            $this->data['topViewedAssessments']  = $this->reskilling_model->getTopEntitiesByViews(ASSESSMENT_TYPE_ID,5, $this->vendorId);
-            $this->data['topClickedAssessments'] = $this->reskilling_model->getTopEntitiesByClicks(ASSESSMENT_TYPE_ID,5, $this->vendorId);
-            $this->data['newAssessments']        = $this->reskilling_model->getNewEntities(ASSESSMENT_TYPE_ID,5, $this->vendorId);
-        }
-
-        if( true == in_array(3, $this->vendorAssociationIds) ){
-            $this->data['totalServices']         = $this->reskilling_model->getTotalEntities(SERVICE_TYPE_ID, $this->vendorId);
-            $this->data['topViewedServices']     = $this->reskilling_model->getTopEntitiesByViews(SERVICE_TYPE_ID, 5, $this->vendorId);
-            $this->data['topClickedServices']    = $this->reskilling_model->getTopEntitiesByClicks(SERVICE_TYPE_ID, 5, $this->vendorId );
-            $this->data['newServices']           = $this->reskilling_model->getNewEntities(SERVICE_TYPE_ID, 5, $this->vendorId );
-        }
-        //$this->data['profileCompletePercentage']    = $this->getProfilePercentage();
-        $this->displayPages( 'partner/dashboard', $this->data, true );
-        
+        $this->generateView( 'partner/dashboard', $this->data );
     }
 
     function __validateEmailPassword( $password ){
@@ -286,7 +257,7 @@ class Account extends CI_Controller {
         
         if( true == is_array( $partnerDetails ) ) {
             $this->data['logged'] = 1;
-            redirect('dashboard', 'refresh');
+            redirect('partner/dashboard', 'refresh');
         } else {
             $this->data['signinErrors'] = 'Account is Inactive/Blocked!';
             $this->signin();

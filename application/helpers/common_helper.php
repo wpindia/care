@@ -70,6 +70,7 @@ if( !function_exists('loadCSS') ) {
 			1  => 'signup.css',
 			2  => 'signin.css',
 			3  => 'user_daycare_view.css',
+			4  => 'dashboard.css',
 
 			101=>'https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css',
 			102=>'https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.3/assets/owl.carousel.min.css',
@@ -103,9 +104,14 @@ if( !function_exists('loadCSS') ) {
 				array_push($cssArr, 1,105,106);
 			break;
 
+			case 'dashboard':
+				array_push($cssArr, 4);
+			break;				
+
 			case 'user-daycare-view':
 				array_push($cssArr, 3,102,103);
 			break;
+
 		}
 
 		if(!empty($cssArr)){
