@@ -58,6 +58,7 @@ $route['partner/validate-user'] = 'account/signinProcess';
 $route['partner/signup'] 		= 'account/signup';
 $route['partner/signupProcess'] = 'account/signupProcess';
 $route['partner/welcome'] 		= 'account/welcome';
+$route['partner/dashboard'] 	= 'account/dashboard';
 $route['partner/logout'] 		= 'account/logout';
 
 

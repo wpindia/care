@@ -25,6 +25,16 @@ class Welcome extends CI_Controller {
 	}
 
 	public function index(){
+		$this->load->library('email'); // Note: no $config param needed
+		$this->email->from('info@day-care.in', 'info@day-care.in');
+		$this->email->to('ninadajnikar@gmail.com');
+		$this->email->subject('Test email from CI and Gmail');
+		$this->email->message('This is a test.');
+		$test = $this->email->send();
+		show($this->email->print_debugger());
+		exit;
+
+
 		$this->data['pageName'] = 'home';
 		$this->data['daycares'] = $this->common_model->getStarredDaycares();
 
