@@ -276,7 +276,7 @@ class Account extends CI_Controller {
             array(
                 'field' => 'vendor_name',
                 'label' => 'Day Care Name',
-                'rules' => 'trim|required|xss_clean|is_unique[daycare.vendor_name]'
+                'rules' => 'trim|required|xss_clean|is_unique[vendor.name]'
             ),
             array(
                 'field' => 'mobile_no',
@@ -447,7 +447,8 @@ class Account extends CI_Controller {
             $this->data['logged']   = 1;
             //$this->data['id']       = $this->partnerData['partner_id'];  
             //$this->data['pageName'] = 'signup-success';
-            redirect( 'welcome', 'refresh' );
+            $redirectLink = partner_base_url('welcome');
+            redirect( $redirectLink, 'refresh' );
         } 
     }
 
@@ -921,7 +922,7 @@ class Account extends CI_Controller {
     protected function generateView( $viewName,$data = '' ) {
         $this->load->view('partner/header', $data);
         $this->load->view('partner/header-menu', $data);
-        $this->load->view($viewName, $data);
+        $this->load->view('partner/' . $viewName, $data);
         $this->load->view('partner/footer', $data );
     
     }

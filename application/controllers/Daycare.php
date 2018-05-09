@@ -15,6 +15,7 @@ class Daycare extends CI_Controller {
         $this->load->model('daycare_model');
         $this->load->model('common_model');
         
+        $this->data['showSearch'] = true;
         //$this->load->model('partner_account_model');
         /*$this->load->helper('partner_helper');
         $this->load->helper('common');
@@ -63,19 +64,22 @@ class Daycare extends CI_Controller {
 
     public function search($city,$areaName){
         $this->data['pageName'] = 'search-results';
+        $this->data['selectedArea'] = ucwords(urldecode($areaName));
         $cityId = getCityIdByName($city);
         $areaId = getAreaIdByName($areaName);
         $this->data['daycares'] = $this->common_model->getDaycaresByCityIdByAreaId($cityId,$areaId);
         //show($this->data['daycares']);
+
         $this->generateView('search_results.php',$this->data);
         //show($daycares); 
     }
 
     public function displayDaycare($city,$area,$slug){
         $this->data['pageName'] = 'user-daycare-view';
+        $this->data['selectedArea'] = ucwords(urldecode($area));
         $seoName = $city . '/' . $area . '/' . $slug;
         $this->data['daycareDetails'] = (array)$this->daycare_model->getDaycareDetailsBySeoName($seoName);
-        
+        $this->data['showSearch'] = false;
         $this->generateView('user_daycare_view.php',$this->data);
     }
 
@@ -979,7 +983,7 @@ class Daycare extends CI_Controller {
     
     protected function generateView( $viewName,$data = '' ) {
         $this->load->view('header', $data);
-        //$this->load->view('header-menu', $data);
+        $this->load->view('header-menu', $data);
         $this->load->view($viewName, $data);
         $this->load->view('footer', $data );
     

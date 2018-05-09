@@ -15,7 +15,7 @@
 			<div class="center">
 				<?php echo validation_errors(); ?>
 			</div>
-			<form id="frm_signup" name="frm_signup" action="<?php echo base_url('signupProcess');?>" method="post">
+			<form id="frm_signup" name="frm_signup" action="<?php echo partner_base_url('signupProcess');?>" method="post">
 				<div class="row">
 					<div class="col s12 m6 l6 input-field">
 						<i class="material-icons signup-icons">business</i>
@@ -69,11 +69,11 @@
 							<a class="jfh-purple-text" target="_blank" href="<?php echo base_url('terms-of-use') ?>">Privacy Policy</a> and <a class="jfh-purple-text" target="_blank" href="<?php echo base_url('privacy-policy') ?>">Terms of Use</a>
 							<br/><br/>
 							Are you an existing partner?
-							<a class="jfh-purple-text modal-trigger" href="#signin-content">
+							<a class="" href="<?php echo partner_base_url('signin') ?>">
 								 Sign in now.
 							</a>
 							<br/>
-							Have questions? Feel free to call us on +91-9923206515		
+							Have questions? Feel free to call us on +91-9923206515 <br/>or email us at enquiries@day-care.in		
 														
 						</div>
 					</div>

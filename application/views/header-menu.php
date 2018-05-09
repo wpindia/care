@@ -5,6 +5,7 @@
 				<img class="responsive-img" src="<?php echo base_url('images/logo.png')?>">
 			</a>	
 		</div>
+		<?php //if( true == $showSearch ){ ?>
 		<div class="col s9 m9 l9">
 			<div class="col s5 m4 l2">
 				<select id="preferred-city" name="preferred-city">
@@ -14,7 +15,7 @@
 				</select>	
 			</div>
 			<div class="col s7 m4 l4">
-				<input type="text" name="location" placeholder="Enter your area" id="location"  />	
+				<input type="text" name="location" placeholder="Enter your area" value="<?php echo $selectedArea ?>" id="location"  />	
 			</div>
 			<div class="m4 l3 hide-on-small-only">
 				<div class="margin20">
@@ -24,5 +25,6 @@
 				
 			</div>	
 		</div>
+		<?php //} ?>
 	</div>
 </div>

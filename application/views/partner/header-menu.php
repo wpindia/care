@@ -1,5 +1,5 @@
 <?php
-	$dashboard_menu = $create_branch = '';
+	$dashboard_menu = $branch_menu = '';
 	if(isset($pageName)){
 		switch ($pageName) {
 			case 'dashboard':
@@ -24,12 +24,13 @@
 			</div>
 
 			<div class="col s9 m9 l9">
-				
+					<?php if($logged == 1) {?>
 					<ul class="left left-side-menu hide-on-med-and-down">
-						<li><a class="<?php echo $dashboard_menu;?>" href="<?php echo partner_base_url('dashboard')?>">Dashboard</a></li>
-						<li><a class="<?php echo $branch_menu; ?> href="<?php echo partner_base_url('create-branch')?>">Create branch</a></li>
+						<li><a class="<?php echo $dashboard_menu; ?>" href="<?php echo partner_base_url('dashboard')?>">Dashboard</a></li>
+						<li><a class="<?php echo $branch_menu; ?>" href="<?php echo partner_base_url('create-branch')?>">Create branch</a></li>
 
 					</ul>
+					<?php } ?>
 							
 				<div class="s3 m3 l3 margin20">
 					<?php if($logged == 1) {?>

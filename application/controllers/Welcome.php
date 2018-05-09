@@ -37,6 +37,7 @@ class Welcome extends CI_Controller {
 
 		$this->data['pageName'] = 'home';
 		$this->data['daycares'] = $this->common_model->getStarredDaycares();
+		$this->data['selectedArea'] = '';
 
 		$this->generateView('home',$this->data);	
 	}
@@ -50,8 +51,7 @@ class Welcome extends CI_Controller {
     }
 
     public function getLocationByCityId(){
-        
-        $cityId 	= $this->input->get('city_id');
+    	$cityId 	= $this->input->get('city_id');
         $areaName 	= $this->input->get('area_name');
         $areas  	= $this->common_model->getActiveAreasByCityIdByAreaName($cityId,$areaName);
         
