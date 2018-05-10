@@ -370,6 +370,30 @@
 				            			<label for="video_url">Video URL</label>
 									</div>
 								</div>
+
+								<div class="row">
+									<?php 
+										/*if(count($sampleImages)){ 
+											echo '<div class="row">';
+											foreach( $sampleImages as $sampleImage ){
+												$imagePath = generate_image_url('uploads/admin/reskilling/samples/'. $serviceDetails["vendor_id"] .'/services/' . $sampleImage['image_name']);
+												echo '<div id="sample-'.$sampleImage['id'].'" class="left margin20 center"><img class="" src="'.$imagePath.'" />';
+												echo '<br/><input type="button" class="center delete-sample default-btn jfh-green" value="Delete" data-entity-id="'.$serviceDetails["id"].'" data-id="'.$sampleImage['id'].'"></div>';
+											}
+											echo '</div><hr/>';
+										} */
+									?>
+									<div class="file-field input-field">
+								      <div class="btn jfh-green">
+								        <span>File</span>
+								        <input name="sampleFiles[]" type="file" multiple>
+								      </div>
+								      <div class="file-path-wrapper">
+								        <input class="file-path validate" type="text" placeholder="Upload one or more files">
+								      </div>
+									</div>
+									
+								</div>
 							</div>
 						</li>
 					</ul>
