@@ -1,0 +1,17 @@
+#daycares .edit-daycare{
+	position: absolute;
+    bottom: 0px;
+    width: 100%;
+    font-size: 16px;
+}
+
+h4{
+	font-size: 16px;
+}
+
+@media only screen and (min-width : 800px) {
+	/*#left-col{
+		min-height: 800px;
+	}*/
+
+}	

@@ -14,4 +14,4 @@ define('DOMAIN_URL', 'http://dev.daycare.com/');
 define('DB_NAME', 'dummy');
 define('DB_HOSTNAME', 'localhost');
 define('DB_USERNAME', 'root');
-define('DB_PASSWORD', '');
+define('DB_PASSWORD', 'root');

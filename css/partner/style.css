@@ -1,0 +1,231 @@
+body {
+    margin: 0 auto;
+    background-color: #fff;
+    font-family: 'Roboto', sans-serif;
+}
+
+nav#top-menu {
+	box-shadow: none;
+	background: #fff;
+}
+
+.ui-menu .ui-menu-item-wrapper {
+    padding: 10px 20px;
+    color: #794c9e;
+    text-align: left;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.padding0{
+	padding: 0px !important;
+}
+
+.margin-bottom0{
+	margin-bottom: 0px !important;
+}
+
+.margin20{
+	margin: 20px 20px 20px 20px;
+}
+
+.margin-top-10{
+	margin-top: 10px !important;  
+}
+
+.margin-right-20{
+	margin-right: 20px !important;  	
+}
+
+.padding20{
+	padding: 20px 20px 20px 20px;
+}
+
+#daycare .container {
+    width: 85%;
+}
+
+#daycare .btn{
+	height: auto;
+    line-height: normal;
+}
+
+#daycare .btn.compact{
+	padding: 10px 30px;
+}
+
+#daycare .daycare-green-btn{
+	background-color: #8cb859;
+	color: #fff;
+}
+
+#daycare .daycare-default-btn{
+    background-color: #fff;
+    color: #000;
+}
+
+#daycare .daycare-default-round-btn{
+    background-color: #fff;
+    color: #000;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+#daycare .daycare-green-round-btn{
+    background-color: #8cb859;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    vertical-align: middle;
+}
+
+#daycare .daycare-green-flat-btn{
+    background-color: #8cb859;
+    color: #fff;
+    padding: 10px;
+    border-radius: 0px;
+}    
+
+#daycares .read-more{
+	position: absolute;
+    bottom: 0px;
+    width: 100%;
+}
+
+#daycares .card .card-content{
+	padding: 18px;
+}
+
+#daycares .card .card-image .card-title {
+	padding: 5px 0px 5px 20px;
+    background: #000;
+    width: 100%;
+    opacity: 0.8;
+}     
+
+.padding10{
+	padding: 10px !important;
+}
+
+#daycare .block{
+	display: block;
+}
+
+
+
+i.material-icons{
+	vertical-align: middle;
+	margin: 0px 5px 0px 0px;
+}
+
+/**
+ * Carousel CSS
+ */
+#daycare .carousel .indicators .indicator-item {
+	background-color: #b2b2b2;
+	opacity: 0.5;
+}
+#daycare .carousel .indicators .indicator-item:hover,
+.carousel .indicators .indicator-item:focus {
+	opacity: 1;
+}
+#daycare .carousel .indicators .indicator-item.active {
+	background-color: #92c139;
+	opacity: 1;
+}
+#daycare .owl-theme .owl-controls .owl-page.active span {
+	background: #92c139;
+}
+#daycare .owl-theme .owl-nav {
+	text-align: center;
+	-webkit-tap-highlight-color: transparent;
+}
+#daycare .owl-theme .owl-dots .owl-dot {
+	display: inline-block;
+	zoom: 1;
+	cursor: pointer;
+}
+#daycare .owl-theme .owl-dots .owl-dot span {
+	width: 10px;
+	height: 10px;
+	margin: 5px 7px;
+	background: dimgrey;
+	display: block;
+	-webkit-backface-visibility: visible;
+	transition: opacity .2s ease;
+	border-radius: 30px;
+	opacity: 0.5;
+}
+#daycare .owl-theme .owl-dots .owl-dot.active span {
+	background: #92c139;
+	opacity: 1;
+}
+#daycare .owl-theme .owl-dots .owl-dot span:hover {
+	opacity: 1;
+}
+
+.owl-dots{
+	position: absolute;
+	bottom: 0px;
+	text-align: center;
+	margin: 0px;
+	width: 100%;
+}
+
+#footer{
+	background: #f3f3f3;
+	padding: 20px 0px;
+}
+
+#footer ul{
+	padding: 0;
+    margin: 0px;
+    list-style: none;
+    
+}
+
+#footer ul li{
+	vertical-align: middle;
+    line-height: 10px;
+    font-size: 11px;
+    color: #878787;
+    border-right: 1px solid #878787;
+    display: inline-block;
+    padding-right: 5px;
+}
+
+#footer ul li:last-child{
+	border: 0px none;
+}    
+
+#footer ul li a{
+	text-decoration: underline;
+    padding: 0 8px;
+    margin: 0;
+    color: #878787;
+    display: inline-block;
+}    
+
+
+.card-content{
+	color: #000;
+}
+
+label.error, div.error {
+    position: relative;
+    font-size: 0.8rem;
+    color: #FF1744;
+}    
+
+
+
+nav ul li a.active{
+	background: #8cb859;
+	color: #fff;
+}
+
+nav ul li a{
+	background: #fff;
+	color: #000;
+}

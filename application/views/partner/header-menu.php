@@ -16,7 +16,7 @@
 
 <div class="row margin-top-10">
 	<div class="col s12 m12 l12">
-		<nav class="white" role="navigation">
+		<nav id="top-menu" role="navigation">
 			<div class="col s3 m3 l3">
 				<a href="<?php echo partner_base_url() ?>" class="block">
 					<img class="responsive-img" src="<?php echo base_url('images/logo.png')?>">
@@ -27,7 +27,7 @@
 					<?php if($logged == 1) {?>
 					<ul class="left left-side-menu hide-on-med-and-down">
 						<li><a class="<?php echo $dashboard_menu; ?>" href="<?php echo partner_base_url('dashboard')?>">Dashboard</a></li>
-						<li><a class="<?php echo $branch_menu; ?>" href="<?php echo partner_base_url('create-branch')?>">Create branch</a></li>
+						<li><a class="<?php echo $branch_menu; ?>" href="<?php echo partner_base_url('create-branch')?>">Profile</a></li>
 
 					</ul>
 					<?php } ?>

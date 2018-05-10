@@ -1,5 +1,5 @@
 <?php
-	echo loadJS($this->data['pageName']);
+	echo loadPartnerJS($this->data['pageName']);
 ?>
 <div id="footer" class="center ">
 	<div class="center">

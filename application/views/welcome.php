@@ -12,7 +12,7 @@
        
     </div>
 
-    <a class="daycare-green-btn btn margin20" href="<?php echo base_url('create-profile')?>">CREATE PROFILE</a>
+    <a class="daycare-green-round-btn btn margin20" href="<?php echo base_url('create-profile')?>">CREATE PROFILE</a>
 
     <hr/>
 

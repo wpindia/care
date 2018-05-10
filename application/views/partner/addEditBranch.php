@@ -27,7 +27,7 @@
 			</div>
 
 			<form id="frm_addEditProfile" name="frm_addEditProfile" action="<?php echo partner_base_url('save-branch');?>" method="post" enctype="multipart/form-data">
-				<h2 class="center">Partner Details</h2>
+				<h2 class="center">Profile</h2>
 				<input type="hidden" name="daycare-id" value="<?php echo $daycareDetails['id'];?>"/>
 				<div class="row white">
 					<ul id="images-collapsible" class="collapsible" data-collapsible="accordion">
@@ -125,24 +125,30 @@
 								</div>
 
 								<div class="row">
+
 									<div class="input-field col s12 m4 l4 other-details">
-										<select name="city" id="city">
+										<select name="city" id="preferred-city" <?php if($daycareDetails['id']>0) echo "disabled" ?> >
 											<option value="0">Select City</option>
 											<?php foreach($cities as $city){?>
-												<option value="<?php echo $city['id'] ?>"><?php echo $city['name'] ?></option>
+
+												<option value="<?php echo $city['id'] ?>" <?php if($daycareDetails['city_id'] == $city['id'] ) echo "selected"; ?>><?php echo $city['name'] ?></option>
 											<?php } ?> 
 										</select>
 				            			<label for="pan">City*</label>
 									</div>
 
 									<div class="input-field col s12 m4 l4 other-details">
-										 <input id="area" name="area" type="text" value="<?php echo $daycareDetails['area_id']?>">
+										<?php $areaName = getAreaNameById($daycareDetails['area_id']); ?>
+										<input type="text" name="area" placeholder="Enter your area" value="<?php echo $areaName ?>" id="location" <?php if($daycareDetails['id']>0) echo "disabled" ?> />	
 				            			<label for="gst">Area*</label>
 									</div>
 
 									<div class="input-field col s12 m4 l4 other-details">
 										 <input id="zip" name="zip" type="number" pattern="[0-9]*" maxlength="6" value="<?php echo $daycareDetails['zip']?>">
 				            			<label for="sac">Zip</label>
+									</div>
+									<div class="col s12 m12 l12">
+									<h6 class="red padding20">If you wish to change city or area email us at <a href="mailto:support@day-care.in">support@day-care.in</a> </h6>
 									</div>
 								</div>
 

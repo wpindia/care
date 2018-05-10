@@ -203,7 +203,7 @@ class Account extends CI_Controller {
         $this->data['pageName'] = 'dashboard'; 
         $this->data['daycares'] = $this->daycare_model->getDaycaresByVendorId($this->partnerData['vendor_id']);
 
-        $this->generateView( 'partner/dashboard', $this->data );
+        $this->generateView( 'dashboard', $this->data );
     }
 
     function __validateEmailPassword( $password ){

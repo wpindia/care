@@ -6,11 +6,9 @@ if( !function_exists('loadJS') ) {
 	function loadJS( $pageName = 'home' ) {
 		$jsFileArr = array(
 			0 => 'home.js',
-			1 => 'signup.js',
-			2 => 'branch.js',
-			3 => 'user_daycare_view.js',
-			4 => 'materialize.min.js',
-			5 => 'common.js',
+			1 => 'user_daycare_view.js',
+			2 => 'materialize.min.js',
+			3 => 'common.js',
 			//101=>'https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js',
 			//101=>'materialize.min.js',
 			102=>'https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.15.0/jquery.validate.min.js',
@@ -23,27 +21,18 @@ if( !function_exists('loadJS') ) {
 			
 		);
 		$jsText = '';
-		$jsArr = array(4);
+		$jsArr = array(2,3);
 		switch ($pageName) {
 			case 'home':
-				array_push($jsArr, 0,5,103,108);
+				array_push($jsArr, 0,103,108);
 			break;
 
 			case 'search-results':
-				array_push($jsArr, 5,108);
-			break;				
-
-			case 'signup':
-				array_push($jsArr, 1,102,104);
-			break;			
-
-			case 'create-branch':
-			case 'edit-branch':
-				array_push($jsArr, 2,102,104,105,106,107);
+				array_push($jsArr, 108);
 			break;				
 
 			case 'user-daycare-view':
-				array_push($jsArr, 3,103);
+				array_push($jsArr, 1,103);
 			break;							
 		}
 
@@ -68,11 +57,8 @@ if( !function_exists('loadCSS') ) {
 	function loadCSS( $pageName = 'home' ) {
 		$cssFileArr = array(
 			0  => 'style.css',
-			1  => 'signup.css',
-			2  => 'signin.css',
-			3  => 'user_daycare_view.css',
-			4  => 'dashboard.css',
-
+			1  => 'user_daycare_view.css',
+			
 			101=>'https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css',
 			102=>'https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.3/assets/owl.carousel.min.css',
 			103=>'https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.3/assets/owl.theme.default.min.css',
@@ -96,6 +82,100 @@ if( !function_exists('loadCSS') ) {
 				//array_push($cssArr);
 			break;
 					
+			case 'user-daycare-view':
+				array_push($cssArr, 1,102,103);
+			break;
+
+		}
+
+		if(!empty($cssArr)){
+			foreach ($cssArr as $key => $value) {
+				if(isset($cssFileArr[$value]) && $cssFileArr[$value] != ''){
+					$path = THEME_CSS_PATH.$cssFileArr[$value];
+					if($value>=100){
+						$path = $cssFileArr[$value];
+					}
+					$cssText .= '<link type="text/css" rel="stylesheet" href="'.$path.'">'."\r\n";
+				}
+			}
+		}
+		return $cssText;
+	}	
+}
+
+
+if( !function_exists('loadPartnerJS') ) {
+	function loadPartnerJS( $pageName = '' ) {
+		$jsFileArr = array(
+			1 => 'partner/signup.js',
+			2 => 'partner/branch.js',
+			3 => 'materialize.min.js',
+			4 => 'partner/common.js',
+			//101=>'https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js',
+			//101=>'materialize.min.js',
+			102=>'https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.15.0/jquery.validate.min.js',
+			103=>'https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.3/owl.carousel.min.js',
+			104=>'https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.15.0/additional-methods.min.js',
+			105=>'https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/js/dropify.min.js', 
+			106=>'https://cdnjs.cloudflare.com/ajax/libs/tinymce/4.7.11/jquery.tinymce.min.js',
+			107=>'https://cdnjs.cloudflare.com/ajax/libs/tinymce/4.5.6/tinymce.min.js',
+			108=>"https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"		
+			
+		);
+		$jsText = '';
+		$jsArr = array(3,4);
+		switch ($pageName) {
+			case 'signup':
+				array_push($jsArr, 1,102,104);
+			break;			
+
+			case 'create-branch':
+			case 'edit-branch':
+				array_push($jsArr, 2,102,104,105,106,107,108);
+			break;				
+
+			default:
+				//array_push($jsArr, 3,103);
+			break;											
+		}
+
+		if(!empty($jsArr)){
+			foreach ($jsArr as $key => $value) {
+				if(isset($jsFileArr[$value]) && $jsFileArr[$value] != ''){
+					$path = THEME_JS_PATH.$jsFileArr[$value];
+					$additional = "defer";
+					if($value>=100){
+						$path = $jsFileArr[$value];
+						$additional = "defer";
+					}
+					$jsText .= "\r\n".'<script type="text/javascript" src="'.$path.'" '.$additional.'></script>';
+				}
+			}
+		}
+		return $jsText;
+	}	
+}
+
+if( !function_exists('loadPartnerCSS') ) {
+	function loadPartnerCSS( $pageName = 'home' ) {
+		$cssFileArr = array(
+			0  => 'partner/style.css',
+			1  => 'partner/signup.css',
+			2  => 'partner/signin.css',
+			3  => 'partner/user_daycare_view.css',
+			4  => 'partner/dashboard.css',
+
+			101=>'https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css',
+			102=>'https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.3/assets/owl.carousel.min.css',
+			103=>'https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.3/assets/owl.theme.default.min.css',
+			104=>'https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css',
+			105=>'https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/css/dropify.min.css',
+			106=>'https://cdnjs.cloudflare.com/ajax/libs/tinymce/4.7.11/skins/lightgray/skin.min.css'
+		);
+		
+		$cssText = '';
+		$cssArr = array(0,101);
+		switch ($pageName) {
 			case 'signup':
 				array_push($cssArr,1);
 			break;
@@ -106,7 +186,7 @@ if( !function_exists('loadCSS') ) {
 
 			case 'create-branch':
 			case 'edit-branch':
-				array_push($cssArr, 1,105,106);
+				array_push($cssArr, 1,104,105,106);
 			break;
 
 			case 'dashboard':
@@ -132,7 +212,8 @@ if( !function_exists('loadCSS') ) {
 		}
 		return $cssText;
 	}	
-}	
+}
+
 
 function generateSlug($text){
 	// replace non letter or digits by -

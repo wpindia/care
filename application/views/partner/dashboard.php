@@ -30,7 +30,7 @@
 		          			        
 		          <h4><i class="material-icons small">visibility</i>Profile Views: <?php echo $daycare['total_views'] ?></h4>
 		        </div>
-		        <a href="<?php echo partner_base_url($url)?>" class="edit-daycare btn block daycare-green-flat-btn"><i class="material-icons">edit</i>Edit Daycare </a>
+		        <a href="<?php echo $url ?>" class="edit-daycare btn block daycare-green-flat-btn"><i class="material-icons">edit</i>Edit Daycare </a>
 		         	  		 	
 		    </div>
 		</div>

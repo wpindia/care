@@ -63,17 +63,18 @@ class Branch extends Account {
                                             'is_digital_payment_available' =>''
 
             );
-    	$this->generateView( 'partner/addEditBranch', $this->data);
+    	$this->generateView( 'addEditBranch', $this->data);
     }   
 
     function edit($daycareId){
     	$this->data['pageName']        = 'edit-branch';
         $this->data['daycareDetails']  = $this->daycare_model->getDaycareDetailsById($daycareId); 
-    	
-        $this->generateView( 'partner/addEditBranch', $this->data);
+       	
+        $this->generateView( 'addEditBranch', $this->data);
     }  
 
     function save(){
+        
         $id                         = (int)$this->input->post('daycare-id');
         $aboutUs                    = $this->input->post('aboutus');
         $additionalInformation      = $this->input->post('additional_information');
@@ -83,8 +84,10 @@ class Branch extends Account {
         $email                      = $this->input->post('email');
         $mobile                     = $this->input->post('mobile');
 
-        $cityId                     = 1;//$this->input->post('city');
-        $areaId                     = 1;//$this->input->post('area');
+        $cityId                     = $this->input->post('city');
+        $city                       = getCityNameById($cityId);
+        $area                       = $this->input->post('area');
+        $areaId                     = getAreaIdByName($this->input->post('area'));
         $zip                        = $this->input->post('zip');
 
         $weekdaysStartTime          = $this->input->post('weekdays_start_time');
@@ -118,9 +121,7 @@ class Branch extends Account {
             $coverImageName = uploadfile('featured_image', $this->partnerData['vendor_id']);
         }
         
-        $city = 'Bangalore';
-        $area = 'Whitefield';
-        $slug = $city . '/' . $this->partnerData['vendor_name'] . '-' . $area;
+        $slug = $city . '/' .  $area . '/' . $this->partnerData['vendor_name'];
                 
         $daycareData = array(
             'vendor_id'                         => $this->partnerData['vendor_id'],
@@ -509,7 +510,7 @@ class Branch extends Account {
         $this->data['pageName'] = 'add-event';
         $this->data['eventDetails'] = array('id'=>'', 'title' => '', 'description' => '', 'event_url' => '', 'image' => '');
         
-        $this->displayPages( 'partner/profile/addEditEvent', $this->data, true );
+        $this->displayPages( 'profile/addEditEvent', $this->data, true );
     }
 
     public function editEvent($eventId){

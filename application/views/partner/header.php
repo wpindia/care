@@ -15,7 +15,7 @@
 	<title>DayCare</title>
 
 	<?php
-		echo loadCSS($this->data['pageName']);
+		echo loadPartnerCSS($this->data['pageName']);
 	?>
 
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
