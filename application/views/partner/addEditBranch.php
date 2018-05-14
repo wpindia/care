@@ -15,11 +15,11 @@
 					$profile_image = $logo = $featured_image = $cover_image = '';
 					
 					if(isset($daycareDetails['logo']) && $daycareDetails['logo'] != ''){
-						$logo = generateImageUrl( 'uploads/admin/'. $daycareDetails['vendor_id'] . '/' . $daycareDetails['logo'] );
+						$logo = base_url( 'uploads/admin/'. $daycareDetails['vendor_id'] . '/' . $daycareDetails['logo'] );
 					}
 
 					if(isset($daycareDetails['featured_image']) && $daycareDetails['featured_image'] != ''){
-						$featured_image = generateImageUrl( 'uploads/admin/'. $daycareDetails['vendor_id'] . '/' . $daycareDetails['featured_image'] );
+						$featured_image = base_url( 'uploads/admin/'. $daycareDetails['vendor_id'] . '/' . $daycareDetails['featured_image'] );
 					}
 					//var_dump($logo);
 					//show($featured_image);	
@@ -59,7 +59,7 @@
 										<label for="cover_image">Cover Image</label>
 										<input type="text" class="visbilty-none hide" name="cover_image" id="cover_image" value="<?php echo $daycareDetails['featured_image'];?>">
 										<input type="file" name="featured_image" class="dropify" id="featured_image"
-										data-default-file="<?php echo $featured_image;?>" data-min-width="1000" data-max-width="1175" data-min-height="150" data-max-height="440" data-allowed-file-extensions="png jpeg jpg" data-max-file-size="500K" />
+										data-default-file="<?php echo $featured_image;?>" data-min-width="800" data-allowed-file-extensions="png jpeg jpg" data-max-file-size="500K" />
 										
 										<div class="error"><?php echo form_error('profile_image'); ?></div>
 														
