@@ -81,10 +81,12 @@ class Daycare extends CI_Controller {
         $seoName = urlencode( strtolower( $url ) );
         
         $this->data['daycareDetails']   = (array)$this->daycare_model->getDaycareDetailsBySeoName($seoName);
-        $this->data['daycares']         = $this->daycare_model->getDaycaresByVendorId($this->data['daycareDetails']['vendor_id']);
-        $this->data['galleryImages']    = $this->daycare_model->getGalleryImagesByBranchId($this->data['daycareDetails']['id']);
+        if(true == is_array($this->data['daycareDetails'])){
+            $this->data['daycares']         = $this->daycare_model->getOtherBranchesByVendorId($this->data['daycareDetails']['vendor_id'],$this->data['daycareDetails']['id']);
+            $this->data['galleryImages']    = $this->daycare_model->getGalleryImagesByBranchId($this->data['daycareDetails']['id']);
 
-        $this->daycare_model->updateProfileViews($this->data['daycareDetails']['id']);
+            $this->daycare_model->updateProfileViews($this->data['daycareDetails']['id']);
+        }
 
         $this->data['showSearch'] = false;
         $this->generateView('user_daycare_view.php',$this->data);

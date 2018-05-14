@@ -293,7 +293,7 @@ class Branch extends Account {
 
     function deleteImage(){
         $id     = $this->input->post('imageId');
-        //$result = $this->daycare_model->deleteImage($id); 
+        $result = $this->daycare_model->deleteImage($id); 
         echo json_encode(true);
     }
 

@@ -104,6 +104,30 @@ class Daycare_model extends CI_Model{
         }	
 	}
 
+	function getOtherBranchesByVendorId($vendorId,$branchId){
+		try{
+			$this->db->select('d.*');
+			$this->db->from('daycare as d');
+			$this->db->where('d.vendor_id', $vendorId );
+			$this->db->where('d.id !=', $branchId );
+			
+			$query 	= $this->db->get();
+			
+			if($query){
+				$result = $query->result_array();
+				if($result)
+					return $result;
+				else 
+					return array();
+				
+			}
+			return array();	
+		}catch(Exception $e){		
+            log_message('error', __METHOD__ . ' called '.$e->getMessage());		
+            return NULL;		
+        }	
+	}
+
 
 
 	function getDaycareDetailsBySeoName($seoName){
