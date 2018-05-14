@@ -1,7 +1,15 @@
 $('document').ready(function(){
+	$('#save-branch').on('click', function() {
+            tinymce.triggerSave();
+    });
+    
 	$('form#frm_addEditProfile').validate({
 		ignore: [],
 		rules: {
+			branch_name:{
+				required: true,
+			},
+
 			aboutus:{
 				required: true,
 				//minlength: 50
@@ -41,6 +49,10 @@ $('document').ready(function(){
 			},
 			instagram_id:{
 				url: true
+			},
+			zip:{
+				minlength: 6,
+				maxlength: 6
 			}
 		},
 		messages: {

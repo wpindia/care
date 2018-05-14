@@ -1,53 +1,53 @@
 <div class="container">
 	<div id="daycares" class="row">
-
+		<div class="col s12 m3 l3">
+	    	<a href="<?php echo partner_base_url('create-branch')?>">
+		    	<div class="card small">
+			        <div class="card-content center">
+					  	<i class="material-icons large">add_circle_outline</i>
+			        </div>
+			        <a href="<?php echo partner_base_url('create-branch')?>" class="add-daycare btn block daycare-green-flat-btn"><i class="material-icons">add</i>Add Branch </a>
+			         	  		 	
+			    </div>
+		    </a>
+		</div>
 		<?php 
 		if(count($daycares) > 0) {
 		foreach($daycares as $daycare){
 			$weekdaysStartTime 	= getFormattedTime($daycare['weekdays_start_time']);
 	    	$weekdaysEndTime 	= getFormattedTime($daycare['weekdays_end_time']);
-	    	$url 				= partner_base_url('edit-branch/'.$daycare['id']);
+	    	$editUrl 			= partner_base_url('edit-branch/'.$daycare['id']);
+	    	$viewUrl 			= base_url(urldecode($daycare['seo_name']));
 	    	$areaName 			= getAreaNameById($daycare['area_id']);
 	    	$cityName 			= getCityNameById($daycare['city_id']);
+	    	$featuredImage      = 'uploads/admin/'.$daycare['vendor_id'].'/'.$daycare['featured_image'];
 		?>
 		<div class="col s12 m3 l3">
-	    	<div class="card medium">
+	    	<div class="card small">
 		        <div class="card-image">
-		          <?php $image = 'images/' . $daycare['featured_image'] ?>
-		          <img class="responsive-image" src="<?php echo base_url($image) ?>">
-		          <span class="card-title"><?php echo ucwords($daycare['vendor_name']) ?></span>
+		          
+		          <img class="responsive-image" src="<?php echo base_url($featuredImage) ?>">
+		          <span class="card-title"><?php echo ucwords($daycare['branch_name']) ?></span>
 		        </div>
 		        
 		        <div class="card-content">
 				  <h4>
 				  	<i class="material-icons small">location_on</i> Location: 
-		          	<?php echo trim( $areaName ) ?><br/>
+		          	<?php echo trim( $areaName ) . ', ' . trim( $cityName ) ?><br/>
 		          </h4>
 		          <h4>
-				  	<i class="material-icons small">location_city</i> City: 
-		          	<?php echo trim( $cityName ) ?><br/>
-		          </h4>
-		          			        
+				  	          			        
 		          <h4><i class="material-icons small">visibility</i>Profile Views: <?php echo $daycare['total_views'] ?></h4>
 		        </div>
-		        <a href="<?php echo $url ?>" class="edit-daycare btn block daycare-green-flat-btn"><i class="material-icons">edit</i>Edit Daycare </a>
-		         	  		 	
+		        
+		        <a href="<?php echo $editUrl ?>" class="edit-daycare btn block daycare-green-flat-btn"><i class="material-icons">edit</i>Edit Branch </a>
+		        <a href="<?php echo $viewUrl ?>" target="_blank" class="view-daycare btn block daycare-green-flat-btn"><i class="material-icons">visibility</i>View Branch </a> 	  		 	 	
 		    </div>
 		</div>
 	<?php }
 		}
 	?>
-		<div class="col s12 m3 l3">
-	    	<a href="<?php echo partner_base_url('create-branch')?>">
-		    	<div class="card medium">
-			        <div class="card-content center">
-					  	<i class="material-icons large">add_circle_outline</i>
-			        </div>
-			        <a href="<?php echo partner_base_url('create-branch')?>" class="edit-daycare btn block daycare-green-flat-btn"><i class="material-icons">add</i>Add Daycare </a>
-			         	  		 	
-			    </div>
-		    </a>
-		</div>
+		
 	</div>
 </div>
 		   	

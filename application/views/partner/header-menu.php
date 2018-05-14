@@ -1,5 +1,5 @@
 <?php
-	$dashboard_menu = $branch_menu = '';
+	$dashboard_menu = $branch_menu = $gallery_menu = '';
 	if(isset($pageName)){
 		switch ($pageName) {
 			case 'dashboard':
@@ -7,8 +7,13 @@
 			break;
 
 			case 'create-branch':
+			case 'edit-branch':
 				$branch_menu = 'active';
 			break;
+
+			case 'manage-gallery':
+				$gallery_menu = 'active';
+			break;				
 		}
 	}
 ?>			
@@ -18,7 +23,7 @@
 	<div class="col s12 m12 l12">
 		<nav id="top-menu" role="navigation">
 			<div class="col s3 m3 l3">
-				<a href="<?php echo partner_base_url() ?>" class="block">
+				<a href="<?php echo partner_base_url('signup') ?>" class="block">
 					<img class="responsive-img" src="<?php echo base_url('images/logo.png')?>">
 				</a>	
 			</div>
@@ -28,6 +33,7 @@
 					<ul class="left left-side-menu hide-on-med-and-down">
 						<li><a class="<?php echo $dashboard_menu; ?>" href="<?php echo partner_base_url('dashboard')?>">Dashboard</a></li>
 						<li><a class="<?php echo $branch_menu; ?>" href="<?php echo partner_base_url('create-branch')?>">Profile</a></li>
+						<li><a class="<?php echo $gallery_menu; ?>" href="<?php echo partner_base_url('manage-gallery')?>">Gallery</a></li>
 
 					</ul>
 					<?php } ?>

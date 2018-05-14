@@ -62,10 +62,16 @@ $route['partner/dashboard'] 	= 'account/dashboard';
 $route['partner/logout'] 		= 'account/logout';
 
 
-$route['partner/fetchLocations'] 	= 'account/getLocationByCityId';
-$route['partner/create-branch'] = 'branch/create';
-$route['partner/edit-branch/(:num)']   = 'branch/edit/$1';
-$route['partner/save-branch'] 	= 'branch/save';
+$route['partner/fetchLocations'] 		= 'account/getLocationByCityId';
+$route['partner/create-branch'] 		= 'branch/create';
+$route['partner/edit-branch/(:num)']   	= 'branch/edit/$1';
+$route['partner/save-branch'] 			= 'branch/save';
+$route['partner/manage-gallery'] 		= 'branch/manageGallery';
+$route['partner/save-image-gallery'] 	= 'branch/saveImageGallery';
+$route['partner/getGalleryImagesByBranchId'] = 'branch/getGalleryImagesByBranchId'; 
+$route['partner/displayGalleryImages'] 	= 'branch/displayGalleryImages'; 
+$route['partner/deleteImage'] 			= 'branch/deleteImage'; 
+
 
 $route['suggestArea']			= 'welcome/getLocationByCityId'; 
 $route['(:any)/(:any)'] 		= 'daycare/search/$1/$2';

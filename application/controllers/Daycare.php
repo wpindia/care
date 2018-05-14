@@ -77,8 +77,15 @@ class Daycare extends CI_Controller {
     public function displayDaycare($city,$area,$slug){
         $this->data['pageName'] = 'user-daycare-view';
         $this->data['selectedArea'] = ucwords(urldecode($area));
-        $seoName = $city . '/' . $area . '/' . $slug;
-        $this->data['daycareDetails'] = (array)$this->daycare_model->getDaycareDetailsBySeoName($seoName);
+        $url = $city . '/' .  $area . '/' . $slug;
+        $seoName = urlencode( strtolower( $url ) );
+        
+        $this->data['daycareDetails']   = (array)$this->daycare_model->getDaycareDetailsBySeoName($seoName);
+        $this->data['daycares']         = $this->daycare_model->getDaycaresByVendorId($this->data['daycareDetails']['vendor_id']);
+        $this->data['galleryImages']    = $this->daycare_model->getGalleryImagesByBranchId($this->data['daycareDetails']['id']);
+
+        $this->daycare_model->updateProfileViews($this->data['daycareDetails']['id']);
+
         $this->data['showSearch'] = false;
         $this->generateView('user_daycare_view.php',$this->data);
     }
@@ -339,7 +346,7 @@ class Daycare extends CI_Controller {
             array(
                 'field' => 'vendor_name',
                 'label' => 'Day Care Name',
-                'rules' => 'trim|required|xss_clean|is_unique[daycare.vendor_name]'
+                'rules' => 'trim|required|xss_clean|is_unique[vendor.name]'
             ),
             array(
                 'field' => 'mobile_no',

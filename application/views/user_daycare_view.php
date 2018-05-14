@@ -1,25 +1,26 @@
+<?php
+	$logo 			= ( false == empty( $daycareDetails['logo'] ) ) ? 'uploads/admin/' . $daycareDetails['vendor_id'] . '/' . $daycareDetails['logo'] : ''; 
+	$featuredImage 	= ( false == empty( $daycareDetails['featured_image'] ) ) ? 'uploads/admin/' . $daycareDetails['vendor_id'] . '/' . $daycareDetails['featured_image'] : '';
+?>
 <div class="wrapper" id="user_daycare_view">
 	<div class="row margin-bottom0">
 		<div class="col s12 m12 l12 padding0 section1">
 			<div class="featured-image">
-				<img class="block responsive-img" src="<?php echo base_url('images/carousel-1.jpg')?>" />
+				<img class="block responsive-img" src="<?php echo base_url($featuredImage)?>" />
 			</div>	
 			<div class="daycare-title row margin-bottom0">
 				<div class="col s2 m1 l1">
-					<img class="" src="<?php echo base_url('images/kidsoorja.png')?>">
+
+					<img class="" src="<?php echo base_url($logo)?>">
 				</div>
 				<div class="col s9 m9 l9">
-					<h1 class=""><?php echo ucwords( $daycareDetails['vendor_name'] ) ?></h1>	
+					<h1 class=""><?php echo ucwords( $daycareDetails['branch_name'] ) ?></h1>	
 				</div>	
 			</div>
 			
 			
-      		<div class="care-side-menu">
-      		<!-- <a class='dropdown-button btn right ' href='#' data-activates='dropdown1'><i class="material-icons large">menu</i></a> -->
-      		</div>
-
 		  <!-- Dropdown Structure -->
-		  <ul id='dropdown1' class='dropdown-content'>
+		  <ul id='care-side-menu' class='dropdown-content'>
 		    <li><a href="#!" title="About-us" class="about-us"><i class="material-icons">info</i></a></li>
 		    <li><a href="#!" title="Features" class="features"><i class="material-icons">star</i></a></li>
 		    <li><a href="#!" title="Gallery" class="gallery"><i class="material-icons">camera</i></a></li>
@@ -34,7 +35,7 @@
 	<div id="about-us-section" class="row margin-bottom0" style="background:#e57368;min-height:200px">
 		<div class="col s12 m12 l12">
 			<div  class="section ">
-				<h3>About Us</h3>	
+				<h3 class="center">About Us</h3>	
 				<?php echo $daycareDetails['description'] ?>
 			</div>	
 		</div>
@@ -42,7 +43,7 @@
 
 	<div id="features-section" class="row margin-bottom0" style="background:#ffcf40;min-height:200px">
 		<div class="section ">	
-		<h3>Features</h3>
+		<h3 class="center">Features</h3>
 			<div class="col s12 m4 l4">
 				<i class="material-icons">check</i> Timings: 8.30 a.m to 7.30 p.m<br/><br/>
 				<i class="material-icons">check</i> Age-Group: 10 months+<br/><br/>
@@ -81,34 +82,29 @@
 		</div>
 	</div>
 
-	<div id="gallery-section" class="row margin-bottom0 padding20" style="background:#8cb859;min-height:200px" >	
-		<div class="section">
-		<h3>Gallery</h3>
-		<div id="gallery" class="col s12 m12 l12 owl-carousel owl-theme ">
-			<div class="slide1">
-				<img src="<?php echo base_url('images/gallery-1.jpg')?>" title="playing" />
-			</div>
+	<?php if(count($galleryImages) > 0) {?>
+		<div id="gallery-section" class="row margin-bottom0 padding20" style="background:#8cb859;min-height:200px" >	
+			<div class="section">
+				<h3 class="center">Gallery</h3>
+				<div id="gallery" class="col s12 m12 l12 owl-carousel owl-theme ">
+					<?php foreach($galleryImages as $galleryImage){
+						$imageUrl = 'uploads/admin/' . $daycareDetails['vendor_id'] . '/' . $daycareDetails['id'] . '/gallery/' . $galleryImage['image_name'];
+					?>
+						<div class="slide">
+							<img src="<?php echo base_url($imageUrl)?>" title="" />
+						</div>
+					<?php } ?>	
 
-			<div class="slide2">
-				<img src="<?php echo base_url('images/gallery-2.jpg')?>" title="laughing" />
-			</div>
-			<div class="slide3">
-				<img src="<?php echo base_url('images/gallery-3.jpg')?>" title="laughing" />
-			</div>
-			<div class="slide4">
-				<img src="<?php echo base_url('images/gallery-4.jpg')?>" title="laughing" />
-			</div>
-			<div class="slide5">
-				<img src="<?php echo base_url('images/gallery-5.jpg')?>" title="laughing" />
+					
+				</div>
 			</div>
 		</div>
-		</div>
-	</div>
+	<?php } ?>
 
 	<div id="review-section" class="row margin-bottom0 padding20" style="background:#e57368;min-height:200px" >		<div class="section">
 		<div class="col s12 m12 l12">
 			<div class="col s12 m6 l6">
-			<h3 class="white-text">Enquiry</h3>
+			<h3 class="center white-text">Enquiry</h3>
 			
 				<form id="frm_signup" name="frm_signup" action="<?php echo base_url('signupProcess');?>" method="post">
 				<div class="row">
@@ -148,7 +144,7 @@
 			</form>
 			</div>
 			<div id="testimonials-section" class="col s12 m6 l6">
-				<h3 class="white-text">What our parents say</h3>
+				<h3 class="center white-text">What our parents say</h3>
 				<div id="testimonials" class="owl-carousel owl-theme ">
 					<div class="slide1">
 					I can't say enough good things about Little Kid n Me. Everyone on their staff is wonderful, especially the director. I highly recommend this daycare!<br/>
@@ -170,31 +166,51 @@
 		</div>
 	</div>
 
-	<div id="other-center-section" class="row margin-bottom0 padding20" style="background:#ffcf40;min-height:200px" >	
-		<h3>Other Centers</h3>	
-		<div class="col s12 m3 l3">
-	      	<a href="<?php echo base_url('title/1')?>" class="block">
-		      <div class="card medium">
-		        <div class="card-image">
-		          <img src="<?php echo base_url('images/sample-1.jpg')?>">
-		          <span class="card-title">Kids Oorja</span>
-		          
-		        </div>
-		        <div class="card-content">
-		          <i class="material-icons small">location_on</i> Kothrud, Pune.<br/>
-		          <i class="material-icons small">group</i>10 months+<br/>
-		          <i class="material-icons small">access_time</i> 8.30a.m - 7.30p.m<br/>
-		        </div>
-		      </div>
-		    </a>  
-	    </div>
-		  
-	</div>
+	<?php 
+		if(count($daycares) > 0) {?>
+		<div id="other-center-section" class="row margin-bottom0 padding20" style="background:#ffcf40;min-height:200px" >	
+			<h3 class="center">Other Centers</h3>	
+		
+		<?php	
+			foreach($daycares as $daycare){
+				$weekdaysStartTime 	= getFormattedTime($daycare['weekdays_start_time']);
+		    	$weekdaysEndTime 	= getFormattedTime($daycare['weekdays_end_time']);
+		    	$editUrl 			= partner_base_url('edit-branch/'.$daycare['id']);
+		    	$viewUrl 			= base_url(urldecode($daycare['seo_name']));
+		    	$areaName 			= getAreaNameById($daycare['area_id']);
+		    	$cityName 			= getCityNameById($daycare['city_id']);
+		    	$featuredImage      = 'uploads/admin/'.$daycare['vendor_id'].'/'.$daycare['featured_image'];
+			?>
+			<div class="col s12 m3 l3">
+		    	<a href="<?php echo $viewUrl ?>" class="block" target="_blank">
+			    	<div class="card medium">
+				        <div class="card-image">
+				          
+				          <img class="responsive-image" src="<?php echo base_url($featuredImage) ?>">
+				          <span class="card-title"><?php echo ucwords($daycare['branch_name']) ?></span>
+				        </div>
+				        
+				        <div class="card-content">
+						  <h4 class="location">
+						  	<i class="material-icons small">location_on</i> Location: 
+				          	<?php echo trim( $areaName ) . ', ' . trim( $cityName ) ?><br/>
+				          </h4>
+				          
+						</div>
+				        
+				         	  		 	 	
+				    </div>
+			    </a>
+			</div>
+		<?php }
+		?>
+		</div>
+	<?php } ?>	
 
 	<div id="contact-us-section" class="row margin-bottom0 padding20" style="background:#8cb859;min-height:200px">
 		<div class="col s12 m12 l12">
 			<div class="col s12 m3 l3">
-				<h3>Contact Us</h3>	
+				<h3 class="center">Contact Us</h3>	
 				<!--<div class="btn daycare-green-round-btn margin20">Contact DayCare</div>-->
 				<!--<div class="contact-us-details padding20" >-->
 					<i class="material-icons">person</i> <?php echo $daycareDetails['contact_name'] ?><br/><br/>
@@ -203,9 +219,10 @@
 				<!--</div>-->
 			</div>
 			<div class="col s12 m9 l9">
-				<h3>Our Location</h3>
+				<h3 class="center">Our Location</h3>
+				<?php $location = $daycareDetails['address'] .',' . getAreaNameById($daycareDetails['area_id']) . ',' . getCityNameById($daycareDetails['city_id'])  ?>
 				<iframe height="300px" width="100%" src="//www.google.com/maps/embed/v1/directions?origin=
-      &destination=<?php echo $daycareDetails['address'] ?>&zoom=12&key=<?php echo GOOGLE_MAPS_API_KEY ?>">
+      &destination=<?php echo $location ?>&zoom=13&key=<?php echo GOOGLE_MAPS_API_KEY ?>">
   </iframe>	
 			</div>	
 		</div>

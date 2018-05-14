@@ -7,43 +7,81 @@ $(document).ready(function(){
 	})
 
 
-	$('.featured-content-delete .delete').on('click', function(){
-            featuredOption  = $(this).attr('data-featured-option');
+		$('body').on('click','.featured-content-delete .delete' , function(e){
+            e.preventDefault();
+            $answer = confirm('Are you sure you want to delete?');
+            $this = $(this);
+            if($answer){
+            	var $imageId = $(this).attr('data-option-id');
+	            $.ajax({
+	                type: "POST",
+	                async: true,
+	                url: 'deleteImage',
+	                data: {imageId: $imageId},
+	                dataType: 'json',
+	                success: function (result) {
+	                    $this.parents('.left').remove();
+	                    //location.reload();
+	                }
+	            });
+            }
+            /*featuredOption  = $(this).attr('data-featured-option');
             optionId        = $(this).attr('data-option-id');
             optionText      = $(this).attr('data-option-text');
             postData        = { table:featuredOption, id: optionId  };
             $('#delete-featured-content .delete-header').text( 'Delete ' + optionText );
-            $('#delete-featured-content').modal('open');
+            $('#delete-featured-content').modal('open');*/
        
         });
 
-        $('.delete-yes').on('click', function(){
-            $.ajax({
+		$('#branch-id').on('change',function(){
+			
+			if($(this).val() > 0 ) {
+				$('#upload-wrapper').removeClass('hide');
+			} else{
+				$('#upload-wrapper').addClass('hide');
+			}	
+
+			$.ajax({
                 type: "POST",
                 async: true,
-                url: 'profile/deleteFetauredContent',
-                data: postData,
+                url: 'getGalleryImagesByBranchId',
+                data: {branchId: $(this).val()},
                 dataType: 'json',
                 success: function (result) {
-                    location.reload();
+                	$.ajax({
+                        url: 'displayGalleryImages',
+                        type: "POST",
+                        dataType: "html",
+                        contentType: "application/json; charset=utf-8",
+                        data: JSON.stringify(result),
+                        success: function(response) {
+                        	$('#branch-images').html(response);	
+                        }
+                    });    	
                 }
             });
-        })
+		})
 
+        
 	$("#upload").on('click',function(){
 		galleryObj.startUpload();
 	}); 
 
 	var galleryObj = $("#multipleupload").uploadFile({
-		url:"profile/handleUploadImageGallery",
+		url:"save-image-gallery",
 		multiple:true,
 		dragDrop:true,
-		fileName:"featured-image",
+		fileName:"gallery-image",
+		dynamicFormData: function(){
+			var data ={ branchId:$('#branch-id').val() }
+			return data;
+		},
 		acceptFiles:"image/*",
 		showPreview:true,
 		previewHeight: "100px",
 		previewWidth: "100px",
-		maxFileSize:100*1024,
+		maxFileSize:400*1024,
 		maxFileCount:5,
 		autoSubmit:false,
 		onSuccess:function(files,data,xhr,pd){
@@ -51,6 +89,27 @@ $(document).ready(function(){
 		},
 		afterUploadAll:function(obj){
 			$("#eventsmessage").html($("#eventsmessage").html()+"<br/>All files are uploaded");
+			
+			$.ajax({
+                type: "POST",
+                async: true,
+                url: 'getGalleryImagesByBranchId',
+                data: {branchId: $('#branch-id').val()},
+                dataType: 'json',
+                success: function (result) {
+                	$.ajax({
+                        url: 'displayGalleryImages',
+                        type: "POST",
+                        dataType: "html",
+                        contentType: "application/json; charset=utf-8",
+                        data: JSON.stringify(result),
+                        success: function(response) {
+                        	$('#branch-images').html(response);	
+                        }
+                    });    	
+                }
+            });
+
 		},
 		onError: function(files,status,errMsg,pd){
 			$("#eventsmessage").html($("#eventsmessage").html()+"<br/>Error for: "+JSON.stringify(files));

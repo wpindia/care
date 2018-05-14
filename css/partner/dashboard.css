@@ -1,9 +1,29 @@
 #daycares .edit-daycare{
 	position: absolute;
     bottom: 0px;
-    width: 100%;
-    font-size: 16px;
+    width: 48%;
+    font-size: 12px;
+    padding: 10px 5px;
 }
+
+#daycares .view-daycare{
+	position: absolute;
+    bottom: 0px;
+    left: 52%;
+    width: 48%;
+    font-size: 12px;
+    padding: 10px 5px;
+}
+
+#daycares .add-daycare{
+	position: absolute;
+    bottom: 0px;
+    width: 100%;
+    font-size: 12px;
+    padding: 10px 5px;
+}
+
+
 
 h4{
 	font-size: 16px;

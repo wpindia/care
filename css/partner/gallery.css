@@ -1,27 +1,21 @@
+#left-section{
+    border-right: 1px solid #000; 
+}
+
 .featured-content-delete {
     cursor: pointer;
     
     text-align: center;
 }
 
-.featured-content-delete span {
-    background-image: url(../../images/sprite-icons.png);
-    background-repeat: no-repeat;
-    display: inline-block;
-    width: 21px;
-    height: 22px;
-    vertical-align: middle;
-    background-position: -202px -178px;
+.wrapper{
+	position: relative;
 }
 
 #manage-images .partner-gallery{
-	margin: 0px 15px;
+    margin: 0px 15px;
     padding: 5px 20px;
     min-height: 100px;
-}
-
-.wrapper{
-	position: relative;
 }
 
 #multipleupload .ajax-file-upload{

@@ -2,8 +2,12 @@ a{
 	color: #000;
 }
 
+h4.location{
+	font-size: 16px;
+}
+
 @media only screen and (min-width: 601px){
-.dropdown-content{
+#care-side-menu.dropdown-content{
 	display:block;
 	opacity: 0.6;
 	background: #000;
@@ -37,14 +41,14 @@ a{
 	font-size: 18px;
 }
 
-.dropdown-content li>a{
+#care-side-menu.dropdown-content li>a{
 	padding: 30px 12px;
 }
 
 
 }
 
-.dropdown-content i.material-icons{
+#care-side-menu.dropdown-content i.material-icons{
 	color: #fff;
 }
 
@@ -53,7 +57,7 @@ h3{
 }
 
 
-.dropdown-content li a:hover,.dropdown-content li:hover{
+#care-side-menu.dropdown-content li a:hover,.dropdown-content li:hover{
 	background: none;
 }
 
@@ -87,7 +91,7 @@ h3{
 }
 
 @media only screen and (max-width: 600px){
-	.dropdown-content{
+	#care-side-menu.dropdown-content{
 		display:block;
 		opacity: 0.6;
 		background: #000;
@@ -98,17 +102,17 @@ h3{
 	    width: 100%;	
 	}
 
-	.dropdown-content li{
+	#care-side-menu.dropdown-content li{
 		float: left;
 		width: 55px;	
 		clear: none;
 	}
 
-	.dropdown-content li:first-child{
+	#care-side-menu.dropdown-content li:first-child{
 		margin-left: 30px;
 	}
 
-	.dropdown-content li>a{
+	#care-side-menu.dropdown-content li>a{
 		padding: 12px 0px;
 	}
 

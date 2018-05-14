@@ -4,9 +4,19 @@ body {
     font-family: 'Roboto', sans-serif;
 }
 
+ul.dropdown-content.select-dropdown li span,.input-field label {
+    color: #000 !important; 
+}
+
+
+
 nav#top-menu {
 	box-shadow: none;
 	background: #fff;
+}
+
+a.link{
+	color: #8cb859;
 }
 
 .ui-menu .ui-menu-item-wrapper {
@@ -33,6 +43,10 @@ nav#top-menu {
 	margin-top: 10px !important;  
 }
 
+.margin-bottom40{
+	margin-bottom: 40px !important;  
+}
+
 .margin-right-20{
 	margin-right: 20px !important;  	
 }
@@ -42,6 +56,7 @@ nav#top-menu {
 }
 
 #daycare .container {
+	min-height: 440px;
     width: 85%;
 }
 
@@ -218,9 +233,34 @@ label.error, div.error {
     color: #FF1744;
 }    
 
+/*.message-section-main-box {
+	position: fixed;
+	width: 100%;
+	z-index: 4;
+	display: none;
+	margin: auto;
+}
+.message-section {
+	position: relative;
+	width: 100%;
+	display: none;
+	margin-bottom: 5px;
+}
+.message-section .card,
+.message-section .card.success {
+	background: #f4ffe6;
+	border-radius: 0;
+	margin: 0px auto;
+	color: #222;
+}
+.message-section .card.error {
+	background: #ffe6e6;
+	color: #b00000;
+}*/
 
 
-nav ul li a.active{
+
+nav ul li a.active,nav ul li a:hover{
 	background: #8cb859;
 	color: #fff;
 }

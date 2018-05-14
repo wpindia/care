@@ -13,6 +13,15 @@ $('document').ready(function(){
   );
 
   $('.dropdown-button').dropdown('open');*/
+
+  /*navigator.geolocation.getCurrentPosition(
+    function( position ){ // success cb
+        console.log( position );
+    },
+    function(){ // fail cb
+    }
+);*/
+  
   $('#gallery').owlCarousel({
     lazyLoad: true,
     loop:true,
@@ -27,7 +36,7 @@ $('document').ready(function(){
         autoplayHoverPause: false
       },
       993:{
-        items:3,
+        items:4,
         dots: true,
         nav: false,
         autoplayHoverPause: true

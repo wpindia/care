@@ -34,7 +34,10 @@ class Branch extends Account {
     	$this->data['pageName']        = 'create-branch';
         $this->data['daycareDetails']  = array(
                                             'id'            => '',
+                                            'branch_name'   => '',
                                             'featured_image' => '',
+                                            'age_group'      => '',
+                                            'fees'           => '',
                                             'description' => '', 
                                             'additional_information' => '',
                                             'is_featured' => 0,
@@ -76,6 +79,7 @@ class Branch extends Account {
     function save(){
         
         $id                         = (int)$this->input->post('daycare-id');
+        $branchName                 = $this->input->post('branch_name');
         $aboutUs                    = $this->input->post('aboutus');
         $additionalInformation      = $this->input->post('additional_information');
         $address                    = $this->input->post('address');
@@ -90,17 +94,20 @@ class Branch extends Account {
         $areaId                     = getAreaIdByName($this->input->post('area'));
         $zip                        = $this->input->post('zip');
 
+        $ageGroup                   = $this->input->post('age_group');
+        $fees                       = $this->input->post('fees');
+
         $weekdaysStartTime          = $this->input->post('weekdays_start_time');
         $weekdaysEndTime            = $this->input->post('weekdays_end_time');
         $weekendStartTime           = $this->input->post('weekend_start_time');
         $weekendEndTime             = $this->input->post('weekend_end_time');
 
-        $isFoodAvailable            = $this->input->post('food_provided');
-        $isDoctorOnCallAvailable    = $this->input->post('doctor_on_call');
-        $isOpenOnWeekends           = $this->input->post('open_on_weekends');
-        $areActivitiesAvailable     = $this->input->post('activities_available');
-        $isPickDropAvailable        = $this->input->post('pick_drop');
-        $isDigitalPaymentAvailable  = $this->input->post('credit_debit_card');
+        $isFoodAvailable            = (int)$this->input->post('food_provided');
+        $isDoctorOnCallAvailable    = (int)$this->input->post('doctor_on_call');
+        $isOpenOnWeekends           = (int)$this->input->post('open_on_weekends');
+        $areActivitiesAvailable     = (int)$this->input->post('activities_available');
+        $isPickDropAvailable        = (int)$this->input->post('pick_drop');
+        $isDigitalPaymentAvailable  = (int)$this->input->post('credit_debit_card');
 
         $videoUrl                   = $this->input->post('video_url');
         $facebookId                 = $this->input->post('facebook_id');
@@ -120,19 +127,20 @@ class Branch extends Account {
         if(isset($_FILES['featured_image']['name']) && !empty($_FILES['featured_image']['name'])){
             $coverImageName = uploadfile('featured_image', $this->partnerData['vendor_id']);
         }
-        
-        $slug = $city . '/' .  $area . '/' . $this->partnerData['vendor_name'];
+        $slug = $city . '/' .  $area . '/' . generateSlug($branchName);
                 
         $daycareData = array(
             'vendor_id'                         => $this->partnerData['vendor_id'],
-            'vendor_name'                       => $this->partnerData['vendor_name'],
-            'seo_name'                          => generateSlug($slug),
+            'branch_name'                       => $branchName,
+            'seo_name'                          => urlencode( strtolower( $slug ) ),
     		'description' 			            => $aboutUs,
             'additional_information'            => $additionalInformation,
     		'address' 	                        => $address,
             'contact_name'                      => $contactName,
             'email'                             => $email, 
-            'mobile'                            => $mobile, 
+            'mobile'                            => $mobile,
+            'fees'                              => $fees,
+            'age_group'                         => $ageGroup,
             'city_id'                           => $cityId,
             'area_id'                           => $areaId,
             'zip'                               => $zip,
@@ -157,7 +165,7 @@ class Branch extends Account {
         );
 
         if( $id ){
-            unset( $daycareData['seo_name'] );
+            unset( $daycareData['seo_name'], $daycareData['city_id'], $daycareData['area_id'], $daycareData['branch_name'] );
         }
 
     	$daycareId = $this->daycare_model->insertOrUpdateDaycareData($daycareData, $id);
@@ -235,28 +243,58 @@ class Branch extends Account {
         return false;
     }*/
 
-    function createImageGallery(){
-        $this->data['pageName'] = 'create-gallery';
-        $this->data['images']   = $this->partner_profile_model->getPartnerImageGallery($this->vendorId, PARTNER_TYPE_ID);
-       
-        $this->displayPages( 'partner/profile/gallery', $this->data, true ); 
+    function manageGallery(){
+        $this->data['pageName'] = 'manage-gallery';
+        $this->data['branches'] = $this->daycare_model->getDaycaresByVendorId($this->partnerData['vendor_id']);
+              
+        $this->generateView( 'manageGallery', $this->data); 
     }
 
-    function handleUploadImageGallery(){
+    function getGalleryImagesByBranchId(){
+        $branchId = $this->input->post('branchId');
+        $images   = $this->daycare_model->getGalleryImagesByBranchId($branchId);
         
-        $destinationPath    = 'uploads/admin/reskilling/gallery/'. $this->partnerData['vendor_id'] .'/';
-        $imageName          = $this->uploadImage($destinationPath); 
+        echo json_encode($images);
+    }
+
+    function displayGalleryImages(){
+        $galleryImagesJsonData = file_get_contents("php://input");
+        
+        if (strlen($galleryImagesJsonData) > 0 ){
+            $galleryImages = json_decode($galleryImagesJsonData);
+            $this->data['galleryImages']  = $galleryImages;
+        
+            $galleryImages = $this->load->view('partner/displayGalleryImages', $this->data, true);
+            echo $galleryImages;
+          //echo json_encode(true);  
+        }
+    } 
+
+    function saveImageGallery(){
+        $branchId   = $this->input->post('branchId');
+        if($branchId < 0 ) redirect('partner/manage-gallery'); 
+        $destinationPath    = 'uploads/admin/'. $this->partnerData['vendor_id'] . '/' . $branchId . '/gallery/' ;
+        //if(isset($_FILES['logo']['name']) && !empty($_FILES['logo']['name'])){
+            $imageName = uploadfile('gallery-image', $this->partnerData['vendor_id'], $destinationPath);
+        //}
+        //$imageName          = $this->uploadImage($destinationPath); 
         
         $insertData = array(
-            'entity_id'         => $this->partnerData['vendor_id'],
-            'entity_type_id'    => PARTNER_TYPE_ID,
+            'vendor_id'         => $this->partnerData['vendor_id'],
+            'branch_id'         => $branchId,
             'image_name'        => $imageName,
             'created_date'      => date('Y-m-d H:i:s')
         );
         
-        $galleryId = $this->partner_profile_model->insertOrUpdateFetauredContent( $insertData, 'reskilling_gallery', -1 );
+        $galleryId = $this->daycare_model->insertGalleryImages( $insertData );
 
         //json_encode(array($galleryId));
+    }
+
+    function deleteImage(){
+        $id     = $this->input->post('imageId');
+        //$result = $this->daycare_model->deleteImage($id); 
+        echo json_encode(true);
     }
 
     public function deleteFetauredContent(){
@@ -665,7 +703,7 @@ class Branch extends Account {
         }
     }
 
-    protected function uploadImage( $destinationPath = '' ){
+    protected function uploadImage1( $destinationPath = '' ){
         $filename = strtolower($_FILES["featured-image"]["name"]);
         $rand = rand(10, 99999);
         $rand_alpha = $this->RandomString();
@@ -742,5 +780,6 @@ class Branch extends Account {
         }
         return false;
     }
+    
 
 }

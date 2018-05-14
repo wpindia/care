@@ -1,3 +1,4 @@
+
 <?php
 if (!defined('BASEPATH'))
 	exit('No direct script access allowed');
@@ -27,6 +28,36 @@ class Daycare_model extends CI_Model{
 			$this->db->rollback();
 			return false;
 		}
+	}
+
+	function updateProfileViews($branchId){
+		try {
+			$this->db->trans_start();
+			$this->db->set('total_views', '`total_views`+ 1', FALSE);
+			$this->db->where('id', $branchId);
+			$this->db->update('daycare', $data);
+			
+			$this->db->trans_complete();
+			return true;
+		} catch (Exception $e) {
+			$this->db->rollback();
+			return false;
+		}
+	}
+
+	function deleteImage($id){
+		try {
+			$this->db->trans_start();
+			$this->db->where('id', $id);
+			$this->db->delete('gallery');
+			
+			$this->db->trans_complete();
+			//show($this->db->last_query());
+			return true;
+		} catch (Exception $e) {
+			$this->db->rollback();
+			return false;
+		}	
 	}
 
 	function getDaycareDetailsById($daycareId){
@@ -73,6 +104,8 @@ class Daycare_model extends CI_Model{
         }	
 	}
 
+
+
 	function getDaycareDetailsBySeoName($seoName){
 		try{
 			$this->db->select('d.*');
@@ -80,7 +113,6 @@ class Daycare_model extends CI_Model{
 			$this->db->where('d.seo_name', $seoName );
 			
 			$query 	= $this->db->get();
-			
 			if($query){
 				$result = $query->result_array();
 				if($result)
@@ -169,6 +201,39 @@ class Daycare_model extends CI_Model{
 			return false;
 		}
 
+	}
+
+	function insertGalleryImages( $insertData ){
+		try {
+			$this->db->trans_start();
+				$status = $this->db->insert('gallery', $insertData);
+				$id 	= $this->db->insert_id();
+
+			$this->db->trans_complete();
+			return $id;
+		} catch (Exception $e) {
+			$insert_id = 0;
+			$this->db->rollback();
+			return false;
+		}		
+	}
+
+	function getGalleryImagesByBranchId( $branchId  ){
+		try{
+			$this->db->select('g.*');
+			$this->db->from('gallery as g');
+			$this->db->where('g.branch_id', $branchId );
+			
+			$query 	= $this->db->get();
+			if($query){
+				$result = $query->result_array();
+				return $result;
+			}
+			return array();	
+		}catch(Exception $e){		
+            log_message('error', __METHOD__ . ' called '.$e->getMessage());		
+            return NULL;		
+        }	
 	}
 
 	function insertOrUpdateVendorAssociation($vendorId,$vendorTypeIds){

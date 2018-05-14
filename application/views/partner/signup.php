@@ -51,6 +51,8 @@
 						<select id="city" class="" name="city" >
 							<option value="" >Choose City</option>
 							<option value="1" >Bangalore</option>
+							<option value="2" >Pune</option>
+							<option value="3" >Mumbai</option>
 						</select>
 					</div>
 				</div>

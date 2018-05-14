@@ -247,7 +247,7 @@ class Account extends CI_Controller {
         $isValidLogin = $this->validateSignInForm();
         if( false == $isValidLogin ) {
             $this->data['signinErrors'] = validation_errors();
-            redirect('signin');
+            redirect('partner/signin');
         }
 
         $currentURL     = $this->input->post('current_url');
@@ -392,13 +392,14 @@ class Account extends CI_Controller {
             //$encryptedCode   = $this->encryption_model->encryptNET3DES( $this->key_emailer, $text );
 
             $partnerLoginData = array(
-                'contact_name'              => $contactName,
+                'contact_name'      => $contactName,
                 'email_id'          => $emailId,
                 'password'          => $password,
                 'mobile'            => $mobileNumber,
                 'last_login'        => date('Y-m-d H:i:s'),
                 'is_admin'          => 1,
                 'created_date'      => date('Y-m-d H:i:s'),
+                'status'            => 'ACTIVE'
                 //'encrypt_code'      => $randomKey 
             );
 

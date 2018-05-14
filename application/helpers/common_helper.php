@@ -17,22 +17,22 @@ if( !function_exists('loadJS') ) {
 			105=>'https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/js/dropify.min.js', 
 			106=>'https://cdnjs.cloudflare.com/ajax/libs/tinymce/4.7.11/jquery.tinymce.min.js',
 			107=>'https://cdnjs.cloudflare.com/ajax/libs/tinymce/4.5.6/tinymce.min.js',
-			108=>"https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"		
-			
+			108=>"https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js",		
+			109 =>"//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-531f2b095f14dea7"
 		);
 		$jsText = '';
 		$jsArr = array(2,3);
 		switch ($pageName) {
 			case 'home':
-				array_push($jsArr, 0,103,108);
+				array_push($jsArr, 0,103,108,109);
 			break;
 
 			case 'search-results':
-				array_push($jsArr, 108);
+				array_push($jsArr, 108,109);
 			break;				
 
 			case 'user-daycare-view':
-				array_push($jsArr, 1,103);
+				array_push($jsArr, 1,103,109);
 			break;							
 		}
 
@@ -111,6 +111,8 @@ if( !function_exists('loadPartnerJS') ) {
 			2 => 'partner/branch.js',
 			3 => 'materialize.min.js',
 			4 => 'partner/common.js',
+			5 => 'partner/multipleUploadFile.min.js',
+			6 => 'partner/gallery.js',
 			//101=>'https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js',
 			//101=>'materialize.min.js',
 			102=>'https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.15.0/jquery.validate.min.js',
@@ -119,7 +121,7 @@ if( !function_exists('loadPartnerJS') ) {
 			105=>'https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/js/dropify.min.js', 
 			106=>'https://cdnjs.cloudflare.com/ajax/libs/tinymce/4.7.11/jquery.tinymce.min.js',
 			107=>'https://cdnjs.cloudflare.com/ajax/libs/tinymce/4.5.6/tinymce.min.js',
-			108=>"https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"		
+			108=>"https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js",		
 			
 		);
 		$jsText = '';
@@ -131,7 +133,11 @@ if( !function_exists('loadPartnerJS') ) {
 
 			case 'create-branch':
 			case 'edit-branch':
-				array_push($jsArr, 2,102,104,105,106,107,108);
+				array_push($jsArr, 2,5,6,102,104,105,106,107,108);
+			break;
+
+			case 'manage-gallery':
+				array_push($jsArr, 5,6);
 			break;				
 
 			default:
@@ -164,6 +170,8 @@ if( !function_exists('loadPartnerCSS') ) {
 			2  => 'partner/signin.css',
 			3  => 'partner/user_daycare_view.css',
 			4  => 'partner/dashboard.css',
+			5  => 'partner/fileUpload.css',
+			6  => 'partner/gallery.css',
 
 			101=>'https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css',
 			102=>'https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.3/assets/owl.carousel.min.css',
@@ -188,6 +196,10 @@ if( !function_exists('loadPartnerCSS') ) {
 			case 'edit-branch':
 				array_push($cssArr, 1,104,105,106);
 			break;
+
+			case 'manage-gallery':
+				array_push($cssArr, 5,6);
+			break;			
 
 			case 'dashboard':
 				array_push($cssArr, 4);
@@ -261,13 +273,15 @@ function generateImageUrl($fileName){
 	return $strUrl;
 }
 
-function uploadfile($uploadedFilename, $vendorId){
+function uploadfile($uploadedFilename, $vendorId, $destinationPath = ''){
         //$filename 			= strtolower($_FILES[$uploadedFilename]["name"]);
         $randomString 		= getRandomString();
-        $destinationPath 	= FCPATH . 'uploads/admin/' . $vendorId . '/';
-        
-        if(false == file_exists($destinationPath)){
-            $status = mkdir($destinationPath);
+        if(true == empty($destinationPath)){
+        	$destinationPath = FCPATH . 'uploads/admin/' . $vendorId . '/';
+    	} 
+    	
+    	if(false == file_exists($destinationPath)){
+            $status = mkdir($destinationPath , 0777 , true);
         	if(false == $status) return false;
         }
 
@@ -277,20 +291,36 @@ function uploadfile($uploadedFilename, $vendorId){
 		if($_FILES[$uploadedFilename]['error'] != 0 || $_FILES[$uploadedFilename]['name'] == '') return false;
 
 		$filename 	= $uploadedFilename . '_' . $randomString . '_'.time(). '.' . $fileExtension;
-        
-        $config['upload_path'] 		= $destinationPath;
-        $config['allowed_types'] 	= 'gif|jpg|png|jpeg';
-        $config['file_name']		= $filename;
+		/*$config['upload_path'] 		= $destinationPath;
+        $config['allowed_types'] 	= '*';
+        $config['file_name']		= $filename;*/
+        $config = array(
+		    'logo' => array(
+		        'upload_path'   => $destinationPath,
+		        'allowed_types' => '*',
+		        'file_name'		=> $filename
+		    ),
+		    'featured_image' => array(
+		        'upload_path'   => $destinationPath,
+		        'allowed_types' => '*',
+		        'file_name'		=> $filename
+		    ),
+		    'gallery-image' => array(
+		        'upload_path'   => $destinationPath,
+		        'allowed_types' => '*',
+		        'file_name'		=> $filename
+		    ),
+		);
+        $CI = '';
         $CI =& get_instance();
-     	$CI->load->library('upload', $config);
-
+     	$CI->load->library('upload');
+     	$CI->upload->initialize($config[$uploadedFilename]);
         if( false == $CI->upload->do_upload($uploadedFilename) ) {
             $error = array('error' => $CI->upload->display_errors());
             show($error);
         }else {
             $uploadData = $CI->upload->data();
-	        
-	        return $filename;
+	    	return $filename;
         }
         
         
