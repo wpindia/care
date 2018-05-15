@@ -1,5 +1,5 @@
 <?php
-	$dashboard_menu = $branch_menu = $gallery_menu = '';
+	$dashboard_menu = $branch_menu = $gallery_menu = $testimonial_menu = '';
 	if(isset($pageName)){
 		switch ($pageName) {
 			case 'dashboard':
@@ -13,7 +13,13 @@
 
 			case 'manage-gallery':
 				$gallery_menu = 'active';
-			break;				
+			break;
+
+			case 'create-testimonial':
+			case 'edit-testimonial':
+				$testimonial_menu = 'active';
+			break;
+						
 		}
 	}
 ?>			
@@ -34,6 +40,7 @@
 						<li><a class="<?php echo $dashboard_menu; ?>" href="<?php echo partner_base_url('dashboard')?>">Dashboard</a></li>
 						<li><a class="<?php echo $branch_menu; ?>" href="<?php echo partner_base_url('create-branch')?>">Profile</a></li>
 						<li><a class="<?php echo $gallery_menu; ?>" href="<?php echo partner_base_url('manage-gallery')?>">Gallery</a></li>
+						<li><a class="<?php echo $testimonial_menu; ?>" href="<?php echo partner_base_url('create-testimonial')?>">Testimonials</a></li>
 
 					</ul>
 					<?php } ?>

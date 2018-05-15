@@ -243,6 +243,78 @@ class Branch extends Account {
         return false;
     }*/
 
+    public function createTestimonial(){
+        /*if($this->partnerData['is_featured'] == 0) {
+            redirect('partner/profile', 'refresh'); 
+        }*/
+            
+        $this->data['pageName'] = 'add-testimonial';
+        $this->data['testimonialDetails'] = array( 'id'=>'', 'name' => '', 'testimonial' => '', 'designation' => '', 'description' => '', 'image_name' => '');
+        $this->data['vendorId']          = $this->partnerData['vendor_id'];
+
+        $this->generateView( 'addEditTestimonial', $this->data );
+    }
+
+    public function editTestimonial($testimonialId){
+        /*if($this->partnerData['is_featured'] == 0) {
+            redirect('partner/profile', 'refresh'); 
+        }*/
+
+        //check if this can be updated by logged in vendor id
+        $isValidUser = $this->partner_profile_model->isValidEditUser( $testimonialId, 'reskilling_testimonials', $this->vendorId );
+
+        if( false == $isValidUser ){
+            $this->session->set_flashdata('set_flashdata', 'Not allowed to access this testimonial');    
+            redirect('partner/profile');
+        }
+
+        $this->data['pageName']             = 'edit-testimonial';
+        $this->data['testimonialDetails']   = $this->partner_profile_model->getFetauredContentByType( $testimonialId, 'reskilling_testimonials' );
+        $this->data['vendorId']             = $this->partnerData['vendor_id'];
+        $this->generateView( 'addEditTestimonial', $this->data );
+    } 
+
+    public function insertOrUpdateTestimonials(){
+        
+        /*if($this->partnerData['is_featured'] == 0) {
+            redirect('partner/profile', 'refresh'); 
+        }
+        */        
+        $id             = (int) $this->input->post( 'testimonial-id' );
+        $designation    = $this->input->post( 'testimonial-designation' );
+        $name           = $this->input->post( 'testimonial-name' ); 
+        $description    = $this->input->post( 'testimonial-description' ); 
+        $imageName      = $this->input->post( 'featured-image' );
+        $userId         = $this->partnerData['user_login_id']; 
+
+        $destinationPath    = 'uploads/admin/reskilling/testimonials/'. $this->partnerData['vendor_id'] . '/';
+        $imageName          = $this->uploadImage($destinationPath); 
+        $insertData = array(
+            'entity_id'         => $this->partnerData['vendor_id'],
+            'entity_type'       => PARTNER_TYPE_ID,
+            'name'              => $name,
+            'designation'       => $designation,
+            'image_name'        => $imageName,
+            'description'       => $description,
+            'updated_by'        => $userId, 
+            'created_date'      => date('Y-m-d H:i:s'),
+            'modified_date'     => date('Y-m-d H:i:s')
+        );
+        
+        $testimonialId = $this->partner_profile_model->insertOrUpdateFetauredContent( $insertData, 'reskilling_testimonials', $id, $userId );
+        
+        $message = 'Testimonial updated successfully!';
+        if(is_null($id)){
+            $message = 'Testimonial created successfully!';
+        }
+
+        $this->session->set_flashdata('set_flashdata', $message);
+
+        redirect('partner/profile', 'refresh'); 
+        
+    }
+
+
     function manageGallery(){
         $this->data['pageName'] = 'manage-gallery';
         $this->data['branches'] = $this->daycare_model->getDaycaresByVendorId($this->partnerData['vendor_id']);
@@ -469,77 +541,7 @@ class Branch extends Account {
         redirect('mentor/profile', 'refresh'); 
     }
 
-    public function createTestimonial(){
-        if($this->partnerData['is_featured'] == 0) {
-            redirect('partner/profile', 'refresh'); 
-        }
-            
-        $this->data['pageName'] = 'add-testimonial';
-        $this->data['testimonialDetails'] = array( 'id'=>'', 'name' => '', 'testimonial' => '', 'designation' => '', 'description' => '', 'image_name' => '');
-        $this->data['vendorId']          = $this->partnerData['vendor_id'];
-
-        $this->displayPages( 'partner/profile/addEditTestimonial', $this->data, true );
-    }
-
-    public function editTestimonial($testimonialId){
-        if($this->partnerData['is_featured'] == 0) {
-            redirect('partner/profile', 'refresh'); 
-        }
-
-        //check if this can be updated by logged in vendor id
-        $isValidUser = $this->partner_profile_model->isValidEditUser( $testimonialId, 'reskilling_testimonials', $this->vendorId );
-
-        if( false == $isValidUser ){
-            $this->session->set_flashdata('set_flashdata', 'Not allowed to access this testimonial');    
-            redirect('partner/profile');
-        }
-
-        $this->data['pageName']             = 'edit-testimonial';
-        $this->data['testimonialDetails']   = $this->partner_profile_model->getFetauredContentByType( $testimonialId, 'reskilling_testimonials' );
-        $this->data['vendorId']             = $this->partnerData['vendor_id'];
-        $this->displayPages( 'partner/profile/addEditTestimonial', $this->data, true );
-    } 
-
-    public function insertOrUpdateTestimonials(){
-        
-        if($this->partnerData['is_featured'] == 0) {
-            redirect('partner/profile', 'refresh'); 
-        }
-        
-        $id             = (int) $this->input->post( 'testimonial-id' );
-        $designation    = $this->input->post( 'testimonial-designation' );
-        $name           = $this->input->post( 'testimonial-name' ); 
-        $description    = $this->input->post( 'testimonial-description' ); 
-        $imageName      = $this->input->post( 'featured-image' );
-        $userId         = $this->partnerData['user_login_id']; 
-
-        $destinationPath    = 'uploads/admin/reskilling/testimonials/'. $this->partnerData['vendor_id'] . '/';
-        $imageName          = $this->uploadImage($destinationPath); 
-        $insertData = array(
-            'entity_id'         => $this->partnerData['vendor_id'],
-            'entity_type'       => PARTNER_TYPE_ID,
-            'name'              => $name,
-            'designation'       => $designation,
-            'image_name'        => $imageName,
-            'description'       => $description,
-            'updated_by'        => $userId, 
-            'created_date'      => date('Y-m-d H:i:s'),
-            'modified_date'     => date('Y-m-d H:i:s')
-        );
-        
-        $testimonialId = $this->partner_profile_model->insertOrUpdateFetauredContent( $insertData, 'reskilling_testimonials', $id, $userId );
-        
-        $message = 'Testimonial updated successfully!';
-        if(is_null($id)){
-            $message = 'Testimonial created successfully!';
-        }
-
-        $this->session->set_flashdata('set_flashdata', $message);
-
-        redirect('partner/profile', 'refresh'); 
-        
-    }
-
+    
     public function createEvent(){
         if($this->partnerData['is_featured'] == 0) {
             redirect('partner/profile', 'refresh'); 
