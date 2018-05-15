@@ -1,7 +1,7 @@
 		jQuery('document').ready(function(){	
 			$('select').material_select();
 
-			if(typeof autocomplete !== 'undefined'){
+			if(typeof $('input#preferred-area').autocomplete === "function"){
 				$('input#location').autocomplete({
 					_resizeMenu: function () {
 						var ul = this.menu.element;
