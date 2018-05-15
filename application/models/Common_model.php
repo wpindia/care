@@ -55,7 +55,6 @@ class Common_model extends CI_Model{
 			$this->db->where('is_active', 1);
 			$this->db->where('city_id', $cityId);
 			$this->db->like('area_name', $areaName, 'after');   
-			
 			$query 	= $this->db->get();
 			if($query){
 				$result = $query->result_array();

@@ -21,7 +21,7 @@
 
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>	
-	
+	<script type="text/javascript">var BASE_URL = '<?php echo base_url() ?>'</script>	
 </head>
 <body id="<?php echo $this->data['pageName']?>">
 <?php
