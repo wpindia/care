@@ -28,7 +28,7 @@
 					select: function( event, ui ) {
 						var areaName 			= encodeURI(ui.item.value.toLowerCase());
 						var city 				= encodeURI($('#preferred-city option:selected').text().toLowerCase());
-						window.location.href 	= "/" + city + "/" + areaName;
+						window.location.href 	= BASE_URL + city + "/" + areaName;
 					},
 
 					minLength: 3,
