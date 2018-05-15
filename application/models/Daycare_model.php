@@ -35,7 +35,7 @@ class Daycare_model extends CI_Model{
 			$this->db->trans_start();
 			$this->db->set('total_views', '`total_views`+ 1', FALSE);
 			$this->db->where('id', $branchId);
-			$this->db->update('daycare', $data);
+			$this->db->update('daycare');
 			
 			$this->db->trans_complete();
 			return true;

@@ -1,12 +1,17 @@
 $('document').ready(function(){	
 	$('select').material_select();
 
+	jQuery.validator.addMethod("lettersonly", function(value, element){
+		return this.optional(element) || /^[a-z ]+$/i.test(value);
+	}, "Letters and spaces only please");
+
 	$('form#frm_signup').validate({
 		ignore: [],
 		rules: {
 			vendor_name:{
 				required: true,
-				minlength: 3
+				minlength: 3,
+				alphanumeric: true
 								
 			},
 			email:{
@@ -24,7 +29,8 @@ $('document').ready(function(){
 				maxlength: 12
 			},
 			contact_name:{
-				required:true
+				required:true,
+				letterswithspaces: true 
 			},
 			city:{
 				required: true

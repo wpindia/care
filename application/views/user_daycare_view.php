@@ -1,6 +1,7 @@
 <?php
 	$logo 			= ( false == empty( $daycareDetails['logo'] ) ) ? 'uploads/admin/' . $daycareDetails['vendor_id'] . '/' . $daycareDetails['logo'] : ''; 
 	$featuredImage 	= ( false == empty( $daycareDetails['featured_image'] ) ) ? 'uploads/admin/' . $daycareDetails['vendor_id'] . '/' . $daycareDetails['featured_image'] : '';
+	$featuredClass = (empty($featuredImage)) ? 'not-featured' : 'featured';
 ?>
 <div class="wrapper" id="user_daycare_view">
 	<div class="row margin-bottom0">
@@ -8,7 +9,7 @@
 			<div class="featured-image">
 				<img class="block responsive-img" src="<?php echo base_url($featuredImage)?>" />
 			</div>	
-			<div class="daycare-title row margin-bottom0">
+			<div class="daycare-title row margin-bottom0 <?php echo $featuredClass ?>">
 				<div class="col s2 m1 l1">
 
 					<img class="" src="<?php echo base_url($logo)?>">
@@ -104,7 +105,7 @@
 	<div id="review-section" class="row margin-bottom0 padding20" style="background:#e57368;min-height:200px" >		<div class="section">
 		<div class="col s12 m12 l12">
 			<div class="col s12 m6 l6">
-			<h3 class="center white-text">Enquiry</h3>
+			<h3 class="white-text">Enquiry</h3>
 			
 				<form id="frm_signup" name="frm_signup" action="<?php echo base_url('signupProcess');?>" method="post">
 				<div class="row">
@@ -210,18 +211,23 @@
 	<div id="contact-us-section" class="row margin-bottom0 padding20" style="background:#8cb859;min-height:200px">
 		<div class="col s12 m12 l12">
 			<div class="col s12 m3 l3">
-				<h3 class="center">Contact Us</h3>	
+				<h3 class="">Contact Us</h3>	
 				<!--<div class="btn daycare-green-round-btn margin20">Contact DayCare</div>-->
 				<!--<div class="contact-us-details padding20" >-->
+					<?php $address = $daycareDetails['branch_name'] . ', ' . $daycareDetails['address'] . ', ' . getAreaNameById($daycareDetails['area_id']) . ', ' . getCityNameById($daycareDetails['city_id']) .', ' . $daycareDetails['zip'] ;  ?>
 					<i class="material-icons">person</i> <?php echo $daycareDetails['contact_name'] ?><br/><br/>
 					<i class="material-icons">phone</i> <?php echo $daycareDetails['mobile'] ?> <br/><br/>
-					<i class="material-icons">email</i> <a href="mailto:<?php echo $daycareDetails['email'] ?>"><?php echo $daycareDetails['email'] ?></a><br/>
+					<i class="material-icons">email</i> <a href="mailto:<?php echo $daycareDetails['email'] ?>"><?php echo $daycareDetails['email'] ?></a><br/><br/>
+					<i class="material-icons">location_on</i><?php echo $address ?> <br/>
+
 				<!--</div>-->
 			</div>
 			<div class="col s12 m9 l9">
 				<h3 class="center">Our Location</h3>
-				<?php $location = $daycareDetails['address'] .',' . getAreaNameById($daycareDetails['area_id']) . ',' . getCityNameById($daycareDetails['city_id'])  ?>
-				<iframe height="300px" width="100%" src="//www.google.com/maps/embed/v1/directions?origin=
+				<?php $location = $daycareDetails['branch_name'] .',' . getAreaNameById($daycareDetails['area_id']) . ',' . getCityNameById($daycareDetails['city_id']); 
+					$areaName = getAreaNameById($daycareDetails['area_id']);
+				 ?>
+				<iframe height="300px" width="100%" src="//www.google.com/maps/embed/v1/directions?origin=<?php echo $areaName ?>
       &destination=<?php echo $location ?>&zoom=13&key=<?php echo GOOGLE_MAPS_API_KEY ?>">
   </iframe>	
 			</div>	

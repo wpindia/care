@@ -9,11 +9,12 @@ if( !function_exists('loadJS') ) {
 			1 => 'user_daycare_view.js',
 			2 => 'materialize.min.js',
 			3 => 'common.js',
+			4 => 'additionalMethods.js',
 			//101=>'https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js',
 			//101=>'materialize.min.js',
 			102=>'https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.15.0/jquery.validate.min.js',
 			103=>'https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.3/owl.carousel.min.js',
-			104=>'https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.15.0/additional-methods.min.js',
+			//104=>'https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.15.0/additional-methods.min.js',
 			105=>'https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/js/dropify.min.js', 
 			106=>'https://cdnjs.cloudflare.com/ajax/libs/tinymce/4.7.11/jquery.tinymce.min.js',
 			107=>'https://cdnjs.cloudflare.com/ajax/libs/tinymce/4.5.6/tinymce.min.js',
@@ -113,6 +114,7 @@ if( !function_exists('loadPartnerJS') ) {
 			4 => 'partner/common.js',
 			5 => 'partner/multipleUploadFile.min.js',
 			6 => 'partner/gallery.js',
+			7 => 'additionalMethods.js',  
 			//101=>'https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js',
 			//101=>'materialize.min.js',
 			102=>'https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.15.0/jquery.validate.min.js',
@@ -128,7 +130,7 @@ if( !function_exists('loadPartnerJS') ) {
 		$jsArr = array(3,4);
 		switch ($pageName) {
 			case 'signup':
-				array_push($jsArr, 1,102,104);
+				array_push($jsArr, 1,7,102,104);
 			break;			
 
 			case 'create-branch':

@@ -17,6 +17,11 @@ h4.location{
     min-width: 50px;	
     width: 50px;	
 }
+
+.daycare-title.not-featured{
+	position: relative;
+}
+
 .daycare-title{
 	position: absolute;
 	bottom: 0px;
