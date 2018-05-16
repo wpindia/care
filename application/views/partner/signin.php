@@ -4,8 +4,10 @@
 		
 	<div class="white col s12 m6 offset-m3 l4 offset-l4 z-depth-6 card-panel">
 			<h1 class="center">Log In </h1>	
-		
-			<?php echo ( true == isset( $signinErrors ) ) ? $signinErrors : ''; ?>
+			<div class="center">
+				<?php echo validation_errors(); ?>
+			</div>
+			<?php //echo ( true == isset( $signinErrors ) ) ? $signinErrors : ''; ?>
 			<form id="frmsignin" name="frmsignin" class="" method="POST" action="<?php echo partner_base_url('validate-user')?>">
 					<div class="input-field fields-hold">
 						<input id="email" name="email" placeholder="Email ID*" type="email" class="" value="">
@@ -26,7 +28,7 @@
 					</div>
 					
 					<a href="<?php echo partner_base_url('signup') ?>" class="signup-link center block">
-						New to day-care.in? <span class="">Sign up now</span>
+						New to day-care.in? <span class="">Sign up</span>
 					</a>
 				
 			</form>

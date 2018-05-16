@@ -10,3 +10,21 @@
 .signup-link{
 	margin: 20px 0px;
 }
+
+#b-signin{
+	margin: 20px 0px 0px;
+}
+
+input[type=text]:not(.browser-default), input[type=password]:not(.browser-default), input[type=email]:not(.browser-default){
+	margin: 0px;
+}
+
+a{
+	color: #8cb859;
+}
+
+.formerror{
+    background: red;
+    color: #fff;
+    padding: 10px;
+}

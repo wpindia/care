@@ -246,8 +246,10 @@ class Account extends CI_Controller {
         
         $isValidLogin = $this->validateSignInForm();
         if( false == $isValidLogin ) {
-            $this->data['signinErrors'] = validation_errors();
-            redirect('partner/signin');
+            //$this->data['signinErrors'] = validation_errors();
+            $this->data['pageName'] = 'signin'; 
+            $this->generateView( 'signin', $this->data);
+            return;
         }
 
         $currentURL     = $this->input->post('current_url');
@@ -563,7 +565,7 @@ class Account extends CI_Controller {
         $status             = $this->cache->redis->delete((string) $redisKey);*/
         $sess_out           = $this->session->sess_destroy();
         
-        redirect(base_url());
+        redirect(partner_base_url('signup'));
     }
 
     public function checkEmailIdExists(){

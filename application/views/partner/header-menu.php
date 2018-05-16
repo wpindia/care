@@ -38,9 +38,9 @@
 					<?php if($logged == 1) {?>
 					<ul class="left left-side-menu hide-on-med-and-down">
 						<li><a class="<?php echo $dashboard_menu; ?>" href="<?php echo partner_base_url('dashboard')?>">Dashboard</a></li>
-						<li><a class="<?php echo $branch_menu; ?>" href="<?php echo partner_base_url('create-branch')?>">Profile</a></li>
+						<li><a class="<?php echo $branch_menu; ?>" href="<?php echo partner_base_url('create-branch')?>">Create Branch</a></li>
 						<li><a class="<?php echo $gallery_menu; ?>" href="<?php echo partner_base_url('manage-gallery')?>">Gallery</a></li>
-						<li><a class="<?php echo $testimonial_menu; ?>" href="<?php echo partner_base_url('create-testimonial')?>">Testimonials</a></li>
+						<li><a class="hide <?php echo $testimonial_menu; ?>" href="<?php echo partner_base_url('create-testimonial')?>">Testimonials</a></li>
 
 					</ul>
 					<?php } ?>

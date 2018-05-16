@@ -23,7 +23,7 @@
 					</div>
 					<div class="col s12 m6 l6 input-field">
 						<i class="material-icons signup-icons">person_outline</i>
-						<input type="text" name="contact_name" id="contact_name" class="form-class" placeholder="Contact Name" data-error="" value="<?php echo set_value('contact_name'); ?>">
+						<input type="text" name="contact_name" id="contact_name" class="form-class" placeholder="Contact Name*" data-error="" value="<?php echo set_value('contact_name'); ?>">
 					</div>
 				</div>
 
@@ -49,7 +49,7 @@
 					<div class="col s12 m6 l6 input-field">
 						<i class="material-icons signup-icons">location_on</i>
 						<select id="city" class="" name="city" >
-							<option value="" >Choose City</option>
+							<option value="" >Choose City*</option>
 							<option value="1" >Bangalore</option>
 							<option value="2" >Pune</option>
 							<option value="3" >Mumbai</option>
@@ -72,7 +72,7 @@
 							<br/><br/>
 							Are you an existing partner?
 							<a class="" href="<?php echo partner_base_url('signin') ?>">
-								 Sign in now.
+								 Sign in.
 							</a>
 							<br/>
 							Have questions? Feel free to call us on +91-9923206515 <br/>or email us at enquiries@day-care.in		

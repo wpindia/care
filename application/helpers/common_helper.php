@@ -115,6 +115,7 @@ if( !function_exists('loadPartnerJS') ) {
 			5 => 'partner/multipleUploadFile.min.js',
 			6 => 'partner/gallery.js',
 			7 => 'additionalMethods.js',  
+			8 => 'partner/signin.js',
 			//101=>'https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js',
 			//101=>'materialize.min.js',
 			102=>'https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.15.0/jquery.validate.min.js',
@@ -130,8 +131,12 @@ if( !function_exists('loadPartnerJS') ) {
 		$jsArr = array(3,4);
 		switch ($pageName) {
 			case 'signup':
-				array_push($jsArr, 1,7,102,104);
+				array_push($jsArr, 1,7,102);
 			break;			
+
+			case 'signin':
+				array_push($jsArr, 8,7,102);
+			break;
 
 			case 'create-branch':
 			case 'edit-branch':
