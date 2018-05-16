@@ -35,7 +35,7 @@
 					},
 				    source: function (request, response) {
 						$.ajax({
-							url: '/suggestArea',
+							url: BASE_URL + 'suggestArea',
 							type: "GET",
 							cache: false,
 							dataType: "json",

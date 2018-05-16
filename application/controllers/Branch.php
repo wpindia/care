@@ -11,6 +11,8 @@ class Branch extends Account {
         if( true == empty( $this->partnerData ) ) {
             redirect('/');
         }
+
+
     }
 
     function index(){
@@ -34,7 +36,7 @@ class Branch extends Account {
     	$this->data['pageName']        = 'create-branch';
         $this->data['daycareDetails']  = array(
                                             'id'            => '',
-                                            'branch_name'   => '',
+                                            'branch_name'   => ucwords($this->partnerData['vendor_name']),
                                             'featured_image' => '',
                                             'age_group'      => '',
                                             'fees'           => '',
@@ -48,9 +50,9 @@ class Branch extends Account {
                                             'zip'         => '',
                                             'video_url'   => '',
                                             'address'     => '',
-                                            'email'       => '',
-                                            'mobile'      => '',
-                                            'contact_name'=> '',
+                                            'email'       => $this->partnerData['email_id'],
+                                            'mobile'      => $this->partnerData['mobile'],
+                                            'contact_name'=> ucwords($this->partnerData['contact_name']),
                                             'weekdays_start_time' => '',
                                             'weekdays_end_time' => '',
                                             'weekend_start_time' => '',
