@@ -1,22 +1,21 @@
 $('document').ready(function(){	
-	$('form#frmsignin').validate({
+	$('form#frm_addEditTestimonial').validate({
 		ignore: [],
 		rules: {
-			email:{
+			branchId:{
 				required: true,
-				email:true,
 			},
-			password:{
+			
+			parentName:{
 				required: true,
+			},
+
+			testimonial:{
+				required: true
 			}
 		},
 		messages: {
-			email:{
-				required: "Please enter email id",
-			},
-			password:{
-				required: "Please enter password",
-			}
+			
 
 		},
 		errorElement : 'div',
@@ -33,4 +32,10 @@ $('document').ready(function(){
         }
 		
 	});
+
+	$('#save-testimonial').on('click', function() {
+        tinymce.triggerSave();
+    });
+    
+
 })

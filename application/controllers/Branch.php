@@ -248,8 +248,9 @@ class Branch extends Account {
             redirect('partner/profile', 'refresh'); 
         }*/
             
-        $this->data['pageName'] = 'add-testimonial';
-        $this->data['testimonialDetails'] = array( 'id'=>'', 'name' => '', 'testimonial' => '', 'designation' => '', 'description' => '', 'image_name' => '');
+        $this->data['pageName'] = 'create-testimonial';
+        $this->data['testimonialDetails'] = array( 'id'=>'', 'parent_name' => '', 'child_name' => '', 'testimonial' => '');
+        $this->data['branches'] = $this->daycare_model->getDaycaresByVendorId($this->partnerData['vendor_id']);
         $this->data['vendorId']          = $this->partnerData['vendor_id'];
 
         $this->generateView( 'addEditTestimonial', $this->data );
@@ -270,6 +271,7 @@ class Branch extends Account {
 
         $this->data['pageName']             = 'edit-testimonial';
         $this->data['testimonialDetails']   = $this->partner_profile_model->getFetauredContentByType( $testimonialId, 'reskilling_testimonials' );
+        $this->data['branches'] = $this->daycare_model->getDaycaresByVendorId($this->partnerData['vendor_id']);
         $this->data['vendorId']             = $this->partnerData['vendor_id'];
         $this->generateView( 'addEditTestimonial', $this->data );
     } 
@@ -281,27 +283,21 @@ class Branch extends Account {
         }
         */        
         $id             = (int) $this->input->post( 'testimonial-id' );
-        $designation    = $this->input->post( 'testimonial-designation' );
-        $name           = $this->input->post( 'testimonial-name' ); 
-        $description    = $this->input->post( 'testimonial-description' ); 
-        $imageName      = $this->input->post( 'featured-image' );
-        $userId         = $this->partnerData['user_login_id']; 
-
-        $destinationPath    = 'uploads/admin/reskilling/testimonials/'. $this->partnerData['vendor_id'] . '/';
-        $imageName          = $this->uploadImage($destinationPath); 
+        $branchId       = (int) $this->input->post( 'branchId' );
+        $parentName     = $this->input->post( 'parentName' );
+        $childName      = $this->input->post( 'childName' );
+        $testimonial    = $this->input->post( 'testimonial' ); 
+        
         $insertData = array(
-            'entity_id'         => $this->partnerData['vendor_id'],
-            'entity_type'       => PARTNER_TYPE_ID,
-            'name'              => $name,
-            'designation'       => $designation,
-            'image_name'        => $imageName,
-            'description'       => $description,
-            'updated_by'        => $userId, 
+            'branch_id'         => $branchId,
+            'parent_name'       => $parentName,
+            'child_name'        => $childName,
+            'testimonial'       => $testimonial,
             'created_date'      => date('Y-m-d H:i:s'),
             'modified_date'     => date('Y-m-d H:i:s')
         );
         
-        $testimonialId = $this->partner_profile_model->insertOrUpdateFetauredContent( $insertData, 'reskilling_testimonials', $id, $userId );
+        $testimonialId = $this->daycare_model->insertOrUpdateTestimonial( $insertData, $id );
         
         $message = 'Testimonial updated successfully!';
         if(is_null($id)){
@@ -310,7 +306,7 @@ class Branch extends Account {
 
         $this->session->set_flashdata('set_flashdata', $message);
 
-        redirect('partner/profile', 'refresh'); 
+        redirect('partner/create-testimonial', 'refresh'); 
         
     }
 

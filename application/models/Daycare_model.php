@@ -30,6 +30,25 @@ class Daycare_model extends CI_Model{
 		}
 	}
 
+	function insertOrUpdateTestimonial( $data, $id ){
+		try {
+			$this->db->trans_start();
+			if( 0 < $id ){
+				$this->db->where('id', $id);
+				$this->db->update('daycare_testimonials', $data);
+			} else{
+				$this->db->insert('daycare_testimonials', $data);
+				$id = $this->db->insert_id();
+			}
+			
+			$this->db->trans_complete();
+			return $id;
+		} catch (Exception $e) {
+			$this->db->rollback();
+			return false;
+		}
+	}
+
 	function updateProfileViews($branchId){
 		try {
 			$this->db->trans_start();

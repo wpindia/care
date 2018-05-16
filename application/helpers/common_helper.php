@@ -116,6 +116,7 @@ if( !function_exists('loadPartnerJS') ) {
 			6 => 'partner/gallery.js',
 			7 => 'additionalMethods.js',  
 			8 => 'partner/signin.js',
+			9 => 'partner/testimonial.js',
 			//101=>'https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js',
 			//101=>'materialize.min.js',
 			102=>'https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.15.0/jquery.validate.min.js',
@@ -141,6 +142,11 @@ if( !function_exists('loadPartnerJS') ) {
 			case 'create-branch':
 			case 'edit-branch':
 				array_push($jsArr, 2,5,6,102,104,105,106,107,108);
+			break;
+
+			case 'create-testimonial':
+			case 'edit-testimonial':
+				array_push($jsArr, 7, 9, 102, 107);
 			break;
 
 			case 'manage-gallery':

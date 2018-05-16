@@ -1,5 +1,18 @@
 		jQuery('document').ready(function(){	
 			
+			if($('textarea.tinymce-editor').length>0){
+				tinymce.init({
+					selector: '.tinymce-editor',
+					branding:false,
+					menubar: false,
+					statusbar: true,
+					toolbar_items_size: 'small',
+					height: 200,
+					
+				});
+			}
+			
+						
 			if($('#message_alert_box').length>0){
 		      var alertHtml = $('#message_alert_box');
 		      $('#message_alert_box').remove();

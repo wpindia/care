@@ -1,6 +1,7 @@
 		jQuery('document').ready(function(){	
 			$('select').material_select();
 
+				
 			if(typeof $('input#preferred-area').autocomplete === "function"){
 				$('input#location').autocomplete({
 					_resizeMenu: function () {

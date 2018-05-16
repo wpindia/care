@@ -138,7 +138,6 @@ $('document').ready(function(){
 		});
 	}
 	
-
 	$('#city').on('change',function(){
 		$cityId = $(this).val();
 		$.ajax({
