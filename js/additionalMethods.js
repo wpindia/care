@@ -27,4 +27,22 @@ jQuery('document').ready(function(){
 	{
 	return this.optional(element) || /^[a-z ]+$/i.test(value);
 	}, "Letters and spaces only please");
+
+	jQuery.validator.addMethod( "maxWords", function( value, element, params ) {
+		return this.optional( element ) || stripHtml( value ).match( /\b\w+\b/g ).length <= params;
+	}, $.validator.format( "Please enter {0} words or less." ) );
+
+	$.validator.addMethod( "minWords", function( value, element, params ) {
+		return this.optional( element ) || stripHtml( value ).match( /\b\w+\b/g ).length >= params;
+	}, $.validator.format( "Please enter at least {0} words." ) );
+	
+	function stripHtml( value ) {
+
+		// Remove html tags and space chars
+		return value.replace( /<.[^<>]*?>/g, " " ).replace( /&nbsp;|&#160;/gi, " " )
+
+		// Remove punctuation
+		.replace( /[.(),;:!?%#$'\"_+=\/\-“”’]*/g, "" );
+	}
+
 });

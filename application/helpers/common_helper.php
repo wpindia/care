@@ -33,7 +33,7 @@ if( !function_exists('loadJS') ) {
 			break;				
 
 			case 'user-daycare-view':
-				array_push($jsArr, 1,103,109);
+				array_push($jsArr, 1,4,102,103,109);
 			break;							
 		}
 

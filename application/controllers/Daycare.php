@@ -84,6 +84,7 @@ class Daycare extends CI_Controller {
         if(true == is_array($this->data['daycareDetails'])){
             $this->data['daycares']         = $this->daycare_model->getOtherBranchesByVendorId($this->data['daycareDetails']['vendor_id'],$this->data['daycareDetails']['id']);
             $this->data['galleryImages']    = $this->daycare_model->getGalleryImagesByBranchId($this->data['daycareDetails']['id']);
+            $this->data['testimonials']     = $this->daycare_model->getTestimonialsByBranchId($this->data['daycareDetails']['id']);
 
             $this->daycare_model->updateProfileViews($this->data['daycareDetails']['id']);
         }

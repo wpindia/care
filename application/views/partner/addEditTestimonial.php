@@ -38,7 +38,7 @@
 
 					<div class="row">	
 						<div class="col s12 m12 l12 input-field">
-							<textarea id="testimonial" name="testimonial" class="tinymce-editor"><?php echo $testimonialDetails['testimonial']?></textarea>
+							<textarea id="testimonial" name="testimonial" length="700" class="tinymce-editor"><?php echo $testimonialDetails['testimonial']?></textarea>
 	            			<label for="testimonial" class="custom">Testimonial*</label>
 						</div>
 					</div>

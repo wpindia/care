@@ -20,7 +20,74 @@ $('document').ready(function(){
     },
     function(){ // fail cb
     }
-);*/
+  );*/
+
+  $('form#frm_enquiry').validate({
+    rules: {
+      contact_name:{
+        required: true,
+        letterswithspaces: true 
+      },
+      
+      email:{
+        required: true,
+        email:true,
+      },
+
+      mobile:{
+        required:true,
+        minlength: 10,
+        maxlength: 12
+        
+      },
+
+      enquiry_text:{
+        required: true,
+        maxWords: 50,
+        minWords: 5
+      }
+    },
+    messages: {
+      email:{
+        required: "Please enter email id",
+      },
+      mobile_no:{
+        required: "Please enter mobile no",
+      },
+
+    },
+    errorElement : 'div',
+    
+    errorPlacement: function(error, element) {
+        
+      var placement = $(element).data('error');
+      if (placement) {
+          $(placement).parent().prepend(error);
+      } else {
+          error.insertAfter(element);
+          
+      }
+    },
+
+    submitHandler: function(form) {
+        $.ajax({
+            url: BASE_URL + 'parent-enquiry', 
+            type: "POST",             
+            data: $('form#frm_enquiry').serialize(),
+            cache: false,             
+            processData: false,      
+            success: function(data) {
+                $( "#thankyou-message" ).removeClass('hide');
+                $('form#frm_enquiry textarea, form#frm_enquiry input[type="text"], input[type="email"]').val("");
+
+            }
+        });
+        return false;
+    },
+
+
+    
+  });
   
   $('#gallery').owlCarousel({
     lazyLoad: true,

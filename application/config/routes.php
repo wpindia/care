@@ -78,6 +78,8 @@ $route['partner/create-testimonial'] 		= 'branch/createTestimonial';
 $route['partner/edit-testimonial/(:num)'] 	= 'branch//editTestimonial/$1';
 $route['partner/save-testimonial'] 			= 'branch/insertOrUpdateTestimonials';
 
+$route['parent-enquiry'] 			= 'account/parentEnquiry';
+
 $route['suggestArea']			= 'welcome/getLocationByCityId'; 
 $route['(:any)/(:any)'] 		= 'daycare/search/$1/$2';
 $route['(:any)/(:any)/(:any)'] 	= 'daycare/displayDaycare/$1/$2/$3';

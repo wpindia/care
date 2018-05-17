@@ -107,17 +107,20 @@
 			<div class="col s12 m6 l6">
 			<h3 class="white-text">Enquiry</h3>
 			
-				<form id="frm_signup" name="frm_signup" action="<?php echo base_url('signupProcess');?>" method="post">
+				<form id="frm_enquiry" name="frm_enquiry" action="<?php echo base_url('enquiry');?>" method="post">
+				<div id="thankyou-message" class="white-text hide margin-bottom-10">Our partner will reach out to you shortly!</div>
+				<input type="hidden" name="branch_id" value="<?php echo $daycareDetails['id'] ?>">
 				<div class="row">
 					<div class="col s12 m6 l6 input-field ">
-						<input type="text" name="contact_name" id="contact_name" class="form-class black-text" placeholder="Contact Name" data-error="" value="<?php echo set_value('contact_name'); ?>">
+						<input type="text" name="contact_name" id="contact_name" class="" value="">
+						<label for="contact_name">Contact Name*</label>
 					</div>
 				</div>
 
 				<div class="row">
 					<div class="col s12 m6 l6 input-field">
-						<input type="email" name="email" id="email" class="form-class" placeholder="Email ID*" data-error=".errorTxtemail" value="<?php echo set_value('email'); ?>">
-
+						<input type="email" name="email" id="email" value="">
+						<label for="email">Email ID*</label>	
 					</div>
 				
 					
@@ -125,42 +128,47 @@
 
 				<div class="row">
 					<div class="col s12 m6 l6 input-field">
-						
-						<input type="text" name="mobile_no" id="mobile_no" class="number form-class" placeholder="Mobile No*" data-error=".errorTxtmob" value="<?php echo set_value('mobile_no'); ?>">
+						<input type="text" name="mobile" id="mobile" class="" value="">
+						<label for="email">Mobile*</label>	
 					</div>
 					
 					
 				</div>
 
+				<div class="row">
+					<div class="col s12 m12 l12 ">
+						<textarea class="white" name="enquiry_text" id="enquiry_text" placeholder="Message*"></textarea>
+						
+					</div>
+				</div>
 				
 				<div class="row">
 					<div class="col s12 m12 l12">
-						
 						<button class="daycare-default-round-btn waves-effect waves-light btn" type="submit" name="action">Submit
 						    <i class="material-icons right">send</i>
 						</button>
-						
 					</div>
-				</div>		
+				</div>
+
+
+
+				
 			</form>
 			</div>
 			<div id="testimonials-section" class="col s12 m6 l6">
 				<h3 class="center white-text">What our parents say</h3>
 				<div id="testimonials" class="owl-carousel owl-theme ">
-					<div class="slide1">
-					I can't say enough good things about Little Kid n Me. Everyone on their staff is wonderful, especially the director. I highly recommend this daycare!<br/>
-
-					<span class="author">David J.<br/>
-					Parent
-					</span>
-					</div>
-					<div class="slide2">
-						This place is wonderful! Both my children love attending. My son is flourishing in the preschool and my daughter couldn't wait for summer camp to start!<br/>
-
-						<span class="author">Jessica M.<br/>
-						Parent
-						</span>	
-					</div>
+					<?php foreach($testimonials as $testimonial){?>
+						<div class="slide">
+							<?php echo $testimonial['testimonial'] ?>
+							<div class="testimonial-by">
+								<span class="author"><?php echo $testimonial['parent_name'] ?><br/></span>
+								<span class="small"> - <?php if(false == empty($testimonial['child_name'])) echo $testimonial['child_name'] . "'s " ?>Parent</span>
+							</div>
+							
+						</div>
+					<?php } ?>	
+					
 				</div>	
 			</div>
 		</div>

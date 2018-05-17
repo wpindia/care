@@ -57,6 +57,16 @@ class Account extends CI_Controller {
         $this->generateView('home',$this->data);
     }
 
+    public function parentEnquiry(){
+        $contactName    = $this->input->post('contact_name');
+        $email          = $this->input->post('email');
+        $mobile         = $this->input->post('mobile');
+        $enquiryText    = $this->input->post('enquiry_text');
+        
+        echo json_encode(array(true));
+
+    }
+
     public function deleteSampleDocs(){
         $this->load->model('reskilling_model');
         $id         = $this->input->post('id');

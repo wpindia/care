@@ -11,7 +11,10 @@ $('document').ready(function(){
 			},
 
 			testimonial:{
-				required: true
+				required: true,
+				maxWords: 100,
+				minWords: 10
+				
 			}
 		},
 		messages: {

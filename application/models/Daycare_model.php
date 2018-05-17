@@ -49,6 +49,28 @@ class Daycare_model extends CI_Model{
 		}
 	}
 
+	function getTestimonialsByBranchId($branchId){
+		try{
+			$this->db->select('dt.*');
+			$this->db->from('daycare_testimonials as dt');
+			$this->db->where('dt.branch_id', $branchId );
+			
+			$query 	= $this->db->get();
+			if($query){
+				$result = $query->result_array();
+				if($result)
+					return $result;
+				else 
+					return array();
+				
+			}
+			return array();	
+		}catch(Exception $e){		
+            log_message('error', __METHOD__ . ' called '.$e->getMessage());		
+            return NULL;		
+        }
+	}
+
 	function updateProfileViews($branchId){
 		try {
 			$this->db->trans_start();

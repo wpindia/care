@@ -66,8 +66,27 @@ h3{
 	background: none;
 }
 
+.input-field label, #frm_enquiry input[type="text"]:focus {
+	color: #fff;
+}
 
+#frm_enquiry input[type="text"],#frm_enquiry input[type="email"]{
+	border-bottom: 1px solid #fff;
+	margin: 0px;
+}
 
+#frm_enquiry textarea{
+	width: 50%;
+	height: 100px;
+}
+
+#frm_enquiry div.error{
+	color: #000;
+}
+
+#frm_enquiry button{
+	width: 50%;
+}
 
 .section1 {
 	position: relative;
@@ -80,10 +99,22 @@ h3{
 	padding: 20px;
 }
 
-#testimonials .author{
+#testimonials .testimonial-by{
 	float: right;
-	margin: 10px 0px 20px;
+}
+
+#testimonials .author{
 	font-weight: bold;
+	font-size: 15px;
+}
+
+#testimonials .small{
+	font-size: 12px;
+}
+
+#testimonials .slide p{
+	font-size: 14px;
+	/*font-style: italic;*/
 }
 
 .fixed-action-btn {
