@@ -31,7 +31,7 @@
 		if(!empty($allFixedFlashMessage)){
 			echo '<div class="message-section timeout" id="message_alert_box" >';
 			foreach ($allFixedFlashMessage as $key => $message) {
-				$tmpClass='success';
+				$tmpClass = 'success';
 				if(is_array($message)){
 					$status = $message['status'];
 					$message = $message['message'];

@@ -93,9 +93,32 @@ class Partner_account_model extends CI_Model {
 			$this->db->rollback();
 			return false;
 		}
+	}
 
+	function isUserRegistered( $email ){
+		$this->db->where('email_id', $email);
+		$query 	= $this->db->get('vendor_login');
+		$result = $query->result_array();
+		
+		if( $result && 0 < count( $result ) ) {
+			return true;
+		}
 
+		return false;
+	}
 
+	function updateResetPasswordString( $encryptedString, $email ){
+		try {
+			$this->db->trans_start();
+			$this->db->set('encrypt_code', $encryptedString );
+			$this->db->where('email_id', $email );
+			$this->db->update('vendor_login');
+			$this->db->trans_complete();
+			return true;
+		} catch (Exception $e) {
+			$this->db->rollback();
+			return false;
+		}
 	}
 
 	function checkPassword( $password, $id ){

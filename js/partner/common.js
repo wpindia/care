@@ -19,7 +19,7 @@
 			}
 			
 						
-			if($('#message_alert_box').length>0){
+			/*if($('#message_alert_box').length>0){
 		      var alertHtml = $('#message_alert_box');
 		      $('#message_alert_box').remove();
 		      if($('body section>.message-header-section').length > 0){
@@ -30,7 +30,7 @@
 		      $('#message_alert_box').show();
 		      $('#message_alert_box').slideDown('slow');
 		      setTimeout(function(){ $('#message_alert_box.timeout').slideUp('slow', function(){ $(this).remove(); } ); }, 10000);
-		    }
+		    }*/
 
 			$('select').material_select();
 

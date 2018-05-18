@@ -53,6 +53,12 @@ $route['default_controller'] = 'welcome';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
+$route['parent-enquiry'] 			= 'account/parentEnquiry';
+$route['partner/send-reset-password'] 		= 'account/sendResetPasswordLink';
+$route['partner/reset-password'] 			= 'account/resetPassword';
+$route['partner/update-password'] 			= 'account/updatePassword';
+
+
 $route['partner/signin'] 		= 'account/signin';
 $route['partner/validate-user'] = 'account/signinProcess';
 $route['partner/signup'] 		= 'account/signup';
@@ -77,8 +83,6 @@ $route['partner/deleteImage'] 			= 'branch/deleteImage';
 $route['partner/create-testimonial'] 		= 'branch/createTestimonial';
 $route['partner/edit-testimonial/(:num)'] 	= 'branch//editTestimonial/$1';
 $route['partner/save-testimonial'] 			= 'branch/insertOrUpdateTestimonials';
-
-$route['parent-enquiry'] 			= 'account/parentEnquiry';
 
 $route['suggestArea']			= 'welcome/getLocationByCityId'; 
 $route['(:any)/(:any)'] 		= 'daycare/search/$1/$2';

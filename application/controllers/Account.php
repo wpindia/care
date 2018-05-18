@@ -62,10 +62,66 @@ class Account extends CI_Controller {
         $email          = $this->input->post('email');
         $mobile         = $this->input->post('mobile');
         $enquiryText    = $this->input->post('enquiry_text');
-        
+
         echo json_encode(array(true));
 
     }
+
+    function sendResetPasswordLink(){
+        $email              = $this->input->post('email');
+        $isUserRegistered   = $this->partner_account_model->isUserRegistered( $email );
+
+        if(false == $isUserRegistered) {
+            $data['response'] = false;
+            echo json_encode($data);
+        } else {    
+            $encryptedString    = getEncryptedString($email);
+            $this->partner_account_model->updateResetPasswordString( $encryptedString,$email );
+            
+            $data['response'] = true;
+            echo json_encode($data);
+        }    
+    }
+
+    function resetPassword(){
+        $this->data['pageName'] = 'reset-password'; 
+        $this->data['key']      = $this->input->get('key');
+
+        $this->generateView( 'resetPassword', $this->data);
+        
+    }
+
+    public function updatePassword(){
+        $key        = 'U0tWRlJWTVZZbmFtN203bXRXNWVUU1RjNWJQS0dZSDZaQlltaTNRUUZKUT06OoIRLCamluYzJcl9p0e7b5k='; 
+        $email      = getDecryptedString( $key );
+        $password   = md5( $this->input->post('password') );
+        
+        $isPasswordUpdated = $this->partner_account_model->updatePassword( $email, $password ); 
+        
+        $this->session->set_flashdata('set_flashdata', 'Password updated successfully! Sign in with new password entered.');
+        redirect('partner/reset-password');
+        /*$isValidForm = $this->validateResetPasswordForm();
+        
+
+        if( false == $isValidForm ) {
+            $this->data['pageName'] = 'reset-password';
+            $this->data['email']    = $email;
+            $this->generateView( 'account/reset-password', $this->data );               
+            return false;
+        }
+                
+        $password   = md5( $this->input->post('new-password') );
+
+        $isPasswordUpdated = $this->partner_account_model->updatePassword( $email, $password ); 
+        $this->session->set_flashdata('success_message', 'Password updated successfully! Sign in with new password entered.');*/
+
+        /*$this->data['pageName'] = 'reset-password';
+        $this->data['email']    = $email;
+        $this->generateView( 'resetPassword', $this->data );*/               
+
+    }
+
+
 
     public function deleteSampleDocs(){
         $this->load->model('reskilling_model');
@@ -500,27 +556,7 @@ class Account extends CI_Controller {
     }
 
 
-    public function updatePassword(){
-        $isValidForm = $this->validateResetPasswordForm();
-        $email       = $this->input->post('email');
-       
-        if( false == $isValidForm ) {
-            $this->data['pageName'] = 'reset-password';
-            $this->data['email']    = $email;
-            $this->generateView( 'account/reset-password', $this->data );               
-            return false;
-        }
-                
-        $password   = md5( $this->input->post('new-password') );
-
-        $isPasswordUpdated = $this->partner_account_model->updatePassword( $email, $password ); 
-        $this->session->set_flashdata('success_message', 'Password updated successfully! Sign in with new password entered.');
-
-        $this->data['pageName'] = 'reset-password';
-        $this->data['email']    = $email;
-        $this->generateView( 'account/reset-password', $this->data );               
-
-    }
+    
 
     public function verifyAccount(){
         
@@ -660,7 +696,7 @@ class Account extends CI_Controller {
         $this->displayPages('partner/password-reset',$this->data,true);
     }
 
-    function resetPassword($email = ''){
+    /*function resetPassword($email = ''){
         $return_status = 0;
         if ($this->input->is_ajax_request() || $email != '') {
             if($this->input->is_ajax_request()){
@@ -694,7 +730,7 @@ class Account extends CI_Controller {
         }else {
             return $return_status;
         }
-    }
+    }*/
 
     public function handleQuery(){ 
 

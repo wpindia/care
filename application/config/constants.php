@@ -90,4 +90,6 @@ define('AWS_ACCESS_KEY', 'AKIAIAPFKQ45FCFR3TYQ' );
 define('AWS_SECRET_KEY', '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' );
 define('GOOGLE_MAPS_API_KEY', 'AIzaSyBSUXN3fpPAeT3n67x0CzcF3vScsUsDwfA');
 
+define('ENCRYPTION_KEY', '4EtbusjQt8Xoob+J4155fH6Cv3EhGsCUju40ViKMUVY=');
+
 require_once('daycare_constants.php');

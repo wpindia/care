@@ -117,6 +117,7 @@ if( !function_exists('loadPartnerJS') ) {
 			7 => 'additionalMethods.js',  
 			8 => 'partner/signin.js',
 			9 => 'partner/testimonial.js',
+		   10 => 'partner/resetPassword.js',
 			//101=>'https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js',
 			//101=>'materialize.min.js',
 			102=>'https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.15.0/jquery.validate.min.js',
@@ -151,7 +152,11 @@ if( !function_exists('loadPartnerJS') ) {
 
 			case 'manage-gallery':
 				array_push($jsArr, 5,6);
-			break;				
+			break;
+
+			case 'reset-password':
+				array_push($jsArr, 7, 10, 102);
+			break;								
 
 			default:
 				//array_push($jsArr, 3,103);
@@ -220,6 +225,10 @@ if( !function_exists('loadPartnerCSS') ) {
 
 			case 'user-daycare-view':
 				array_push($cssArr, 3,102,103);
+			break;
+
+			case 'reset-password':
+				array_push($cssArr, 2);
 			break;
 
 		}
@@ -363,3 +372,34 @@ function uploadfile($uploadedFilename, $vendorId, $destinationPath = ''){
 	function getFormattedTime($time){
 		return date('h:i a', strtotime($time));
 	}
+
+	function getEncryptedString($data) {
+	    // Remove the base64 encoding from our key
+	    $encryption_key = base64_decode(ENCRYPTION_KEY);
+	    // Generate an initialization vector
+	    $iv = openssl_random_pseudo_bytes(openssl_cipher_iv_length('aes-256-cbc'));
+	    // Encrypt the data using AES 256 encryption in CBC mode using our encryption key and initialization vector.
+	    $encrypted = openssl_encrypt($data, 'aes-256-cbc', $encryption_key, 0, $iv);
+	    // The $iv is just as important as the key for decrypting, so save it with our encrypted data using a unique separator (::)
+	    return base64_encode($encrypted . '::' . $iv);
+	}
+ 
+	function getDecryptedString($data) {
+	    // Remove the base64 encoding from our key
+	    $encryption_key = base64_decode(ENCRYPTION_KEY);
+	    // To decrypt, split the encrypted data from our IV - our unique separator used was "::"
+	    list($encrypted_data, $iv) = explode('::', base64_decode($data), 2);
+	    return openssl_decrypt($encrypted_data, 'aes-256-cbc', $encryption_key, 0, $iv);
+	}
+
+	function sendEmail($stdEmailObj){
+		$CI =& get_instance();
+     	$CI->load->library('email');
+		$CI->email->from($stdEmailObj->from, $stdEmailObj->from);
+		$CI->email->to($stdEmailObj->to);
+		$CI->email->subject($stdEmailObj->subject);
+		$CI->email->message($stdEmailObj->message);
+		$test = $this->email->send();
+		show($this->email->print_debugger());
+	}
+

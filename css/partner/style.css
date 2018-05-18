@@ -17,6 +17,11 @@ nav#top-menu {
 
 a.link{
 	color: #8cb859;
+
+}
+
+a{
+	cursor: pointer;
 }
 
 .ui-menu .ui-menu-item-wrapper {
